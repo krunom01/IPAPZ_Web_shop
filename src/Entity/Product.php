@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @UniqueEntity(fields={"sku"}, message="There is already an product with this sku key")
  */
 class Product
 {
@@ -21,6 +23,12 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $cat_id;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     */
+    private $sku;
 
     /**
      * @ORM\Column(type="string", length=50)

@@ -108,9 +108,9 @@ class UserController extends AbstractController
      */
     public function deleteUser(User $user, EntityManagerInterface $entityManager)
     {
-        $entityManager->remove($user);
-        $entityManager->flush();
-        $this->addFlash('success', 'Successfully deleted!');
-        return $this->redirectToRoute('admin_users');
+        $users = $this->getDoctrine()->getRepository(User::class)->find();
+
     }
+
+
 }

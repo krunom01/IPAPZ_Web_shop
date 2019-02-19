@@ -41,7 +41,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin_categories');
         }
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        return $this->render('admin/categorylist.html.twig', [
+        return $this->render('admin/category.html.twig', [
             'form' => $form->createView(),
             'title' => 'Category list',
             'categories' => $categories

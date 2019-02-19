@@ -1,6 +1,4 @@
-{% extends 'admin/base.html.twig' %}
-{% block header %}  {% include 'admin/header.html.twig' %}    {% endblock %}
-{% block leftside %}  {% include 'admin/leftside.html.twig' %}{% endblock %}
+{% extends 'base.html.twig' %}
 {% block content %}
     <!-- Main content -->
     <section class="content container-fluid">
@@ -24,13 +22,13 @@
                 </tr>
                 {% for user in users %}
 
-                <tr>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td><a href="{{ path('user_delete', {id: user.id}) }}" class="btn btn-danger">Delete</a></td>
-                    <td><a href="{{ path('admin_user_edit', {id: user.id}) }}" class="btn btn-primary">Edit</a></td>
-                </tr>
+                    <tr>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td><a href="{{ path('user_delete', {id: user.id}) }}" class="btn btn-danger">Delete</a></td>
+                        <td><a href="{{ path('admin_user_edit', {id: user.id}) }}" class="btn btn-primary">Edit</a></td>
+                    </tr>
 
                 {% endfor %}
 
@@ -44,4 +42,3 @@
     <!-- /.content-wrapper -->
 
 {% endblock %}
-{% block footer %}  {% include 'admin/footer.html.twig' %}    {% endblock %}
