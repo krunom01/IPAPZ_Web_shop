@@ -22,7 +22,7 @@ class Product
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $cat_id;
+    private $categories;
 
     /**
      * @ORM\Column(type="string")
@@ -55,14 +55,14 @@ class Product
         return $this->id;
     }
 
-    public function getCatId(): ?int
+    public function getCategories(): ?int
     {
-        return $this->cat_id;
+        return $this->categories;
     }
 
-    public function setCatId(int $cat_id): self
+    public function setCategories(int $categories): self
     {
-        $this->cat_id = $cat_id;
+        $this->categories = categories;
 
         return $this;
     }
