@@ -141,8 +141,3 @@ class User implements UserInterface
     }
 
 }
-/*
-   public function __sleep()
-   {
-       return array('id');
-   }
