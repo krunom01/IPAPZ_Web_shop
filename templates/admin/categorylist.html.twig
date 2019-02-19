@@ -13,22 +13,23 @@
                 </div>
             </div>
         {% endfor %}
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        <button type="submit" class="btn btn-primary" formnovalidate>Add new Category</button>
+        {{ form_end(form) }}
+
 
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <tr>
-                    <th>Fist Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
+                    <th>Category name</th>
                     <th>Delete</th>
                 </tr>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td><a href="{{ path('user_delete', {id: user.id}) }}" class="btn btn-danger">Delete</a></td>
-                </tr>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+
+                    </tr>
                 {% endfor %}
 
             </table>

@@ -948,65 +948,101 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="241" parent="3" name="migration_versions">
+    <table id="241" parent="3" name="category">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="242" parent="3" name="user">
+    <table id="242" parent="3" name="migration_versions">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <column id="243" parent="241" name="version">
-      <Position>1</Position>
-      <DataType>varchar(14)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="244" parent="241" name="executed_at">
-      <Position>2</Position>
-      <Comment>(DC2Type:datetime_immutable)</Comment>
-      <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="245" parent="241" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>version</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="246" parent="242" name="id">
+    <table id="243" parent="3" name="user">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <column id="244" parent="241" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="242" name="firstname">
+    <column id="245" parent="241" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="248" parent="242" name="lastname">
+    <key id="246" parent="241" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="247" parent="242" name="version">
+      <Position>1</Position>
+      <DataType>varchar(14)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="248" parent="242" name="executed_at">
+      <Position>2</Position>
+      <Comment>(DC2Type:datetime_immutable)</Comment>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="249" parent="242" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="250" parent="243" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="251" parent="243" name="email">
+      <Position>2</Position>
+      <DataType>varchar(180)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="252" parent="243" name="password">
       <Position>3</Position>
-      <DataType>varchar(50)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="242" name="email">
+    <column id="253" parent="243" name="roles">
       <Position>4</Position>
-      <DataType>varchar(50)|0s</DataType>
+      <DataType>json|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="250" parent="242" name="password">
+    <column id="254" parent="243" name="first_name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="251" parent="242" name="PRIMARY">
+    <column id="255" parent="243" name="last_name">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="256" parent="243" name="UNIQ_8D93D649E7927C74">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="257" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="258" parent="243" name="UNIQ_8D93D649E7927C74">
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>UNIQ_8D93D649E7927C74</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
