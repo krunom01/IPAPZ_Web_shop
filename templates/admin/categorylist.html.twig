@@ -28,7 +28,7 @@
                 {% for category in categories %}
                     <tr>
                         <td>{{ category.name }}</td>
-
+                        <td><a href="{{ path('category_delete', {id: category.id}) }}" class="btn btn-danger">Delete</a></td>
                     </tr>
                 {% endfor %}
 

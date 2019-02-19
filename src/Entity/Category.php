@@ -37,4 +37,8 @@ class Category
 
         return $this;
     }
+    public function __sleep()
+    {
+        return array('id');
+    }
 }

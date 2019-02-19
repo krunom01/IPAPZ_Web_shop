@@ -48,4 +48,17 @@ class CategoryController extends AbstractController
         ]);
 
     }
+    /**
+     * @Route("/admin/category/delete/{id}", name="category_delete")
+     * @param Category $category
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteUser(Category $category, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($category);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully deleted!');
+        return $this->redirectToRoute('admin_categories');
+    }
 }
