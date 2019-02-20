@@ -10,13 +10,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
+ * * Class CategoryController
+ * @package App\Controller
  * @Route("/admin/category")
  */
 class CategoryController extends AbstractController
 {
     /**
      * @Route("/", name="category_index", methods={"GET"})
+     * @param CategoryRepository $categoryRepository
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
@@ -59,7 +63,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="category_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="category_edit")
      */
     public function edit(Request $request, Category $category): Response
     {

@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class Product
+ * @package App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product
 {
@@ -17,15 +23,15 @@ class Product
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
-    private $sku;
+    private $name;
 
     /**
      * @ORM\Column(type="integer")
@@ -36,74 +42,100 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $price;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $sku;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getCategory(): ?string
+    public function getCategory()
     {
         return $this->category;
     }
-
-    public function setCategory(string $category): self
+    /**
+     * @param mixed $category
+     */
+    public function setCategory(int $category)
     {
         $this->category = $category;
 
-        return $this;
     }
 
-    public function getSku(): ?int
+    public function getName()
     {
-        return $this->sku;
+        return $this->name;
     }
+    /**
+     * @param mixed $name
+     */
 
-    public function setSku(int $sku): self
+    public function setName(string $name)
     {
-        $this->sku = $sku;
+        $this->name = $name;
 
-        return $this;
     }
 
-    public function getProductnumber(): ?int
+    public function getProductnumber()
     {
         return $this->productnumber;
     }
+    /**
+     * @param mixed $productnumber
+     */
 
-    public function setProductnumber(int $productnumber): self
+    public function setProductnumber(int $productnumber)
     {
         $this->productnumber = $productnumber;
 
-        return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice()
     {
         return $this->price;
     }
+    /**
+     * @param mixed $sku
+     */
 
-    public function setPrice(int $price): self
+    public function setSku(int $sku)
+    {
+        $this->sku = $sku;
+
+    }
+    public function getSku()
+    {
+        return $this->sku;
+    }
+    /**
+     * @param mixed $price
+     */
+
+    public function setPrice(int $price)
     {
         $this->price = $price;
 
-        return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
+    /**
+     * @param mixed $image
+     */
 
-    public function setImage(string $image): self
+    public function setImage(string $image)
     {
         $this->image = $image;
 
-        return $this;
     }
 }

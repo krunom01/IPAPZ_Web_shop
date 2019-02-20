@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
+ * Class Category
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
+
 class Category
 {
 
@@ -35,31 +38,35 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category", cascade={"persist", "remove"})
+     *
      */
     private $products;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
 
         return $this;
     }
     /**
-     * @return Collection|Products[]
+     * @return Collection|Product[]
      */
     public function getProducts()
     {
-        return $this->likes;
+        return $this->products;
+    }
+    public function __toString() {
+        return $this->getName();
     }
 }
