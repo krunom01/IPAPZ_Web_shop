@@ -2,25 +2,25 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Category
- * @package App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class Category
 {
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->products = new ArrayCollection();
     }
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -31,26 +31,13 @@ class Category
     /**
      * @ORM\Column(type="string", length=50)
      */
+
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $products;
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-    /**
-     * @param mixed $products
-     */
-    public function setProducts($products): void
-    {
-        $this->products = $products;
-    }
 
     public function getId(): ?int
     {
@@ -68,8 +55,11 @@ class Category
 
         return $this;
     }
-    public function __sleep()
+    /**
+     * @return Collection|Products[]
+     */
+    public function getProducts()
     {
-        return array('id');
+        return $this->likes;
     }
 }

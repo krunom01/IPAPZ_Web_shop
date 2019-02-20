@@ -3,11 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
- * @UniqueEntity(fields={"sku"}, message="There is already an product with this sku key")
  */
 class Product
 {
@@ -19,26 +17,20 @@ class Product
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $categories;
-
-    /**
-     * @ORM\Column(type="string")
-     *
-     */
-    private $sku;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $name;
+    private $category;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $numberOfProduct;
+    private $sku;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productnumber;
 
     /**
      * @ORM\Column(type="integer")
@@ -55,38 +47,38 @@ class Product
         return $this->id;
     }
 
-    public function getCategories(): ?int
+    public function getCategory(): ?string
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function setCategories(int $categories): self
+    public function setCategory(string $category): self
     {
-        $this->categories = categories;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getName(): ?string
+    public function getSku(): ?int
     {
-        return $this->name;
+        return $this->sku;
     }
 
-    public function setName(string $name): self
+    public function setSku(int $sku): self
     {
-        $this->name = $name;
+        $this->sku = $sku;
 
         return $this;
     }
 
-    public function getNumberOfProduct(): ?int
+    public function getProductnumber(): ?int
     {
-        return $this->numberOfProduct;
+        return $this->productnumber;
     }
 
-    public function setNumberOfProduct(int $numberOfProduct): self
+    public function setProductnumber(int $productnumber): self
     {
-        $this->numberOfProduct = $numberOfProduct;
+        $this->productnumber = $productnumber;
 
         return $this;
     }
