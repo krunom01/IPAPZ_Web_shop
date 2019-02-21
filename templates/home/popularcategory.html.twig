@@ -21,7 +21,9 @@
                         <div class="sidebar_title">Categories</div>
                         <ul class="sidebar_categories">
                             {% for category in categories %}
+
                             <li><a href="#">{{ category.name }}</a></li>
+
                             {% endfor %}
                         </ul>
                     </div>
@@ -37,9 +39,15 @@
                     <div class="shop_bar clearfix">
 
 
+                    Number of products: {{ products|length }}
+
+
+
                     </div>
 
                     <div class="product_grid">
+
+
                         <div class="product_grid_border"></div>
                         {% for product in products %}
 

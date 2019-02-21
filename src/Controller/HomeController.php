@@ -25,6 +25,7 @@ class HomeController extends AbstractController
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
 
+
         return $this->render('home/index.html.twig', [
             'title' => 'Sport webshop',
             'categories' => $categories,
