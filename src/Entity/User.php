@@ -75,7 +75,7 @@ class User implements UserInterface
     {
         $this->lastName = $lastName;
     }
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -138,6 +138,10 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+    public function __toString()
+    {
+        return (string) $this->getId();
     }
 
 }

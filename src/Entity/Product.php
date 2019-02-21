@@ -6,6 +6,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Product
@@ -15,6 +16,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->shopcards = new ArrayCollection();
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -51,6 +59,23 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="product", cascade={"persist", "remove"})
+     *
+     */
+    private $shopcards;
+    /**
+     * @return Collection|Shopcard[]
+     */
+    public function getProducts()
+    {
+        return $this->shopcards;
+    }
+
+    /**
+     * @return int
+     */
 
     public function getId()
     {
@@ -137,5 +162,9 @@ class Product
     {
         $this->image = $image;
 
+    }
+    public function __toString()
+    {
+        return (string) $this->getId();
     }
 }

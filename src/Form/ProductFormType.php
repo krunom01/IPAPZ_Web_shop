@@ -38,13 +38,6 @@ class ProductFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('amount', IntegerType::class, [
-                'label' => 'Amount',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
             ->add('productnumber', IntegerType::class, [
                 'label' => 'productnumber',
                 'required' => false,

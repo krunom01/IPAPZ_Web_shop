@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 
 
 class HomeController extends AbstractController
@@ -15,14 +17,18 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      * @param CategoryRepository $CategoryRepository
+     * @param ProductRepository $ProductRepository
      * @return Response
      */
-    public function index(CategoryRepository $CategoryRepository)
+    public function index(CategoryRepository $CategoryRepository, ProductRepository $ProductRepository)
     {
         $categories = $CategoryRepository->findAll();
+        $products = $ProductRepository->findAll();
+
         return $this->render('home/index.html.twig', [
             'title' => 'Sport webshop',
             'categories' => $categories,
+            'products' => $products,
         ]);
     }
 }
