@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Shopcard;
 use App\Entity\User;
+use App\Entity\Product;
 use App\Form\ShopcardType;
 use App\Repository\ShopcardRepository;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,20 +42,17 @@ class ShopcardController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="shopcard_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="shopcard_new")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
     {
+
         $shopcard = new Shopcard();
         $form = $this->createForm(ShopcardType::class, $shopcard);
         $form->handleRequest($request);
-
-
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $user = $this-> getUser();
-            $shopcard->setUserid($user->getId());
-            $shopcard->setProduct($request->request->get('productid'));
+            $user = $this->getUser();
+            $shopcard->setUser($user);
+            $shopcard->setProduct($product);
             $entityManager->persist($shopcard);
             $entityManager->flush();
 

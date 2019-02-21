@@ -36,7 +36,7 @@ class Shopcard
     {
         return $this->product;
     }
-    public function setProduct(int $product): void
+    public function setProduct($product)
     {
         $this->product = $product;
 
@@ -44,21 +44,18 @@ class Shopcard
     /**
      * @return mixed
      */
-    public function getUserid()
+    public function getUser()
     {
         return $this->user;
     }
     /**
      * @param mixed $user
      */
-    public function setUserid(int $user): void
+    public function setUser($user)
     {
-        $this->product = $user;
+        $this->user = $user;
     }
 
-    public function __toString() {
 
-    return $this->getUserid();
-    }
 
 }

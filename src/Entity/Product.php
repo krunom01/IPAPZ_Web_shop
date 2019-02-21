@@ -89,7 +89,7 @@ class Product
     /**
      * @param mixed $category
      */
-    public function setCategory(int $category)
+    public function setCategory($category)
     {
         $this->category = $category;
 
@@ -103,7 +103,7 @@ class Product
      * @param mixed $name
      */
 
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -117,7 +117,7 @@ class Product
      * @param mixed $productnumber
      */
 
-    public function setProductnumber(int $productnumber)
+    public function setProductnumber($productnumber)
     {
         $this->productnumber = $productnumber;
 
@@ -131,7 +131,7 @@ class Product
      * @param mixed $sku
      */
 
-    public function setSku(int $sku)
+    public function setSku($sku)
     {
         $this->sku = $sku;
 
@@ -144,7 +144,7 @@ class Product
      * @param mixed $price
      */
 
-    public function setPrice(int $price)
+    public function setPrice($price)
     {
         $this->price = $price;
 
@@ -158,13 +158,10 @@ class Product
      * @param mixed $image
      */
 
-    public function setImage(string $image)
+    public function setImage($image)
     {
         $this->image = $image;
 
     }
-    public function __toString()
-    {
-        return (string) $this->getId();
-    }
+
 }

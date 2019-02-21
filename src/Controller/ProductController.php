@@ -53,7 +53,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('product_index');
         }
 
-        return $this->render('category/new.html.twig', [
+        return $this->render('product/new.html.twig', [
             'categories' => $categoryRepository->findAll(),
             'form' => $form->createView(),
         ]);
