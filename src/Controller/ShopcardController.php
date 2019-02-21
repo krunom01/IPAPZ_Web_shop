@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Shopcard;
+use App\Entity\User;
 use App\Form\ShopcardType;
 use App\Repository\ShopcardRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,18 +46,18 @@ class ShopcardController extends AbstractController
         $form = $this->createForm(ShopcardType::class, $shopcard);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this-> getUser();
+            $shopcard->setUserid($user->getId());
+            $shopcard->setProduct($request->request->get('productid'));
             $entityManager->persist($shopcard);
             $entityManager->flush();
 
             return $this->redirectToRoute('shopcard_index');
-        }
 
-        return $this->render('shopcard/new.html.twig', [
-            'shopcard' => $shopcard,
-            'form' => $form->createView(),
-        ]);
+
     }
 
     /**
@@ -64,11 +65,12 @@ class ShopcardController extends AbstractController
      */
     public function edit(Request $request, Shopcard $shopcard): Response
     {
+
         $form = $this->createForm(ShopcardType::class, $shopcard);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
 
             return $this->redirectToRoute('shopcard_index', [
                 'id' => $shopcard->getId(),

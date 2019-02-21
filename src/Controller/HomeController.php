@@ -31,4 +31,15 @@ class HomeController extends AbstractController
             'products' => $products,
         ]);
     }
+    /**
+     * @Route("/product_details/{id}", name="product_details", methods={"GET"})
+     * @param ProductRepository $ProductRepository
+     */
+    public function show(Product $product): Response
+    {
+        return $this->render('home/productdetails.html.twig', [
+            'product' => $product,
+            'title' => 'Product details'
+        ]);
+    }
 }

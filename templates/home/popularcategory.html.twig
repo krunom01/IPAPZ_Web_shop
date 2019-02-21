@@ -42,6 +42,7 @@
                     <div class="product_grid">
                         <div class="product_grid_border"></div>
                         {% for product in products %}
+                        <form action="{{ path('shopcard_new') }}", method="POST" name="ShopcardType">
                         <!-- Product Item -->
                         <div class="product_item is_new">
                             <div class="product_border"></div>
@@ -49,13 +50,16 @@
                             <div class="product_content">
                                 <div class="product_price">{{ product.price }} kn</div>
                                 <div class="product_name"><div><a href="#" tabindex="0">{{ product.name }}</a></div></div>
+                                <input type="hidden" name="productid" value="{{ product.id }}">
+
                             </div>
-                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+                            <td><a href="{{ path('product_details', {id: product.id}) }}" class="btn btn-primary">Details</a></td>
+                            <button type="submit">Add to cart</button>
 
                         </div>
+                        </form>
                         {% endfor %}
                     </div>
-
                     <!-- Shop Page Navigation -->
 
                     <div class="shop_page_nav d-flex flex-row">
