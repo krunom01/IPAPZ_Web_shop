@@ -48,6 +48,7 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal", scale=2)
      */
     private $price;
     /**
@@ -57,6 +58,8 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="upload image with .jpg or .jpeg!")
+     * @Assert\File(mimeTypes={ "image/jpg", "image/jpeg" })
      */
     private $image;
 

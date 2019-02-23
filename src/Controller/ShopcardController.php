@@ -26,18 +26,22 @@ class ShopcardController extends AbstractController
     public function index(): Response
     {
         $user = $this->getUser();
-        echo $user->getId();
+
         $em = $this->getDoctrine()->getManager();
-        $sql = "select p.name, p.price, s.id
-        from shopcard s, product p, user a
-        where s.product_id = p.id and a.id = :userid";
+        $sql = "select s.id,  p.name, p.price, s.productnumber
+                from shopcard s
+                left join product p on s.product_id = p.id
+                where s.product_id = p.id and s.user_id = :userid";
 
         $statement = $em->getConnection()->prepare($sql);
         $statement->bindValue('userid', $user->getId());
         $statement->execute();
         $shopcard = $statement->fetchAll();
+        $total = 0;
         return $this->render('shopcard/index.html.twig', [
             'shopcards' =>  $shopcard,
+            'title' => "shopcard details",
+            'total' => $total
         ]);
     }
 
@@ -46,17 +50,17 @@ class ShopcardController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
     {
-
         $shopcard = new Shopcard();
         $form = $this->createForm(ShopcardType::class, $shopcard);
         $form->handleRequest($request);
             $user = $this->getUser();
             $shopcard->setUser($user);
             $shopcard->setProduct($product);
+            $shopcard->setProductnumber($request->request->get('quantity'));
             $entityManager->persist($shopcard);
             $entityManager->flush();
-
-            return $this->redirectToRoute('shopcard_index');
+        $this->addFlash('success', 'Product added to shopcart, go to shopcart to order!');
+            return $this->redirectToRoute('home');
 
 
     }

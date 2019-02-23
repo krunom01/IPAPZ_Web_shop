@@ -2,14 +2,20 @@
 
 namespace App\Controller;
 use App\Entity\Category;
+use App\Entity\Shopcard;
+use App\Entity\User;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\UserRepository;
+use App\Repository\ShopcardRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 class HomeController extends AbstractController
@@ -18,10 +24,12 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      * @param CategoryRepository $CategoryRepository
      * @param ProductRepository $ProductRepository
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function index(CategoryRepository $CategoryRepository, ProductRepository $ProductRepository)
+    public function index(CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
     {
+
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
 
@@ -30,14 +38,18 @@ class HomeController extends AbstractController
             'title' => 'Sport webshop',
             'categories' => $categories,
             'products' => $products,
+
+
         ]);
     }
     /**
      * @Route("/product_details/{id}", name="product_details", methods={"GET"})
      * @param ProductRepository $ProductRepository
      */
-    public function show(Product $product): Response
+    public function show($id,Product $product,ProductRepository $ProductRepository): Response
     {
+        $product = $ProductRepository->find($id);
+
         return $this->render('home/productdetails.html.twig', [
             'product' => $product,
             'title' => 'Product details'

@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class ProductFormType extends AbstractType
@@ -52,12 +53,8 @@ class ProductFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('image', TextareaType::class, [
-                'label' => 'image',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control'
-                ]
+            ->add('image', FileType::class, [
+                'label' => 'Insert Your Image here (jpg, jpeg): '
             ]);
     }
 

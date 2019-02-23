@@ -127,13 +127,9 @@
 
 {% block popularcategory %}
     <h1>Product</h1>
-
+    <form action = "{{ path('shopcard_new', {id: product.id}) }}" name="ShopcardType" method="post">
     <table class="table">
         <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ product.id }}</td>
-        </tr>
         <tr>
             <th>Name</th>
             <td>{{ product.name }}</td>
@@ -144,14 +140,23 @@
         </tr>
         <tr>
             <th>Price</th>
-            <td>{{ product.price }}</td>
+            <td>{{ product.price }} kn</td>
         </tr>
         <tr>
             <th>Image</th>
-            <td>{{ product.image }}</td>
+            <td><img src="../../../../../upload/image/{{ product.image }}" alt="{{ product.name }}"></td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td><input type="number" name="quantity" value="1" placeholder="set product quantity"></td>
         </tr>
         </tbody>
     </table>
+        {% if is_granted('ROLE_USER') %}
+            <button type="submit">Add to cart</button>
+        {% endif %}
+    </form>
+
 
 {% endblock %}
         {% block footer %}

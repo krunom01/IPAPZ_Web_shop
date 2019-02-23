@@ -28,6 +28,12 @@ class Shopcard
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="integer")
+     *  @Assert\NotBlank()
+     */
+    private $productnumber;
+
     public function getId()
     {
         return $this->id;
@@ -55,6 +61,20 @@ class Shopcard
     {
         $this->user = $user;
     }
+
+    public function getProductnumber(): ?int
+    {
+        return $this->productnumber;
+    }
+
+    public function setProductnumber($productnumber): self
+    {
+        $this->productnumber = $productnumber;
+
+        return $this;
+    }
+
+
 
 
 

@@ -17,9 +17,16 @@
 
 </head>
 <div class="super_container">
-
+    {% for message in app.flashes('success') %}
+        <div class="row mt-3">
+            <div class="col">
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     <!-- Header -->
-
     <header class="header">
 
         <!-- Top Bar -->
@@ -41,7 +48,7 @@
                                 <div><a href="{{ path('app_login') }}">Sign in</a></div>
                                 {% endif %}
                                 {% if is_granted('ROLE_ADMIN') %}
-                                <div><a href="">Admin panel</a></div>
+                                <div><a href="{{ path('admin') }}">Admin panel</a></div>
                                 {% endif %}
 
                             </div>
@@ -95,13 +102,11 @@
                             <!-- Cart -->
                             <div class="cart">
                                 <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                    <div class="cart_icon">
-                                        <img src="images/cart.png" alt="">
-                                        <div class="cart_count"><span>10</span></div>
-                                    </div>
+
+
                                     <div class="cart_content">
-                                        <div class="cart_text"><a href="#">Cart</a></div>
-                                        <div class="cart_price">$85</div>
+                                        <div class="cart_text"><a href="{{ path('shopcard_index') }}">Shop Cart</a></div>
+
                                     </div>
                                 </div>
                             </div>
