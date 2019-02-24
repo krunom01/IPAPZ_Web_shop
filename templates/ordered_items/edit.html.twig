@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OrderedItems{% endblock %}
+
+{% block body %}
+    <h1>Edit OrderedItems</h1>
+
+    {{ include('ordered_items/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ordered_items_index') }}">back to list</a>
+
+    {{ include('ordered_items/_delete_form.html.twig') }}
+{% endblock %}

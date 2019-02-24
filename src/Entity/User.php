@@ -4,7 +4,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 /**
+ * Class User
+ * @ORM\Entity()
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  * @ORM\HasLifecycleCallbacks()
@@ -12,6 +16,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy = "AUTO")
@@ -43,6 +56,11 @@ class User implements UserInterface
      * @Assert\NotBlank()
      */
     private $lastName;
+
+
+
+
+
     public function getFullName()
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
@@ -124,6 +142,7 @@ class User implements UserInterface
         $this->password = $password;
         return $this;
     }
+
     /**
      * @see UserInterface
      */
@@ -139,6 +158,8 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
     
 
 }

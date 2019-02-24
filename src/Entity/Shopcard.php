@@ -21,19 +21,20 @@ class Shopcard
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrderedItems", inversedBy="orderItems")
+     */
+    private $order;
     /**
      * @ORM\Column(type="integer")
-     *  @Assert\NotBlank()
+     * @Assert\NotBlank()
      */
     private $productnumber;
-
     public function getId()
     {
         return $this->id;
@@ -45,7 +46,6 @@ class Shopcard
     public function setProduct($product)
     {
         $this->product = $product;
-
     }
     /**
      * @return mixed
@@ -61,21 +61,27 @@ class Shopcard
     {
         $this->user = $user;
     }
-
     public function getProductnumber(): ?int
     {
         return $this->productnumber;
     }
-
     public function setProductnumber($productnumber): self
     {
         $this->productnumber = $productnumber;
-
         return $this;
     }
-
-
-
-
-
+    /**
+     * @return mixed
+     */
+    public function getOrders()
+    {
+        return $this->order;
+    }
+    /**
+     * @param mixed $order
+     */
+    public function setOrders($order): void
+    {
+        $this->order = $order;
+    }
 }

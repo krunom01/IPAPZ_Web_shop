@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New OrderedItems{% endblock %}
+
+{% block body %}
+    <h1>Create new OrderedItems</h1>
+
+    {{ include('ordered_items/_form.html.twig') }}
+
+    <a href="{{ path('ordered_items_index') }}">back to list</a>
+{% endblock %}

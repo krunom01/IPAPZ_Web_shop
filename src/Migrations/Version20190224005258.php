@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190223111244 extends AbstractMigration
+final class Version20190224005258 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20190223111244 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE shopcard ADD productnumber INT NOT NULL');
+        $this->addSql('ALTER TABLE shopcard ADD CONSTRAINT FK_C88451178D9F6D38 FOREIGN KEY (order_id) REFERENCES ordered_items (id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190223111244 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE shopcard DROP productnumber');
+        $this->addSql('ALTER TABLE shopcard DROP FOREIGN KEY FK_C88451178D9F6D38');
     }
 }
