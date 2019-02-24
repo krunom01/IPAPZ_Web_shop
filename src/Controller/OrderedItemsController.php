@@ -42,6 +42,7 @@ class OrderedItemsController extends AbstractController
             $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
             $orderedItem->setUser($user);
+            $orderedItem->setPaid('new');
             $entityManager->persist($orderedItem);
             $entityManager->flush();
             $this->addFlash('success', 'Your order products!');

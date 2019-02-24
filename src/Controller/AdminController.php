@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UserRepository;
+use App\Entity\OrderedItems;
+use App\Repository\OrderedItemsRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +58,44 @@ class AdminController extends AbstractController
                 'user' => $user,
                 'form' => $form->createView(),
             ]);
+
+    }
+    /**
+     * @Route ("/admin/userOrder/{id}", name ="admin_user_order")
+     * @return Response
+     *
+     */
+
+    public function shoUserOrder($id){
+
+        $em = $this->getDoctrine()->getManager();
+        $sql = "select s.id,  p.name, p.price, s.productnumber
+                from shopcard s
+                left join product p on s.product_id = p.id
+                where s.product_id = p.id and s.user_id = :userid";
+
+        $statement = $em->getConnection()->prepare($sql);
+        $statement->bindValue('userid',$id);
+        $statement->execute();
+        $shopcard = $statement->fetchAll();
+        $total = 0;
+
+        $sql = "select * from ordered_items where user_id = :userid";
+
+        $statement = $em->getConnection()->prepare($sql);
+        $statement->bindValue('userid',$id);
+        $statement->execute();
+        $orderedItems = $statement->fetchAll();
+
+
+
+        return $this->render('admin/orders.html.twig', [
+            'title' => 'Orders',
+            'shopcards' => $shopcard,
+            'total' => $total,
+            'orderedItems' => $orderedItems,
+
+        ]);
 
     }
 
