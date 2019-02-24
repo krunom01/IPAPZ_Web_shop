@@ -23,8 +23,6 @@ class OrderedItemsController extends AbstractController
     {
         $orders = $orderedItemsRepository->findAll();
 
-
-
         return $this->render('admin/orders.html.twig', [
             'orders' => $orders,
 
@@ -43,7 +41,7 @@ class OrderedItemsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
-            $orderedItem->setUser($user->getId());
+            $orderedItem->setUser($user);
             $entityManager->persist($orderedItem);
             $entityManager->flush();
             $this->addFlash('success', 'Your order products!');
@@ -59,7 +57,7 @@ class OrderedItemsController extends AbstractController
     /**
      * @Route("/admin/orders/{id}", name="ordered_items_show", methods={"GET"})
      */
-    public function show(OrderedItems $orderedItem, OrderedItems $orderedItems): Response
+    public function show(OrderedItems $orderedItems): Response
     {
 
         $orderedItems->getItems();
@@ -104,4 +102,6 @@ class OrderedItemsController extends AbstractController
 
         return $this->redirectToRoute('ordered_items_index');
     }
+
+
 }
