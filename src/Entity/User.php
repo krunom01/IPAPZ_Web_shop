@@ -23,7 +23,7 @@ class User implements UserInterface
      */
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
+        $this->ordereditems = new ArrayCollection();
     }
     /**
      * @ORM\Id()
@@ -57,7 +57,20 @@ class User implements UserInterface
      */
     private $lastName;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="user", cascade={"persist", "remove"})
+     *
+     */
+    private $ordereditems;
 
+
+    /**
+     * @return Collection|OrderedItems[]
+     */
+    public function getOrdereditems()
+    {
+        return $this->ordereditems;
+    }
 
 
 

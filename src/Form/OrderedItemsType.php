@@ -14,7 +14,7 @@ class OrderedItemsType extends AbstractType
         $builder
             ->add('adress')
             ->add('paid')
-            ->add('user')
+
         ;
     }
 

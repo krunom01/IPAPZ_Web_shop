@@ -23,13 +23,13 @@ class Shopcard
     private $product;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $user;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\OrderedItems", inversedBy="orderItems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrderedItems", inversedBy="items")
      */
-    private $order;
+    private $ordereditems;
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
@@ -75,13 +75,13 @@ class Shopcard
      */
     public function getOrders()
     {
-        return $this->order;
+        return $this->ordereditems;
     }
     /**
-     * @param mixed $order
+     * @param mixed $ordereditems
      */
-    public function setOrders($order): void
+    public function setOrders($ordereditems): void
     {
-        $this->order = $order;
+        $this->ordereditems = $ordereditems;
     }
 }

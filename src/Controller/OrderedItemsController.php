@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\OrderedItems;
+use App\Entity\User;
 use App\Form\OrderedItemsType;
 use App\Repository\OrderedItemsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +32,7 @@ class OrderedItemsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="ordered_items_new", methods={"GET","POST"})
+     * @Route("/neworder", name="ordered_items_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -40,11 +41,13 @@ class OrderedItemsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
+            $orderedItem->setUser($user->getId());
             $entityManager->persist($orderedItem);
             $entityManager->flush();
-
-            return $this->redirectToRoute('ordered_items_index');
+            $this->addFlash('success', 'Your order products!');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('ordered_items/new.html.twig', [

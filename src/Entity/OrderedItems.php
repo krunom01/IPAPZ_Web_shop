@@ -20,7 +20,8 @@ class OrderedItems
      */
     private $id;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ordereditems")
+     * @ORM\JoinColumn(nullable=false)
      *
      */
     private $user;
@@ -35,26 +36,26 @@ class OrderedItems
      */
     private $paid;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="order", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="ordereditems", cascade={"persist", "remove"})
      * @var Collection
      */
-    private $orderItems;
+    private $items;
     public function __construct()
     {
-        $this->orderItems = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
     /**
      * @return Collection
      */
     public function getItems(): Collection
     {
-        return $this->orderItems;
+        return $this->items;
     }
     public function addorderItems(Shopcard $shopcard): self
     {
-        if (!$this->orderItems->contains($shopcard)) {
+        if (!$this->items->contains($shopcard)) {
             $shopcard->setOrders($this);
-            $this->orderItems[] = $shopcard;
+            $this->items[] = $shopcard;
         }
         return $this;
     }
@@ -72,7 +73,7 @@ class OrderedItems
     /**
      * @param mixed $user
      */
-    public function setUser($user): void
+    public function setUser($user)
     {
         $this->user = $user;
     }

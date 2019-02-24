@@ -125,6 +125,7 @@
             </tr>
 
             {%  set total = total + (shopcard.productnumber * shopcard.price) %}
+
         {% else %}
             <tr>
                 <td colspan="2">no records found</td>
@@ -136,13 +137,7 @@
     Total :{{ total }} kn
 {% endblock %}
     <td>
-        <form action="{{ path('order_new')}}" name="OrderType" method="post">
 
-            <input type="text" name="adress">
-
-            <button type="submit" >Add new</button>
-
-        </form>
     </td>
     {% block footer %}
 
