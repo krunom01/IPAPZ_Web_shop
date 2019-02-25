@@ -39,7 +39,7 @@
                     <div class="shop_bar clearfix">
 
 
-                    Number of products: {{ products|length }}
+                    Number of products: {{ pagination|length }}
 
 
 
@@ -50,7 +50,8 @@
 
 
                         <div class="product_grid_border"></div>
-                        {% for product in products %}
+                        <div class="container"><br />
+                        {% for product in pagination %}
 
                         <!-- Product Item -->
                         <div class="product_item is_new">
@@ -68,8 +69,17 @@
 
                         </div>
 
+
                         {% endfor %}
+
+
                     </div>
+
+                    </div>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
 
 
 

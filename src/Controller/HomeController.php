@@ -16,6 +16,9 @@ use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Psr\Container\ContainerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 
 class HomeController extends AbstractController
@@ -27,18 +30,25 @@ class HomeController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function index(CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
+    public function index(Request $request,
+                          PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
     {
 
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
 
+        $pagination = $paginator->paginate(
+            $products, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+
 
         return $this->render('home/index.html.twig', [
             'title' => 'Sport webshop',
             'categories' => $categories,
-            'products' => $products,
-
+            'pagination' => $pagination
 
         ]);
     }
