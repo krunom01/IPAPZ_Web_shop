@@ -59,7 +59,7 @@ class ShopcardController extends AbstractController
             $shopcard->setProductnumber($request->request->get('quantity'));
             $entityManager->persist($shopcard);
             $entityManager->flush();
-        $this->addFlash('success', 'Product added to shopcart, go to shopcart to order!');
+        $this->addFlash('success', 'go to shopcart to order!');
             return $this->redirectToRoute('home');
 
 

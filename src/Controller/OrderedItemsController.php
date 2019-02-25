@@ -45,7 +45,7 @@ class OrderedItemsController extends AbstractController
             $orderedItem->setPaid('new');
             $entityManager->persist($orderedItem);
             $entityManager->flush();
-            $this->addFlash('success', 'Your order products!');
+            $this->addFlash('success', 'Order is sent!');
             return $this->redirectToRoute('home');
         }
 
