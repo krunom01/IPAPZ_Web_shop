@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Form\UpdateProductType;
 use App\Repository\CategoryRepository;
 use App\Form\ProductFormType;
 use App\Form\UserFormType;
@@ -76,37 +77,61 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/updateproduct/{id}", name="update_product")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @param Product $product1
+     * @return Response
      */
-    public function edit(Request $request, Product $product): Response
+    public function updateProduct($id, Request $request,EntityManagerInterface $entityManager,ProductRepository $productRepository)
     {
-        $form = $this->createForm(ProductFormType::class, $product);
+
+        $product = $productRepository->find($id);
+        $product->setName($product->getName());
+        $product->setProductnumber($product->getProductnumber());
+        $product->setPrice($product->getPrice());
+        $product->setCategory($product->getCategory());
+        $product->setImage(new File($this->getParameter('image_directory').'/'.$product->getImage()));
+
+        $form = $this->createForm(UpdateProductType::class, $product);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('product_index', [
-                'id' => $product->getId(),
-            ]);
+        if ($this->isGranted('ROLE_ADMIN') && $form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var Product $product
+             */
+            $file = $product->getImage();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+            $product = $form->getData();
+            $product->setImage($fileName);
+            $entityManager->merge($product);
+            $entityManager->flush();
+            $this->addFlash('success', 'Updated!');
+            return $this->redirectToRoute('product_index');
         }
-
-        return $this->render('product/edit.html.twig', [
-            'product' => $product,
-            'form' => $form->createView(),
+        return $this->render('admin/updateproduct.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="product_delete")
      */
     public function delete(Request $request, Product $product): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($product);
             $entityManager->flush();
-        }
+
 
         return $this->redirectToRoute('product_index');
     }

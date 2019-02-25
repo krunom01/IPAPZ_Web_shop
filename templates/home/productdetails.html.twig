@@ -36,14 +36,15 @@
 
                             <div class="top_bar_user">
                                 <div class="user_icon"><img src="../../images/user.svg" alt=""></div>
-                                {% if is_granted('ROLE_USER') %}
+                                {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
                                     <div><a href="{{ path('app_logout') }}">Logout</a></div>
                                 {% else %}
                                     <div><a href="{{ path('app_register') }}">Register</a></div>
                                     <div><a href="{{ path('app_login') }}">Sign in</a></div>
                                 {% endif %}
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <div><a href="">Admin panel</a></div>
+                                    <div><a href="{{ path('admin') }}">Admin panel</a></div>
+
                                 {% endif %}
 
                             </div>
@@ -152,7 +153,7 @@
         </tr>
         </tbody>
     </table>
-        {% if is_granted('ROLE_USER') %}
+        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
             <button type="submit">Add to cart</button>
         {% endif %}
     </form>

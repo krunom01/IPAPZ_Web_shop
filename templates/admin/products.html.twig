@@ -61,7 +61,10 @@
                 <td>{{ product.price }} kn</td>
                 <td><img width="80" height="80" src="../../../../../upload/image/{{ product.image }}" alt=""></td>
                 <td>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                    <a href="{{ path('update_product', {'id': product.id}) }}">edit</a>
+                </td>
+                <td>
+                    <a href="{{ path('product_delete', {'id': product.id}) }}">delete</a>
                 </td>
             </tr>
         {% else %}
