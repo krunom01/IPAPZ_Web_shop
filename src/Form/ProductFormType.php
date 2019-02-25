@@ -32,13 +32,6 @@ class ProductFormType extends AbstractType
                 ],
                 'choice_label' => 'name'
             ])
-            ->add('sku', IntegerType::class, [
-                'label' => 'sku',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
             ->add('productnumber', IntegerType::class, [
                 'label' => 'productnumber',
                 'required' => false,

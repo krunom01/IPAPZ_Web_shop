@@ -55,4 +55,29 @@ class HomeController extends AbstractController
             'title' => 'Product details'
         ]);
     }
+
+    /**
+     * @Route("/category/{id}", name="category_details", methods={"GET"})
+     * @param CategoryRepository $CategoryRepository
+     *
+     */
+    public function showCategory(CategoryRepository $CategoryRepository, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $sql = "select * from product where category_id = :id";
+
+        $statement = $em->getConnection()->prepare($sql);
+        $statement->bindValue('id', $id);
+        $statement->execute();
+        $products = $statement->fetchAll();
+
+        $categories = $CategoryRepository->findAll();
+
+        return $this->render('home/categorydetails.html.twig', [
+            'products' => $products,
+            'title' => 'category details',
+            'categories' => $categories
+
+        ]);
+    }
 }

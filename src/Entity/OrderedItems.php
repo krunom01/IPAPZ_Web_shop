@@ -20,7 +20,7 @@ class OrderedItems
      */
     private $id;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ordereditems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ordereditems", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      *
      */

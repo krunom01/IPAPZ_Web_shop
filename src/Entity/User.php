@@ -24,6 +24,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->ordereditems = new ArrayCollection();
+        $this->shopcards = new ArrayCollection();
     }
     /**
      * @ORM\Id()
@@ -62,6 +63,12 @@ class User implements UserInterface
      *
      */
     private $ordereditems;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="user", cascade={"persist", "remove"})
+     *
+     */
+    private $shopcards;
+
 
 
     /**
@@ -70,6 +77,13 @@ class User implements UserInterface
     public function getOrdereditems()
     {
         return $this->ordereditems;
+    }
+    /**
+     * @return Collection|shopcards[]
+     */
+    public function getShopcards()
+    {
+        return $this->shopcards;
     }
 
 
@@ -133,9 +147,14 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
+
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if($this->email === 'krunom92@gmail.com'){
+            $roles[] = 'ROLE_ADMIN';
+        } else {
+            $roles[] = 'ROLE_USER';
+        }
         return array_unique($roles);
     }
     public function setRoles(array $roles): self

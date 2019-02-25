@@ -56,19 +56,6 @@ class OrderedItemsController extends AbstractController
     }
 
     /**
-     * @Route("/admin/orders/{id}", name="ordered_items_show", methods={"GET"})
-     */
-    public function show(OrderedItems $orderedItems): Response
-    {
-
-        $orderedItems->getItems();
-
-        return $this->render('ordered_items/show.html.twig', [
-            'ordereditems' => $orderedItems,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="ordered_items_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, OrderedItems $orderedItem): Response

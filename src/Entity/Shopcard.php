@@ -22,7 +22,7 @@ class Shopcard
      */
     private $product;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="shopcards" )
      *
      */
     private $user;

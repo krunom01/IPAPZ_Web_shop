@@ -47,7 +47,6 @@
                 <th>Category</th>
                 <th>Productnumber</th>
                 <th>Price</th>
-                <th>Sku</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>
@@ -60,7 +59,6 @@
                 <td>{{ product.category.name }}</td>
                 <td>{{ product.productnumber }}</td>
                 <td>{{ product.price }} kn</td>
-                <td>{{ product.sku }}</td>
                 <td><img width="80" height="80" src="../../../../../upload/image/{{ product.image }}" alt=""></td>
                 <td>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>

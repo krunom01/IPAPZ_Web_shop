@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Product
  * @package App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"productnumber"}, message="There is already an product with this productnumber")
  */
 class Product
 {
@@ -51,10 +53,6 @@ class Product
      * @ORM\Column(type="decimal", scale=2)
      */
     private $price;
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $sku;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -130,19 +128,7 @@ class Product
     {
         return $this->price;
     }
-    /**
-     * @param mixed $sku
-     */
 
-    public function setSku($sku)
-    {
-        $this->sku = $sku;
-
-    }
-    public function getSku()
-    {
-        return $this->sku;
-    }
     /**
      * @param mixed $price
      */

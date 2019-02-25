@@ -62,7 +62,7 @@
                 <td>{{ shopcard.productnumber * shopcard.price }} kn</td>
 
                 <td>
-                    <a href="{{ path('shopcard_delete', {'id': shopcard.id}) }}">delete</a>
+
 
                 </td>
             </tr>
@@ -77,11 +77,13 @@
 
         </tbody>
     </table>
+    Total :{{ total }} kn
     <table class="table">
         <thead>
         <tr>
             <th>Adress</th>
-            <th>Paid</th>
+            <th>Status</th>
+            <th>Update order</th>
 
         </tr>
         </thead>
@@ -90,6 +92,7 @@
             <tr>
                 <td>{{ item.adress }}</td>
                 <td>{{ item.paid }}</td>
+                <td><a href="{{ path('admin_update_order', {id: item.id}) }}" class="btn btn-primary">Update order</a></td>
             </tr>
 
         {% endfor %}

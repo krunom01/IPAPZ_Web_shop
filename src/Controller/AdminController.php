@@ -98,5 +98,20 @@ class AdminController extends AbstractController
         ]);
 
     }
+    /**
+     * @Route ("/admin/updateOrder/{id}", name ="admin_update_order")
+     * @return Response
+     *
+     */
+
+    public function updateOrder($id,OrderedItemsRepository $orderedItemsRepository, EntityManagerInterface $entityManager){
+
+        $order = $orderedItemsRepository->find($id);
+        $order->setPaid('shipping');
+        $entityManager->merge($order);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_users');
+
+    }
 
 }

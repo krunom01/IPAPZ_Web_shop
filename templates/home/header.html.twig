@@ -41,7 +41,7 @@
 
                             <div class="top_bar_user">
                                 <div class="user_icon"><img src="images/user.svg" alt=""></div>
-                                {% if is_granted('ROLE_USER') %}
+                                {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
                                 <div><a href="{{ path('app_logout') }}">Logout</a></div>
                                 {% else %}
                                 <div><a href="{{ path('app_register') }}">Register</a></div>
@@ -49,6 +49,7 @@
                                 {% endif %}
                                 {% if is_granted('ROLE_ADMIN') %}
                                 <div><a href="{{ path('admin') }}">Admin panel</a></div>
+
                                 {% endif %}
 
                             </div>
