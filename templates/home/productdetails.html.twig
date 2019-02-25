@@ -147,10 +147,12 @@
             <th>Image</th>
             <td><img src="../../../../../upload/image/{{ product.image }}" alt="{{ product.name }}"></td>
         </tr>
+        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
         <tr>
             <th>Quantity</th>
             <td><input type="number" name="quantity" value="1" placeholder="set product quantity"></td>
         </tr>
+        {% endif %}
         </tbody>
     </table>
         {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}

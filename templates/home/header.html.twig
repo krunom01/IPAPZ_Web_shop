@@ -106,8 +106,9 @@
 
 
                                     <div class="cart_content">
+                                        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
                                         <div class="cart_text"><a href="{{ path('shopcard_index') }}">Shop Cart</a></div>
-
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

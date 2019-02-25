@@ -135,11 +135,13 @@
 
         </tbody>
     </table>
-    Total :{{ total }} kn
+    Total :{{ total }} kn <br>
 {% endblock %}
+    {% if shopcards|length > 0 %}
     <td>
     <td><a href="{{ path('ordered_items_new') }}" class="btn btn-primary">Order</a></td>
     </td>
+    {% endif %}
     {% block footer %}
 
 

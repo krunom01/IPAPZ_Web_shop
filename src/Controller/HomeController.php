@@ -30,8 +30,7 @@ class HomeController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function index(Request $request,
-                          PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
+    public function index(Request $request, PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
     {
 
         $categories = $CategoryRepository->findAll();
