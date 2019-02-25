@@ -42,6 +42,7 @@
                             <div class="top_bar_user">
                                 <div class="user_icon"><img src="images/user.svg" alt=""></div>
                                 {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
+                                    <div><a href="{{ path('profile') }}">Profile</a></div>
                                 <div><a href="{{ path('app_logout') }}">Logout</a></div>
                                 {% else %}
                                 <div><a href="{{ path('app_register') }}">Register</a></div>
@@ -75,23 +76,7 @@
                     <!-- Search -->
                     <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                         <div class="header_search">
-                            <div class="header_search_content">
-                                <div class="header_search_form_container">
-                                    <form action="#" class="header_search_form clearfix">
-                                        <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
-                                        <div class="custom_dropdown">
-                                            <div class="custom_dropdown_list">
-                                                <span class="custom_dropdown_placeholder clc">Seach product</span>
-                                                <i class="fas fa-chevron-down"></i>
-                                                <ul class="custom_list clc">
 
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

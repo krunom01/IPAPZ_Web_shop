@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User profile{% endblock %}
+
+{% block body %}
+    <h1>Edit profile</h1>
+
+    {{ form_start(userEdit) }}
+    {{ form_row(userEdit.firstName) }}
+    {{ form_row(userEdit.lastName) }}
+    {{ form_row(userEdit.email) }}
+    {{ form_row(userEdit.plainPassword.first) }}
+    {{ form_row(userEdit.plainPassword.second) }}
+    <button class="btn" formnovalidate>Save</button>
+    {{ form_end(userEdit) }}
+{% endblock %}

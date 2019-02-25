@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserEditType;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -113,6 +114,41 @@ class UserController extends AbstractController
         $this->addFlash('success', 'Successfully deleted!');
         return $this->redirectToRoute('admin_users');
 
+    }
+
+    /**
+     * @Route("/profile", name="profile")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return null|Response
+     */
+    public function profile(Request $request,LoginFormAuthenticator $authenticator,UserPasswordEncoderInterface $passwordEncoder,GuardAuthenticatorHandler $guardHandler,EntityManagerInterface $entityManager) {
+
+        $user = $this->getUser();
+        $form = $this->createForm(UserEditType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+            $this->addFlash('success', 'Profile updated!');
+        }
+        return $this->render('security/useredit.html.twig', [
+            'userEdit' => $form->createView(),
+        ]);
     }
 
 
