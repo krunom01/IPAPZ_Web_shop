@@ -18,11 +18,7 @@
 </head>
 <div class="super_container">
 
-    <!-- Header -->
-
     <header class="header">
-
-        <!-- Top Bar -->
 
         <div class="top_bar">
             <div class="container">
@@ -52,8 +48,6 @@
             </div>
         </div>
 
-        <!-- Header Main -->
-
         <div class="header_main">
             <div class="container">
                 <div class="row">
@@ -70,12 +64,10 @@
 
                     </div>
 
-                    <!-- Wishlist -->
+
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 
-
-                            <!-- Cart -->
 
                         </div>
                     </div>
@@ -83,19 +75,8 @@
             </div>
         </div>
 
-        <!-- Main Navigation -->
-
-
-
-        <!-- Menu -->
-
-
 
     </header> {% endblock %}
-
-
-
-
 
 {% block content %}
     <h1>Shopcard index</h1>
@@ -114,25 +95,19 @@
         <tbody>
         {% for shopcard in shopcards %}
             <tr>
-                <td>{{ shopcard.id }}</td>
                 <td>{{ shopcard.name }}</td>
                 <td>{{ shopcard.productnumber }}</td>
                 <td>{{ shopcard.productnumber * shopcard.price }} kn</td>
-
                 <td>
                     <a href="{{ path('shopcard_delete', {'id': shopcard.id}) }}">delete</a>
-
                 </td>
             </tr>
-
             {%  set total = total + (shopcard.productnumber * shopcard.price) %}
-
         {% else %}
             <tr>
                 <td colspan="2">no records found</td>
             </tr>
         {% endfor %}
-
         </tbody>
     </table>
     Total :{{ total }} kn <br>
@@ -143,8 +118,6 @@
     </td>
     {% endif %}
     {% block footer %}
-
-
 <script src="../../js/jquery-3.3.1.min.js"></script>
 <script src="../../styles/bootstrap4/popper.js"></script>
 <script src="../../styles/bootstrap4/bootstrap.min.js"></script>
@@ -159,7 +132,7 @@
 <script src="../../plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="../../plugins/parallax-js-master/parallax.min.js"></script>
 <script src="../../js/shop_custom.js"></script>
+</div>
 </body>
-
 </html>
 {% endblock %}

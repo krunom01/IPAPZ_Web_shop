@@ -65,28 +65,6 @@ class ShopcardController extends AbstractController
 
     }
 
-    /**
-     * @Route("/{id}/edit", name="shopcard_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Shopcard $shopcard): Response
-    {
-
-        $form = $this->createForm(ShopcardType::class, $shopcard);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-            return $this->redirectToRoute('shopcard_index', [
-                'id' => $shopcard->getId(),
-            ]);
-        }
-
-        return $this->render('shopcard/edit.html.twig', [
-            'shopcard' => $shopcard,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}/delete", name="shopcard_delete")

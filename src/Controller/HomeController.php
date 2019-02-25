@@ -42,13 +42,10 @@ class HomeController extends AbstractController
             10/*limit per page*/
         );
 
-
-
         return $this->render('home/index.html.twig', [
             'title' => 'Sport webshop',
             'categories' => $categories,
             'pagination' => $pagination
-
         ]);
     }
     /**
