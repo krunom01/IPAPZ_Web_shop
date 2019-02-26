@@ -1,8 +1,5 @@
-
-
-
 {% block title %}{{ title }}{% endblock %}
-{% block header %} <!DOCTYPE html>
+{% block header %}  <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>{{ title }}</title>
@@ -45,7 +42,7 @@
 
                             <div class="top_bar_user">
                                 <div class="user_icon"><img src="../../images/user.svg" alt=""></div>
-                                {% if is_granted('ROLE_USER') %}
+                                {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
                                     <div><a href="{{ path('app_logout') }}">Logout</a></div>
                                 {% else %}
                                     <div><a href="{{ path('app_register') }}">Register</a></div>
@@ -53,6 +50,7 @@
                                 {% endif %}
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <div><a href="{{ path('admin') }}">Admin panel</a></div>
+
                                 {% endif %}
 
                             </div>
@@ -78,7 +76,23 @@
                     <!-- Search -->
                     <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                         <div class="header_search">
+                            <div class="header_search_content">
+                                <div class="header_search_form_container">
+                                    <form action="#" class="header_search_form clearfix">
 
+                                        <div class="custom_dropdown">
+                                            <div class="custom_dropdown_list">
+                                                <span class="custom_dropdown_placeholder clc"></span>
+                                                <i class="fas fa-chevron-down"></i>
+                                                <ul class="custom_list clc">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -93,9 +107,7 @@
 
 
                                     <div class="cart_content">
-                                        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
-                                            <div class="cart_text"><a href="{{ path('shopcard_index') }}">Shop Cart</a></div>
-                                        {% endif %}
+                                        <div class="cart_text"><a href="{{ path('shopcard_index') }}">Shop Cart</a></div>
 
                                     </div>
                                 </div>
@@ -106,12 +118,18 @@
             </div>
         </div>
 
+        <!-- Main Navigation -->
+
+
+
+        <!-- Menu -->
+
+
+
     </header>
     {% endblock %}
 
-{% block popularcategory %}
-
-    <!-- Home -->
+{% block popularcategory %}  <!-- Home -->
 
     <div class="home">
         <div class="home_background parallax-window" data-parallax="scroll" data-image-src="../../images/shop_background.jpg"></div>
@@ -196,12 +214,8 @@
 
 
 
-
-
 {% endblock %}
-{% block footer %}  <!-- Footer -->
-
-    <footer class="footer">
+{% block footer %} <footer class="footer">
         <div class="container">
             <div class="row">
 
@@ -291,9 +305,9 @@
                         <div class="logos ml-sm-auto">
                             <ul class="logos_list">
                                 <li><a href="#"><img src="../../images/logos_1.png" alt=""></a></li>
-                                <li><a href="#"><img src="../../images/logos_2.png" alt=""></a></li>
-                                <li><a href="#"><img src="../../images/logos_3.png" alt=""></a></li>
-                                <li><a href="#"><img src="../../images/logos_4.png" alt=""></a></li>
+                                <li><a href="#"><img src="../images/logos_2.png" alt=""></a></li>
+                                <li><a href="#"><img src="../images/logos_3.png" alt=""></a></li>
+                                <li><a href="#"><img src="../images/logos_4.png" alt=""></a></li>
                             </ul>
                         </div>
                     </div>
@@ -303,20 +317,20 @@
     </div>
 </div>
 
-<script src="../../js/jquery-3.3.1.min.js"></script>
-<script src="../../styles/bootstrap4/popper.js"></script>
-<script src="../../styles/bootstrap4/bootstrap.min.js"></script>
-<script src="../../plugins/greensock/TweenMax.min.js"></script>
-<script src="../../plugins/greensock/TimelineMax.min.js"></script>
-<script src="../../plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="../../plugins/greensock/animation.gsap.min.js"></script>
-<script src="../../plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="../../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="../../plugins/easing/easing.js"></script>
-<script src="../../plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="../../plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="../../plugins/parallax-js-master/parallax.min.js"></script>
-<script src="../../js/shop_custom.js"></script>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../styles/bootstrap4/popper.js"></script>
+<script src="../styles/bootstrap4/bootstrap.min.js"></script>
+<script src="../plugins/greensock/TweenMax.min.js"></script>
+<script src="../plugins/greensock/TimelineMax.min.js"></script>
+<script src="../plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="../plugins/greensock/animation.gsap.min.js"></script>
+<script src="../plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="../plugins/easing/easing.js"></script>
+<script src="../plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="../plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="../plugins/parallax-js-master/parallax.min.js"></script>
+<script src="../js/shop_custom.js"></script>
 </body>
 
-</html> {% endblock %}
+</html>{% endblock %}
