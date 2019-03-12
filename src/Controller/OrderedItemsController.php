@@ -59,6 +59,19 @@ class OrderedItemsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/allOrders", name="order_index", methods={"GET"})
+     */
+    public function orders(OrderedItemsRepository $orderedItemsRepository): Response
+    {
+        $orders = $orderedItemsRepository->findAll();
+
+        return $this->render('admin/allOrders.html.twig', [
+            'orders' => $orders,
+
+        ]);
+    }
+
 
 
 
