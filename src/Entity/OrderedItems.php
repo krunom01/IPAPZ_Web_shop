@@ -40,6 +40,18 @@ class OrderedItems
      * @var Collection
      */
     private $items;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     */
+    private $Phone;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     */
+    private $city;
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -93,6 +105,30 @@ class OrderedItems
     public function setPaid($paid): self
     {
         $this->paid = $paid;
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->Phone;
+    }
+
+    public function setPhone(string $Phone): self
+    {
+        $this->Phone = $Phone;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
         return $this;
     }
 }

@@ -28,7 +28,7 @@ class ShopcardController extends AbstractController
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $sql = "select s.id,  p.name, p.price, s.productnumber
+        $sql = "select s.id,  p.name, p.price, s.productnumber, s.product_id
                 from shopcard s
                 left join product p on s.product_id = p.id
                 where s.product_id = p.id and s.user_id = :userid";
@@ -43,6 +43,7 @@ class ShopcardController extends AbstractController
             'title' => "shopcard details",
             'total' => $total
         ]);
+
     }
 
     /**

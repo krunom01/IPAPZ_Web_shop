@@ -38,12 +38,15 @@ class OrderedItemsController extends AbstractController
         $form = $this->createForm(OrderedItemsType::class, $orderedItem);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
             $orderedItem->setUser($user);
             $orderedItem->setPaid('new');
             $entityManager->persist($orderedItem);
+
             $entityManager->flush();
             $this->addFlash('success', 'OK!');
             return $this->redirectToRoute('home');
@@ -52,6 +55,7 @@ class OrderedItemsController extends AbstractController
         return $this->render('ordered_items/new.html.twig', [
             'ordered_item' => $orderedItem,
             'form' => $form->createView(),
+            'message' => '',
         ]);
     }
 

@@ -32,16 +32,13 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
     {
-
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
-
         $pagination = $paginator->paginate(
             $products, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             10/*limit per page*/
         );
-
         return $this->render('home/index.html.twig', [
             'title' => 'Sport webshop',
             'categories' => $categories,

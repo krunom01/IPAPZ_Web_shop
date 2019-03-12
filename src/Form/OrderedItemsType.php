@@ -6,6 +6,8 @@ use App\Entity\OrderedItems;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+;
 
 class OrderedItemsType extends AbstractType
 {
@@ -13,8 +15,8 @@ class OrderedItemsType extends AbstractType
     {
         $builder
             ->add('adress')
-
-
+            ->add('phone',IntegerType::class)
+            ->add('city')
         ;
     }
 

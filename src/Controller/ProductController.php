@@ -60,13 +60,14 @@ class ProductController extends AbstractController
                     $fileName
                 );
             } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+                echo $e;
             }
             $product->setImage($fileName);
             $entityManager->persist($product);
             $entityManager->flush();
             $this->addFlash('success', 'Inserted new product!');
             return $this->redirectToRoute('product_index');
+
         }
 
         return $this->render('product/new.html.twig', [
