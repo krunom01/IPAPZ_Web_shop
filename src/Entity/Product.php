@@ -32,11 +32,12 @@ class Product
      */
     private $id;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
      */
-    private $category;
+    private $categories;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -83,17 +84,17 @@ class Product
         return $this->id;
     }
 
-    public function getCategory()
-    {
-        return $this->category;
-    }
-    /**
-     * @param mixed $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
 
+    /**
+     * @return ArrayCollection
+    */
+    public function getCategories(): ArrayCollection
+    {
+        return $this->categories;
+    }
+    public function setCategories(Category $category)
+    {
+        $this->categories[] = $category;
     }
 
     public function getName()

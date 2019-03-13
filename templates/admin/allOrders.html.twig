@@ -6,8 +6,8 @@
     <tr>
         <th>User name</th>
         <th>Phone</th>
-        <th>adress</th>
         <th>city</th>
+        <th>adress</th>
         <th>status</th>
 
     </tr>
@@ -15,7 +15,7 @@
     <tbody>
 {% for order in orders %}
     <tr>
-        <td>{{ order.user.id }}</td>
+        <td>{{ order.user.firstName }} {{ order.user.lastName }}</td>
         <td>{{ order.phone }}</td>
         <td>{{ order.city }}</td>
         <td>{{ order.adress }}</td>

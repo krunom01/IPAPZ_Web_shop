@@ -36,10 +36,11 @@ class Category
      */
 
     private $name;
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category", cascade={"persist", "remove"})
-     *
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="categories", fetch="EAGER")
+     * @ORM\JoinTable(name="ab_category_2_product",joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)},
+     * inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)})
      */
     private $products;
 
@@ -53,18 +54,25 @@ class Category
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
 
         return $this;
     }
     /**
-     * @return Collection|Product[]
+     * @return ArrayCollection
      */
-    public function getProducts()
+    public function getProducts(): ArrayCollection
     {
         return $this->products;
+    }
+    /**
+     * @param ArrayCollection $products
+     */
+    public function setProducts(ArrayCollection $products): void
+    {
+        $this->products = $products;
     }
     public function __toString() {
         return $this->getName();
