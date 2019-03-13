@@ -48,8 +48,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/product_details/{id}", name="product_details", methods={"GET"})
      * @param ProductRepository $ProductRepository
+     * @return Response
      */
-    public function show($id,Product $product,ProductRepository $ProductRepository): Response
+    public function show($id,Product $product,ProductRepository $ProductRepository)
     {
         $product = $ProductRepository->find($id);
 
@@ -62,19 +63,23 @@ class HomeController extends AbstractController
     /**
      * @Route("/category/{id}", name="category_details", methods={"GET"})
      * @param CategoryRepository $CategoryRepository
+     * @return Response
      *
      */
     public function showCategory(CategoryRepository $CategoryRepository, $id)
     {
+        $categories = $CategoryRepository->findAll();
         $em = $this->getDoctrine()->getManager();
-        $sql = "select * from product where category_id = :id";
-
+        $sql = "select a.name, a.image, a.name, a.price, a.id
+                from product a
+                inner join product_category pc on a.id = pc.product_id
+                where category_id = :id";
         $statement = $em->getConnection()->prepare($sql);
         $statement->bindValue('id', $id);
         $statement->execute();
         $products = $statement->fetchAll();
 
-        $categories = $CategoryRepository->findAll();
+
 
         return $this->render('home/categorydetails.html.twig', [
             'products' => $products,

@@ -21,6 +21,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/", name="category_index", methods={"GET"})
      * @param CategoryRepository $categoryRepository
+     *
      */
     public function index(CategoryRepository $categoryRepository): Response
     {

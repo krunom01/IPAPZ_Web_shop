@@ -66,7 +66,7 @@ class AdminController extends AbstractController
      *
      */
 
-    public function shoUserOrder($id){
+    public function showUserOrder($id){
 
         $em = $this->getDoctrine()->getManager();
         $sql = "select s.id,  p.name, p.price, s.productnumber
@@ -111,6 +111,32 @@ class AdminController extends AbstractController
         $entityManager->merge($order);
         $entityManager->flush();
         return $this->redirectToRoute('admin_users');
+
+    }
+
+    /**
+     * @Route ("/admin/categoryProducts/{id}", name ="admin_category_products")
+     * @return Response
+     *
+     */
+
+    public function categoryProducts($id){
+
+        $em = $this->getDoctrine()->getManager();
+        $sql = "select a.name, a.image, a.name, a.price, a.id
+                from product a
+                inner join product_category pc on a.id = pc.product_id
+                where category_id = :id";
+        $statement = $em->getConnection()->prepare($sql);
+        $statement->bindValue('id', $id);
+        $statement->execute();
+        $products = $statement->fetchAll();
+
+
+
+        return $this->render('admin/categoryProducts.html.twig', [
+            'products' => $products,
+        ]);
 
     }
 
