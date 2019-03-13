@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Entity\Category;
+
 
 /**
  * Class Product
@@ -24,6 +26,7 @@ class Product
     public function __construct()
     {
         $this->shopcards = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
     /**
      * @ORM\Id()
@@ -34,10 +37,10 @@ class Product
 
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist", "remove"})
+     *
      */
-    private $categories;
+    private $products;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -82,19 +85,6 @@ class Product
     public function getId()
     {
         return $this->id;
-    }
-
-
-    /**
-     * @return ArrayCollection
-    */
-    public function getCategories(): ArrayCollection
-    {
-        return $this->categories;
-    }
-    public function setCategories(Category $category)
-    {
-        $this->categories[] = $category;
     }
 
     public function getName()
@@ -152,6 +142,20 @@ class Product
     {
         $this->image = $image;
 
+    }
+    /**
+     * @param ArrayCollection $products
+     */
+    public function addProducts(ArrayCollection $products)
+    {
+        $this->products = $products;
+    }
+    /**
+     * @param ProductCategory $products
+     */
+    public function setProducts(ProductCategory $products)
+    {
+        $this->products = $products;
     }
 
 }

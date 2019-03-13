@@ -64,6 +64,9 @@
                 <td>
                     <a href="{{ path('product_delete', {'id': product.id}) }}">delete</a>
                 </td>
+                <td>
+                    <a href="{{ path('product_new_category', {'id': product.id}) }}">Add category</a>
+                </td>
             </tr>
         {% else %}
             <tr>

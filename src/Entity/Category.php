@@ -17,13 +17,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class Category
 {
 
-    /**
-     * Category constructor.
-     */
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,13 +30,17 @@ class Category
      */
 
     private $name;
+
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="categories", fetch="EAGER")
-     * @ORM\JoinTable(name="ab_category_2_product",joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)},
-     * inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)})
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="category", cascade={"persist", "remove"})
+     *
      */
-    private $products;
+    private $categories;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -60,19 +58,13 @@ class Category
 
         return $this;
     }
+
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|Product[]
      */
-    public function getProducts(): ArrayCollection
+    public function getProducts()
     {
         return $this->products;
-    }
-    /**
-     * @param ArrayCollection $products
-     */
-    public function setProducts(ArrayCollection $products): void
-    {
-        $this->products = $products;
     }
     public function __toString() {
         return $this->getName();
@@ -80,5 +72,17 @@ class Category
     /**
      * @return int
      */
+
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function setCategories($categories): self
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
 
 }
