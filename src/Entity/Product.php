@@ -20,15 +20,7 @@ use App\Entity\Category;
  */
 class Product
 {
-    /**
-     * Category constructor.
-     */
-    public function __construct()
-    {
-        $this->shopcards = new ArrayCollection();
-        $this->products = new ArrayCollection();
-        $this->productCategory = new ArrayCollection();
-    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,8 +30,7 @@ class Product
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist", "remove"})
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist","remove"})
      */
     private $productCategory;
 
@@ -78,6 +69,14 @@ class Product
     public function getProducts()
     {
         return $this->shopcards;
+    }
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->shopcards = new ArrayCollection();
+        $this->productCategory = new ArrayCollection();
     }
 
     /**
@@ -146,32 +145,32 @@ class Product
 
     }
     /**
-     * @param ArrayCollection $products
-     */
-    public function addProducts(ArrayCollection $products)
-    {
-        $this->products = $products;
-    }
-    /**
-     * @param ProductCategory $products
-     */
-    public function setProducts(ProductCategory $products)
-    {
-        $this->products = $products;
-    }
-    /**
      * @return ArrayCollection|Category[]
      */
-    public function getCategory()
+    public function getProductCategory()
     {
         $categories = new ArrayCollection();
-        foreach ($this->productCategory as $product) {
+        foreach ($this->productCategory as $prod) {
             /**
-             * @var ProductCategory $product
+             * @var ProductCategory $prod
              */
-            $categories[] = $product->getCategory();
+            $categories[] = $prod->getCategory();
         }
         return $categories;
     }
-
+    /**
+     * @param ArrayCollection|ProductCategory $productCategory
+     */
+    public function setProductCategory(ArrayCollection $productCategory)
+    {
+        foreach ($productCategory as $category) {
+            /**
+             * @var ProductCategory $newProductCategory
+             */
+            $newProductCategory = new ProductCategory();
+            $newProductCategory->setProduct($this);
+            $newProductCategory->setCategory($category);
+            $this->productCategory[] = $newProductCategory;
+        }
+    }
 }

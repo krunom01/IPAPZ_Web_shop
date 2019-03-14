@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductCategoryRepository")
+ * Class ProductCategory
+ * @package App\Entity
  */
 class ProductCategory
 {
@@ -32,12 +34,18 @@ class ProductCategory
         return $this->id;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategory()
     {
         return $this->category;
     }
+    /**
+     * @param mixed $category
+     */
 
-    public function setCategory($category)
+    public function setCategory($category): void
     {
         $this->category = $category;
 
@@ -48,7 +56,7 @@ class ProductCategory
         return $this->product;
     }
 
-    public function setProduct($product)
+    public function setProduct($product): void
     {
         $this->product = $product;
 

@@ -94,17 +94,17 @@ class ProductController extends AbstractController
      * @Route("/updateproduct/{id}", name="update_product")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
-     * @param Product $product1
+     * @param Product $product
      * @return Response
      */
-    public function updateProduct($id, Request $request,EntityManagerInterface $entityManager,ProductRepository $productRepository)
+    public function updateProduct(Product $product,Request $request,EntityManagerInterface $entityManager,ProductRepository $productRepository)
     {
 
-        $product = $productRepository->find($id);
-        $product->setName($product->getName());
+
         $product->setProductnumber($product->getProductnumber());
         $product->setPrice($product->getPrice());
         $product->setImage(new File($this->getParameter('image_directory').'/'.$product->getImage()));
+
 
         $form = $this->createForm(UpdateProductType::class, $product);
         $form->handleRequest($request);
@@ -164,7 +164,7 @@ class ProductController extends AbstractController
         ,CategoryRepository $categoryRepository,EntityManagerInterface $entityManager){
 
         $product = $productRepository->find($id);
-        $form = $this->createForm(ProductCategoryType::class);
+        $form = $this->createForm(ProductUpdateForm::class);
         $form->handleRequest($request);
 
 

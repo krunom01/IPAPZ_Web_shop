@@ -19,18 +19,35 @@ class UpdateProductType extends AbstractType
     {
         $builder
             ->add('name', TextareaType::class, [
-                'label' => 'Insert Product Name : '
+                'label' => 'name',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('productnumber', IntegerType::class, [
-                'label' => 'Insert Product number: '
+                'label' => 'productnumber',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
+            ->add('productCategory', EntityType::class,[
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
 
+            ])
             ->add('price', IntegerType::class, [
-                'label' => 'Insert Product price: ',
-
+                'label' => 'price',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('image', FileType::class, [
-                'label' => 'Insert Image: '
+                'label' => 'Insert Image (jpg, jpeg): '
             ]);
     }
 
