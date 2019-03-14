@@ -43,7 +43,7 @@ class ProductCategory
 
     }
 
-    public function getProduct(): ?int
+    public function getProduct()
     {
         return $this->product;
     }

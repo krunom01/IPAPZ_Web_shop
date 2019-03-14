@@ -10,6 +10,7 @@ use App\Form\UpdateProductType;
 use App\Repository\CategoryRepository;
 use App\Form\ProductFormType;
 use App\Form\UserFormType;
+use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +31,22 @@ class ProductController extends AbstractController
 {
     /**
      * @Route("/", name="product_index")
-     * @param ProductRepository $productRepository
+
+     * @return Response
      */
-    public function index(ProductRepository $productRepository)
+    public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $sql = "select distinct a.name, a.productnumber,a.id,a.image,a.price, pc.product_id
+                from product a
+                left join product_category pc on a.id = pc.product_id";
+        $statement = $em->getConnection()->prepare($sql);
+        $statement->execute();
+        $products = $statement->fetchAll();
+
         return $this->render('admin/products.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $products,
+
         ]);
     }
 
