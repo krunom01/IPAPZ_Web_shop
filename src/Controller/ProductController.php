@@ -104,7 +104,6 @@ class ProductController extends AbstractController
         $product->setName($product->getName());
         $product->setProductnumber($product->getProductnumber());
         $product->setPrice($product->getPrice());
-        $product->setCategory($product->getCategory());
         $product->setImage(new File($this->getParameter('image_directory').'/'.$product->getImage()));
 
         $form = $this->createForm(UpdateProductType::class, $product);

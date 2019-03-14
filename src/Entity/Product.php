@@ -27,6 +27,7 @@ class Product
     {
         $this->shopcards = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->productCategory = new ArrayCollection();
     }
     /**
      * @ORM\Id()
@@ -40,7 +41,7 @@ class Product
      * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist", "remove"})
      *
      */
-    private $products;
+    private $productCategory;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -70,6 +71,7 @@ class Product
      *
      */
     private $shopcards;
+
     /**
      * @return Collection|Shopcard[]
      */
@@ -156,6 +158,20 @@ class Product
     public function setProducts(ProductCategory $products)
     {
         $this->products = $products;
+    }
+    /**
+     * @return ArrayCollection|Category[]
+     */
+    public function getCategory()
+    {
+        $categories = new ArrayCollection();
+        foreach ($this->productCategory as $product) {
+            /**
+             * @var ProductCategory $product
+             */
+            $categories[] = $product->getCategory();
+        }
+        return $categories;
     }
 
 }

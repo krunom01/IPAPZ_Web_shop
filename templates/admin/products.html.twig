@@ -66,14 +66,13 @@
                 </td>
                 {% if product.product_id != null %}
                 <td>
-                    <a href="{{ path('product_new_category', {'id': product.id}) }}">update category</a>
+                    <a href="{{ path('product_category_edit', {'id': product.id}) }}">update category</a>
                 </td>
                 {% else %}
                     <td>
                         <a href="{{ path('product_new_category', {'id': product.id}) }}">add category</a>
                     </td>
                  {% endif %}
-
             </tr>
         {% else %}
             <tr>

@@ -41,6 +41,7 @@ class ProductFormType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Insert Image (jpg, jpeg): '
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

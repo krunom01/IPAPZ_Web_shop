@@ -23,7 +23,7 @@ class ProductCategory
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="productCategory")
      */
     private $product;
 

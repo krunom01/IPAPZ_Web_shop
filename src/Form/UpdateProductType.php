@@ -24,13 +24,7 @@ class UpdateProductType extends AbstractType
             ->add('productnumber', IntegerType::class, [
                 'label' => 'Insert Product number: '
             ])
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'choice_label' => 'name'
-            ])
+
             ->add('price', IntegerType::class, [
                 'label' => 'Insert Product price: ',
 

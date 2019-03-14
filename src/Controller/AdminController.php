@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\User;
+use App\Form\UpdateProductCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\ProductCategory;
+use App\Repository\ProductCategoryRepository;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use App\Entity\OrderedItems;
 use App\Repository\OrderedItemsRepository;
@@ -13,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\UserFormType;
+use App\Form\ProductCategoryType;
 
 
 class AdminController extends AbstractController
@@ -36,7 +42,7 @@ class AdminController extends AbstractController
     /**
      * @Route ("/admin/userEdit/{id}", name ="admin_user_edit")
      * @param Request $request
-     * @param EntityManagerInterface $entityManage
+     * @param EntityManagerInterface $entityManager
      * @return Response
      *
      */
@@ -138,6 +144,24 @@ class AdminController extends AbstractController
             'products' => $products,
         ]);
 
+    }
+
+    /**
+     * @Route("/admin/productCategoryEdit/{id}", name="product_category_edit")
+     * @param Request $request
+     * @param Product $product
+     * @return Response
+     */
+    public function edit(Request $request, Product $product)
+    {
+
+        $form = $this->createForm(UpdateProductCategoryType::class, $product);
+        $form->handleRequest($request);
+
+
+        return $this->render('admin/editProductCategory.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 }

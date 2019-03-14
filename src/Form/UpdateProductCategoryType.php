@@ -4,12 +4,13 @@ namespace App\Form;
 
 use App\Entity\ProductCategory;
 use App\Entity\Category;
+use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductCategoryType extends AbstractType
+class UpdateProductCategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,14 +20,14 @@ class ProductCategoryType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
+
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ProductCategory::class,
-
+            'data_class' => Product::class,
         ]);
     }
 }
