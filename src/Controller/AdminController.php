@@ -147,40 +147,6 @@ class AdminController extends AbstractController
 
     }
 
-    /**
-     * @Route("/admin/productCategoryEdit/{id}", name="product_category_edit")
-     * @param Request $request
-     * @param Product $product
-     * @param ProductCategoryRepository $productCategoryRepository
-     * @param EntityManagerInterface $entityManager
-     * @param $id
-     * @return Response
-     */
-    public function edit($id,Request $request, Product $product, ProductCategoryRepository $productCategoryRepository,EntityManagerInterface $entityManager)
-    {
 
-        $form = $this->createForm(ProductFormType::class, $product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $productCategories = $form->getData();
-            $cat = $productCategories->getCategory();
-            foreach($cat as $category){
-                /**
-                 * @var ProductCategory $productCategory
-                 */
-                $productCategory= new ProductCategory();
-                $productCategory->setProduct($product);
-                $productCategory->setCategory($category);
-                $entityManager->persist($productCategory);
-                $entityManager->flush();
-            }
-
-        }
-
-        return $this->render('admin/editProductCategory.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
 
 }
