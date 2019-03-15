@@ -52,9 +52,23 @@ class OrderedItems
      * @Assert\NotBlank()
      */
     private $city;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $userEmail;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->date = new \DateTime();
+
     }
     /**
      * @return Collection
@@ -108,7 +122,7 @@ class OrderedItems
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getPhone()
     {
         return $this->Phone;
     }
@@ -120,15 +134,41 @@ class OrderedItems
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getCity()
     {
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity($city): self
     {
         $this->city = $city;
 
         return $this;
     }
+
+    public function getUserEmail()
+    {
+        return $this->userEmail;
+    }
+
+    public function setUserEmail($userEmail): self
+    {
+        $this->userEmail = $userEmail;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+
 }

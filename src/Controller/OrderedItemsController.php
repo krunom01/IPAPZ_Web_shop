@@ -41,9 +41,9 @@ class OrderedItemsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
-            $orderedItem->setUser($user);
+            $orderedItem->setUser($this->getUser());
+            $orderedItem->setUserEmail($this->getUser()->getEmail());
             $orderedItem->setPaid('new');
             $entityManager->persist($orderedItem);
 
