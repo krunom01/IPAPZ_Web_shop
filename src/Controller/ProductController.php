@@ -37,7 +37,7 @@ class ProductController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $sql = "select distinct a.name, a.productnumber,a.id,a.image,a.price, pc.product_id
+        $sql = "select distinct a.name, a.productnumber,a.id,a.image,a.price,a.url_custom, pc.product_id
                 from product a
                 left join product_category pc on a.id = pc.product_id";
         $statement = $em->getConnection()->prepare($sql);
@@ -76,6 +76,9 @@ class ProductController extends AbstractController
                 echo $e;
             }
             $product->setImage($fileName);
+            $spaceReplace = $product->getUrlCustom();
+            $string = preg_replace('/\s+/', '-', $spaceReplace);
+            $product->setUrlCustom($string.$product->getProductnumber());
             $entityManager->persist($product);
             $entityManager->flush();
             $this->addFlash('success', 'Inserted new product!');
@@ -133,6 +136,9 @@ class ProductController extends AbstractController
                 $entityManager->remove($proCategory);
                 $entityManager->flush();
             }
+            $spaceReplace = $product->getUrlCustom();
+            $string = preg_replace('/\s+/', '-', $spaceReplace);
+            $product->setUrlCustom($string.$product->getProductnumber());
             $entityManager->merge($product);
             $entityManager->flush();
             $this->addFlash('success', 'Updated!');

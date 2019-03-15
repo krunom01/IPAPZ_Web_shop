@@ -46,6 +46,7 @@
                 <th>Name</th>
                 <th>Productnumber</th>
                 <th>Price</th>
+                <th>Custom url</th>
                 <th>Image</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -58,6 +59,7 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.productnumber }}</td>
                 <td>{{ product.price }} kn</td>
+                <td>{{ product.url_custom }}</td>
                 <td><img width="80" height="80" src="../../../../../upload/image/{{ product.image }}" alt=""></td>
                 <td>
                     <a href="{{ path('update_product', {'id': product.id}) }}">edit</a>

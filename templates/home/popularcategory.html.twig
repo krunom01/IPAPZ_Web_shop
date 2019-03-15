@@ -63,7 +63,7 @@
 
 
                             </div>
-                            <td><a href="{{ path('product_details', {id: product.id}) }}" class="btn btn-primary">Details</a></td>
+                            <td><a href="{{ path('product_details',{id: product.id, urlCustom: product.urlCustom }) }}" class="btn btn-primary">Details</a></td>
 
                         </div>
                         {% endfor %}

@@ -48,6 +48,13 @@ class ProductFormType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Insert Image (jpg, jpeg): '
+            ])
+            ->add('urlCustom', TextareaType::class, [
+                'label' => 'Custom URL',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ]);
 
     }

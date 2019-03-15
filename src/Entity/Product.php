@@ -36,17 +36,23 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
+     *     message     = "Letters only")
+     * @Assert\NotBlank(message="insert name")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="insert product number")
      */
     private $productnumber;
 
     /**
      * @ORM\Column(type="integer")
      * @ORM\Column(type="decimal", scale=2)
+     * @Assert\NotBlank(message="insert product price")
      */
     private $price;
 
@@ -62,6 +68,15 @@ class Product
      *
      */
     private $shopcards;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
+     *     message     = "Letters only")
+     * @Assert\NotBlank(message="insert your custom url")
+     */
+    private $urlCustom;
 
     /**
      * @return Collection|Shopcard[]
@@ -172,5 +187,17 @@ class Product
             $newProductCategory->setCategory($category);
             $this->productCategory[] = $newProductCategory;
         }
+    }
+
+    public function getUrlCustom()
+    {
+        return $this->urlCustom;
+    }
+
+    public function setUrlCustom($urlCustom): self
+    {
+        $this->urlCustom = $urlCustom;
+
+        return $this;
     }
 }
