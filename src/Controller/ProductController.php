@@ -93,11 +93,12 @@ class ProductController extends AbstractController
     /**
      * @Route("/updateproduct/{id}", name="update_product")
      * @param EntityManagerInterface $entityManager
+     * @param ProductCategoryRepository $productCategoryRepository
      * @param Request $request
      * @param Product $product
      * @return Response
      */
-    public function updateProduct(Product $product,Request $request,EntityManagerInterface $entityManager,ProductRepository $productRepository)
+    public function updateProduct(Product $product,Request $request,EntityManagerInterface $entityManager,ProductCategoryRepository $productCategoryRepository)
     {
 
 
@@ -124,6 +125,14 @@ class ProductController extends AbstractController
             }
             $product = $form->getData();
             $product->setImage($fileName);
+
+            $productCategory = $productCategoryRepository->findBy([
+                'product' => $product->getId()
+            ]);
+            foreach ($productCategory as $proCategory){
+                $entityManager->remove($proCategory);
+                $entityManager->flush();
+            }
             $entityManager->merge($product);
             $entityManager->flush();
             $this->addFlash('success', 'Updated!');
