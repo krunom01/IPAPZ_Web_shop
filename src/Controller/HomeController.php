@@ -47,12 +47,12 @@ class HomeController extends AbstractController
         ]);
     }
     /**
-     * @Route("/product_details/{urlCustom}{id}", name="product_details", methods={"GET"})
+     * @Route("/product_details/{id}{urlCustom}", name="product_details", methods={"GET"})
      * @param ProductRepository $ProductRepository
      * @return Response
      * @param $id
      */
-    public function show($id,Product $product,ProductRepository $ProductRepository)
+    public function show($id,ProductRepository $ProductRepository)
     {
         $product = $ProductRepository->find($id);
 

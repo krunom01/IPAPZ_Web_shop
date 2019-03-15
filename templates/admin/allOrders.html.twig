@@ -2,12 +2,19 @@
 
 
 {% block content %}
+<form action="{{ path('order_index') }}" method="get">
+    <label for="email">Filter email</label>
+    <input type="text" name="email">
+    <button type="submit">Find email</button>
 
+
+</form>
 
     <table class="table">
     <thead>
     <tr>
         <th>User name</th>
+        <th>User email</th>
         <th>Phone</th>
         <th>city</th>
         <th>adress</th>
@@ -19,6 +26,7 @@
 {% for order in orders %}
     <tr>
         <td>{{ order.user.firstName }} {{ order.user.lastName }}</td>
+        <td>{{ order.user.email }}</td>
         <td>{{ order.phone }}</td>
         <td>{{ order.city }}</td>
         <td>{{ order.adress }}</td>

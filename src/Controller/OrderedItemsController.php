@@ -80,11 +80,19 @@ class OrderedItemsController extends AbstractController
      */
     public function orders(Request $request,OrderedItemsRepository $orderedItemsRepository,PaginatorInterface $paginator)
     {
-        $orders = $orderedItemsRepository->findAll();
+
+
+        $orders = $orderedItemsRepository->createQueryBuilder('user');
+
+        if($request->query->getAlnum('email')) {
+
+            $orders->where('user.userEmail = :userEmail')
+                ->setParameter('userEmail', $request->query->getAlnum('email'));
+        };
         $pagination = $paginator->paginate(
             $orders, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            1/*limit per page*/
+            2/*limit per page*/
         );
 
         return $this->render('admin/allOrders.html.twig', [
