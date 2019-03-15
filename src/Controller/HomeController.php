@@ -28,6 +28,7 @@ class HomeController extends AbstractController
      * @param CategoryRepository $CategoryRepository
      * @param ProductRepository $ProductRepository
      * @param EntityManagerInterface $entityManager
+     * @param PaginatorInterface $paginator
      * @return Response
      */
     public function index(Request $request, PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)

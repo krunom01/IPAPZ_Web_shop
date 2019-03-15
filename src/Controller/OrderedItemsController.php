@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Knp\Component\Pager\PaginatorInterface;
 /**
  * @Route("/")
  */
@@ -18,13 +18,24 @@ class OrderedItemsController extends AbstractController
 {
     /**
      * @Route("/admin/orders", name="ordered_items_index", methods={"GET"})
+     * @param OrderedItemsRepository $orderedItemsRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
-    public function index(OrderedItemsRepository $orderedItemsRepository): Response
+    public function index(Request $request,OrderedItemsRepository $orderedItemsRepository,PaginatorInterface $paginator)
     {
-        $orders = $orderedItemsRepository->findAll();
+
+        $em = $this->getDoctrine()->getManager();
+        $orders = $em->getRepository('OrderedItemsRepository')->findAll();
+
+        $pagination = $paginator->paginate(
+            $orders, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            1/*limit per page*/
+        );
 
         return $this->render('admin/orders.html.twig', [
-            'orders' => $orders,
+            'orders' => $pagination,
 
         ]);
     }
@@ -61,13 +72,23 @@ class OrderedItemsController extends AbstractController
 
     /**
      * @Route("/admin/allOrders", name="order_index", methods={"GET"})
+     * @param OrderedItemsRepository $orderedItemsRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     *
      */
-    public function orders(OrderedItemsRepository $orderedItemsRepository): Response
+    public function orders(Request $request,OrderedItemsRepository $orderedItemsRepository,PaginatorInterface $paginator)
     {
         $orders = $orderedItemsRepository->findAll();
+        $pagination = $paginator->paginate(
+            $orders, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            1/*limit per page*/
+        );
 
         return $this->render('admin/allOrders.html.twig', [
-            'orders' => $orders,
+            'orders' => $pagination,
 
         ]);
     }
