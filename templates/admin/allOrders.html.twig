@@ -1,6 +1,5 @@
 {% extends 'admin/base.html.twig' %}
 
-
 {% block content %}
 <form action="{{ path('order_index') }}" method="get">
     <label for="email">Filter by email</label>
@@ -12,6 +11,13 @@
         <input type="text" name="name">
         <button type="submit">Find by user first name</button>
     </form>
+    <form action="{{ path('order_index') }}" method="get">
+        <label for="name">Filter by name</label>
+        <input type="date" name="dateStart">
+        <input type="date" name="dateEnd">
+        <button type="submit">Find by user first name</button>
+    </form>
+
 
     <table class="table">
     <thead>

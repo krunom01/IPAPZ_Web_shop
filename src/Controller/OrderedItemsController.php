@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * @Route("/")
  */
@@ -83,13 +83,19 @@ class OrderedItemsController extends AbstractController
     {
 
 
-        if(isset($_GET['email'])) {
+        if(isset($_GET['email']))
+        {
             $email = $_GET['email'];
             $orders = $orderedItemsRepository->findByEmail($email);
-        } elseif ($_GET['name']){
+        }
+        elseif (isset($_GET['name']))
+        {
             $orders = $orderedItemsRepository->findByName($_GET['name']);
         }
-
+        elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd']))
+        {
+            $orders =$orderedItemsRepository->getRange($_GET['dateStart'], $_GET['dateEnd'] );
+        }
         else {
             $orders = $orderedItemsRepository->findAll();
         };
@@ -99,9 +105,9 @@ class OrderedItemsController extends AbstractController
             2/*limit per page*/
         );
 
+
         return $this->render('admin/allOrders.html.twig', [
             'orders' => $pagination,
-
         ]);
     }
 

@@ -47,6 +47,19 @@ class OrderedItemsRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getRange($start, $end)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date BETWEEN :from AND :to')
+            ->setParameter('from', $start )
+            ->setParameter('to', $end)
+            ->setMaxResults(10)
+            ->orderBy('e.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
 
     /*
     public function findOneBySomeField($value): ?OrderedItems
