@@ -37,10 +37,11 @@ class OrderedItemsRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('o')
             ->select('o')
-            ->where('o.userEmail = :email')
-            ->orderBy('o.userEmail', 'ASC')
+            ->innerJoin('o.user', 'user')
+            ->where('user.firstName = :name')
+            ->orderBy('user.firstName', 'ASC')
             ->setMaxResults(10)
-            ->setParameter(':email', $name)
+            ->setParameter(':name', $name)
             ->getQuery()
             ->getResult()
             ;

@@ -85,10 +85,12 @@ class OrderedItemsController extends AbstractController
 
         if(isset($_GET['email'])) {
             $email = $_GET['email'];
-
             $orders = $orderedItemsRepository->findByEmail($email);
+        } elseif ($_GET['name']){
+            $orders = $orderedItemsRepository->findByName($_GET['name']);
+        }
 
-        } else {
+        else {
             $orders = $orderedItemsRepository->findAll();
         };
             $pagination = $paginator->paginate(
