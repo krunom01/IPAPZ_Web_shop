@@ -130,6 +130,13 @@
             <button type="submit">Add to cart</button>
         {% endif %}
     </form>
+    {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
+        <form action = "{{ path('wishlist_new', {id: product.id}) }}" name="ShopcardType" method="post">
+            <button type="submit">Add to wishlist</button>
+
+        </form>
+    {% endif %}
+
 
 
 {% endblock %}

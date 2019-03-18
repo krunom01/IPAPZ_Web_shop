@@ -68,8 +68,26 @@ class User implements UserInterface
      *
      */
     private $shopcards;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="user", cascade={"persist", "remove"})
+     *
+     */
+    private $wishList;
 
-
+    /**
+     * @return mixed
+     */
+    public function getWish()
+    {
+        return $this->wishList;
+    }
+    /**
+     * @param mixed $wishList
+     */
+    public function setWish($wishList)
+    {
+        $this->wishList = $wishList;
+    }
 
     /**
      * @return Collection|OrderedItems[]

@@ -5,7 +5,9 @@ use App\Entity\Category;
 use App\Entity\Shopcard;
 use App\Entity\User;
 use App\Form\CategoryType;
+use App\Entity\Wishlist;
 use App\Repository\CategoryRepository;
+use App\Repository\WishlistRepository;
 use App\Repository\UserRepository;
 use App\Repository\ShopcardRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,12 +29,12 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      * @param CategoryRepository $CategoryRepository
      * @param ProductRepository $ProductRepository
-     * @param EntityManagerInterface $entityManager
      * @param PaginatorInterface $paginator
      * @return Response
      */
     public function index(Request $request, PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
     {
+       ;
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
         $pagination = $paginator->paginate(
@@ -43,16 +45,17 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'title' => 'Sport webshop',
             'categories' => $categories,
-            'pagination' => $pagination
+            'pagination' => $pagination,
         ]);
     }
     /**
-     * @Route("/product_details/{id}{urlCustom}", name="product_details", methods={"GET"})
+     * @Route("/product_details/{id}/{urlCustom}", name="product_details", methods={"GET"})
      * @param ProductRepository $ProductRepository
+     * @param WishlistRepository $WishlistRepository
      * @return Response
      * @param $id
      */
-    public function show($id,ProductRepository $ProductRepository)
+    public function show($id,ProductRepository $ProductRepository, WishlistRepository $WishlistRepository)
     {
         $product = $ProductRepository->find($id);
 

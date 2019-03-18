@@ -79,6 +79,12 @@ class Product
     private $urlCustom;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="product", cascade={"persist", "remove"})
+     *
+     */
+    private $wishList;
+
+    /**
      * @return Collection|Shopcard[]
      */
     public function getProducts()
@@ -92,6 +98,7 @@ class Product
     {
         $this->shopcards = new ArrayCollection();
         $this->productCategory = new ArrayCollection();
+        $this->wishList = new ArrayCollection();
     }
 
     /**
@@ -107,6 +114,7 @@ class Product
     {
         return $this->name;
     }
+
     /**
      * @param mixed $name
      */
@@ -197,6 +205,18 @@ class Product
     public function setUrlCustom($urlCustom): self
     {
         $this->urlCustom = $urlCustom;
+
+        return $this;
+    }
+
+    public function getWishList()
+    {
+        return $this->wishList;
+    }
+
+    public function setWishList($wishList): self
+    {
+        $this->wishList = $wishList;
 
         return $this;
     }

@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Shopcard;
 use App\Entity\User;
 use App\Entity\Product;
+use App\Entity\Wishlist;
 use App\Form\ShopcardType;
+use App\Form\WishListType;
 use App\Repository\ShopcardRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManager;
@@ -51,6 +53,7 @@ class ShopcardController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
     {
+
         $shopcard = new Shopcard();
         $form = $this->createForm(ShopcardType::class, $shopcard);
         $form->handleRequest($request);
@@ -60,8 +63,11 @@ class ShopcardController extends AbstractController
             $shopcard->setProductnumber($request->request->get('quantity'));
             $entityManager->persist($shopcard);
             $entityManager->flush();
+
+        $form->handleRequest($request);
         $this->addFlash('success', 'go to shopcart to order!');
             return $this->redirectToRoute('home');
+
 
 
     }
