@@ -51,8 +51,8 @@ class OrderedItemsRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.date BETWEEN :from AND :to')
-            ->setParameter('from', $start )
-            ->setParameter('to', $end)
+            ->setParameter('from', $start)
+            ->setParameter('to', $end . ' 23:59:59.993')
             ->setMaxResults(10)
             ->orderBy('e.date', 'DESC')
             ->getQuery()
