@@ -3,12 +3,15 @@
 
 {% block content %}
 <form action="{{ path('order_index') }}" method="get">
-    <label for="email">Filter email</label>
+    <label for="email">Filter by email</label>
     <input type="text" name="email">
     <button type="submit">Find email</button>
-
-
 </form>
+    <form action="{{ path('order_index') }}" method="get">
+        <label for="email">Filter by name</label>
+        <input type="text" name="email">
+        <button type="submit">Find email</button>
+    </form>
 
     <table class="table">
     <thead>

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * @Route("/")
  */
@@ -82,14 +83,15 @@ class OrderedItemsController extends AbstractController
     {
 
 
-        $orders = $orderedItemsRepository->createQueryBuilder('user');
+        if(isset($_GET['email'])) {
+            $email = $_GET['email'];
 
-        if($request->query->getAlnum('email')) {
+            $orders = $orderedItemsRepository->findByEmail($email);
 
-            $orders->where('user.userEmail = :userEmail')
-                ->setParameter('userEmail', $request->query->getAlnum('email'));
+        } else {
+            $orders = $orderedItemsRepository->findAll();
         };
-        $pagination = $paginator->paginate(
+            $pagination = $paginator->paginate(
             $orders, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             2/*limit per page*/
@@ -100,8 +102,6 @@ class OrderedItemsController extends AbstractController
 
         ]);
     }
-
-
 
 
 }

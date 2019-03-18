@@ -20,21 +20,32 @@ class OrderedItemsRepository extends ServiceEntityRepository
     }
 
 
-    //  * @return OrderedItems[] Returns an array of OrderedItems objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByEmail($email)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
+            ->select('o')
+            ->where('o.userEmail = :email')
+            ->orderBy('o.userEmail', 'ASC')
             ->setMaxResults(10)
+            ->setParameter(':email', $email)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    public function findByName($name)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o')
+            ->where('o.userEmail = :email')
+            ->orderBy('o.userEmail', 'ASC')
+            ->setMaxResults(10)
+            ->setParameter(':email', $name)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?OrderedItems
