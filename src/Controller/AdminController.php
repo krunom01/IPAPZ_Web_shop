@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Coupon;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Entity\CustomPage;
 use App\Form\ProductFormType;
 use App\Form\CustomPageType;
+use App\Form\CouponFormType;
 use App\Form\UpdateProductCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -199,17 +201,41 @@ class AdminController extends AbstractController
     /**
      * @Route ("/admin/coupons", name ="admin_coupons")
      * @param CouponRepository $couponRepository
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @param Coupon $coupon
      * @return Response
      *
      */
+    public function coupons(Request $request,EntityManagerInterface $entityManager,CouponRepository $couponRepository){
 
-    public function coupons(CouponRepository $couponRepository){
 
-
+        $form = $this->createForm(CouponFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $req = $request->request->all();
+            $discount = $req['coupon_form']['discount'];
+            $code = $this->str_random(6);
+            $coupon = new Coupon();
+            $coupon->setCode($code);
+            $coupon->setDiscount($discount);
+            $entityManager->persist($coupon);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully added new coupon!');
+            return $this->redirectToRoute('admin_coupons');
+        }
 
         return $this->render('admin/coupons.html.twig', [
-            'coupons' => $couponRepository->findAll()
+            'coupons' => $couponRepository->findAll(),
+            'form' => $form->createView()
         ]);
+    }
+
+    function str_random($length = 16)
+    {
+        $pool = '0123456789';
+
+        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
 
 

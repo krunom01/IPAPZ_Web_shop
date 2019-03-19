@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CouponRepository")
@@ -18,6 +19,10 @@ class Coupon
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Regex(
+     *     pattern     = "/^[1-9][0-9]*$/",
+     *     message     = "Numbers only")
+     * @Assert\NotBlank(message="insert coupon discount")
      */
     private $discount;
 

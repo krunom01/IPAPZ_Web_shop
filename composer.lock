@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d786eeb9aac9bb5a46efb5209d7db151",
+    "content-hash": "6fee3c07821aed60bdad91fab46ef4da",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1799,6 +1799,40 @@
                 "controllers"
             ],
             "time": "2018-12-11T16:59:23+00:00"
+        },
+        {
+            "name": "substacks/simple-php-coupon-code-generator",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SubStacks/simple-php-coupon-code-generator.git",
+                "reference": "21e1d9640d7542fd4772d9bec8563647239d1b6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SubStacks/simple-php-coupon-code-generator/zipball/21e1d9640d7542fd4772d9bec8563647239d1b6b",
+                "reference": "21e1d9640d7542fd4772d9bec8563647239d1b6b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SubStacks\\SMS_Marketing\\Coupon\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Preus Jr <@JPPreusDev>",
+                    "email": "james@jppreusdev.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple PHP coupon code generator to genrate N number of coupons.",
+            "time": "2017-04-15T07:55:52+00:00"
         },
         {
             "name": "symfony/apache-pack",

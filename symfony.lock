@@ -116,6 +116,9 @@
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
     },
+    "substacks/simple-php-coupon-code-generator": {
+        "version": "v1.0.1"
+    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {

@@ -173,6 +173,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route ("/newCategory/{id}" , name = "product_new_category")
+     * @param CategoryRepository $categoryRepository
+     * @return Response
      *
      */
     public function newCategory($id, Request $request,ProductRepository $productRepository
