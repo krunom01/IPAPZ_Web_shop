@@ -61,7 +61,7 @@ class Shopcard
     {
         $this->user = $user;
     }
-    public function getProductnumber(): ?int
+    public function getProductnumber()
     {
         return $this->productnumber;
     }

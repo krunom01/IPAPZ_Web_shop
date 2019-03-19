@@ -59,6 +59,13 @@ class OrderedItems
     private $userEmail;
 
     /**
+     * @ORM\Column(type="integer", length=100)
+     */
+    private $totalPrice;
+
+
+
+    /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
      */
@@ -127,7 +134,7 @@ class OrderedItems
         return $this->Phone;
     }
 
-    public function setPhone(string $Phone): self
+    public function setPhone($Phone): self
     {
         $this->Phone = $Phone;
 
@@ -168,6 +175,22 @@ class OrderedItems
         $this->date = $date;
 
         return $this;
+    }
+
+    /**
+     * @param mixed $totalPrice
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
     }
 
 

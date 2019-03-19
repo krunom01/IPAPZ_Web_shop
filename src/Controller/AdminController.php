@@ -162,7 +162,7 @@ class AdminController extends AbstractController
 
 
         return $this->render('admin/customPages.html.twig', [
-            'customPage' => $customPageRepository->findAll()
+            'customPages' => $customPageRepository->findAll()
         ]);
     }
     /**

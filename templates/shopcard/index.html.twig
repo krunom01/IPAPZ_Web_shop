@@ -88,8 +88,6 @@
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Delete product from shopcart</th>
-
-
             </tr>
         </thead>
         <tbody>
@@ -102,7 +100,7 @@
                     <a href="{{ path('shopcard_delete', {'id': shopcard.id}) }}">delete</a>
                 </td>
             </tr>
-            {%  set total = total + (shopcard.productnumber * shopcard.price) %}
+
         {% else %}
             <tr>
                 <td colspan="2">no records found</td>
@@ -110,14 +108,19 @@
         {% endfor %}
         </tbody>
     </table>
+
     Total :{{ total }} kn <br>
+
 {% endblock %}
     {% if shopcards|length > 0 %}
-    <td>
-    <td><a href="{{ path('ordered_items_new') }}" class="btn btn-primary">Order</a></td>
-    </td>
+        {{ form_start(form,  {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
     {% endif %}
     {% block footer %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="../../js/jquery-3.3.1.min.js"></script>
 <script src="../../styles/bootstrap4/popper.js"></script>
 <script src="../../styles/bootstrap4/bootstrap.min.js"></script>
@@ -132,6 +135,7 @@
 <script src="../../plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="../../plugins/parallax-js-master/parallax.min.js"></script>
 <script src="../../js/shop_custom.js"></script>
+
 </div>
 </body>
 </html>

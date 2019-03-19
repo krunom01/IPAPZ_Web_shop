@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomPageRepository")
+ * @UniqueEntity(fields={"customUrl"}, message="There is already an page with this URL")
  */
 class CustomPage
 {
@@ -25,7 +26,7 @@ class CustomPage
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=30, unique=true)
+     * @ORM\Column(type="string", length=30)
      * @Assert\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
      *     message     = "Letters only")

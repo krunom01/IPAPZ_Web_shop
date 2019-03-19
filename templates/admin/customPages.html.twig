@@ -10,5 +10,28 @@
                         </div>
                 </div>
         {% endfor %}
+        <table class="table">
+                <thead>
+                <tr>
+                        <th>content</th>
+                        <th>URL</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for customPage in customPages %}
+                        <tr>
+                                <td>{{ customPage.content }}</td>
+                                <td>{{ customPage.customUrl }}</td>
+
+                        </tr>
+                {% else %}
+                        <tr>
+                                <td colspan="6">no records found</td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+
         <a href="{{ path('customPage_new') }}">Create new custom page</a>
 {% endblock %}

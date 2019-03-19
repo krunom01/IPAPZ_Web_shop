@@ -97,7 +97,7 @@ class User implements UserInterface
         return $this->ordereditems;
     }
     /**
-     * @return Collection|shopcards[]
+     * @return Collection|Shopcard[]
      */
     public function getShopcards()
     {
