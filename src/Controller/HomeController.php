@@ -55,13 +55,20 @@ class HomeController extends AbstractController
      * @return Response
      * @param $id
      */
-    public function show($id,ProductRepository $ProductRepository, WishlistRepository $WishlistRepository)
+    public function showProduct($id,ProductRepository $ProductRepository, WishlistRepository $WishlistRepository)
     {
         $product = $ProductRepository->find($id);
+        $user = $this->getUser();
+        $wishlistProduct = $WishlistRepository->findOneBy([
+            'product' => $product,
+            'user' => $user->getId()
+        ]);
 
         return $this->render('home/productdetails.html.twig', [
             'product' => $product,
-            'title' => 'Product details'
+            'title' => 'Product details',
+            'wishlistProduct' => $wishlistProduct
+
         ]);
     }
 

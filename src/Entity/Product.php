@@ -208,7 +208,10 @@ class Product
 
         return $this;
     }
-
+    /**
+     * @return ArrayCollection|Wishlist[]
+     *
+     */
     public function getWishList()
     {
         return $this->wishList;

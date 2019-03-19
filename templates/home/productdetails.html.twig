@@ -131,10 +131,15 @@
         {% endif %}
     </form>
     {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
+        {% if wishlistProduct %}
+            <form action = "{{ path('wishlist_new', {id: product.id}) }}" name="ShopcardType" method="post">
+                <button type="submit">Remove from wishlist</button>
+            </form>
+        {% else %}
         <form action = "{{ path('wishlist_new', {id: product.id}) }}" name="ShopcardType" method="post">
             <button type="submit">Add to wishlist</button>
-
         </form>
+            {% endif %}
     {% endif %}
 
 
