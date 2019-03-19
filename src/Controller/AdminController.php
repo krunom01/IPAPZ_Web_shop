@@ -15,6 +15,7 @@ use App\Entity\ProductCategory;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use App\Repository\CouponRepository;
 use App\Repository\CustomPageRepository;
 use App\Entity\OrderedItems;
 use App\Repository\OrderedItemsRepository;
@@ -194,6 +195,22 @@ class AdminController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route ("/admin/coupons", name ="admin_coupons")
+     * @param CouponRepository $couponRepository
+     * @return Response
+     *
+     */
+
+    public function coupons(CouponRepository $couponRepository){
+
+
+
+        return $this->render('admin/coupons.html.twig', [
+            'coupons' => $couponRepository->findAll()
+        ]);
+    }
 
 
 
