@@ -34,7 +34,10 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
     {
-       ;
+
+
+
+
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
         $pagination = $paginator->paginate(

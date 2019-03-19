@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\User;
+use App\Entity\CustomPage;
 use App\Form\ProductFormType;
+use App\Form\CustomPageType;
 use App\Form\UpdateProductCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +15,7 @@ use App\Entity\ProductCategory;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use App\Repository\CustomPageRepository;
 use App\Entity\OrderedItems;
 use App\Repository\OrderedItemsRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -146,6 +149,54 @@ class AdminController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route ("/admin/customPages", name ="admin_custom_pages")
+     * @param $customPageRepository CustomPageRepository
+     * @return Response
+     *
+     */
+
+    public function customPages(CustomPageRepository $customPageRepository ){
+
+
+
+        return $this->render('admin/customPages.html.twig', [
+            'customPage' => $customPageRepository->findAll()
+        ]);
+    }
+    /**
+     * @Route ("/admin/customPages/new", name ="customPage_new")
+     * @param $customPageRepository CustomPageRepository
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     *
+     */
+
+    public function customPagesNew(Request $request, EntityManagerInterface $entityManager, CustomPageRepository $customPageRepository){
+
+        $form = $this->createForm(CustomPageType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var CustomPage $customPage */
+            $customPage= $form->getData();
+            $entityManager->persist($customPage);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully added new custom page!');
+            return $this->redirectToRoute('admin_custom_pages');
+        }
+
+
+
+        return $this->render('admin/customPagesNew.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
 
 
 
