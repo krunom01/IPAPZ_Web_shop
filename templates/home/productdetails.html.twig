@@ -127,17 +127,19 @@
         </tbody>
     </table>
         {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
-            <button type="submit">Add to cart</button>
+            <button class="btn" type="submit">Add to cart</button>
         {% endif %}
     </form>
     {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
         {% if wishlistProduct %}
-            <form action = "{{ path('wishlist_new', {id: product.id}) }}" name="ShopcardType" method="post">
-                <button type="submit">Remove from wishlist</button>
+            <form method="post" action="{{ path('wishlist_remove', {'id': wishlistProduct.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item from wishlist?');">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ wishlistProduct.id) }}">
+                <button class="btn">Delete from wishlist</button>
             </form>
         {% else %}
         <form action = "{{ path('wishlist_new', {id: product.id}) }}" name="ShopcardType" method="post">
-            <button type="submit">Add to wishlist</button>
+            <button class="btn" type="submit">Add to wishlist</button>
         </form>
             {% endif %}
     {% endif %}
