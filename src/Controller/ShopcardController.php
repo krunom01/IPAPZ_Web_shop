@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * @Route("/shopcard")
@@ -46,10 +47,14 @@ class ShopcardController extends AbstractController
         $statement->bindValue('userid', $user->getId());
         $statement->execute();
         $shopcards = $statement->fetchAll();
+
+
         $total = 0;
         foreach ($shopcards as $shopcard){
             $total = $total + ($shopcard['productnumber'] * $shopcard['price']);
         }
+
+
         $orderedItem = new OrderedItems();
         $form = $this->createForm(OrderedItemsType::class, $orderedItem);
         $form->handleRequest($request);
@@ -61,16 +66,15 @@ class ShopcardController extends AbstractController
             $code = $formCoupon->getData();
 
             $coupon = $couponRepository->findOneBy(['code' => $code]);
+
             if(!$coupon){
-                $this->addFlash('success', 'wrong coupon code');
+                $this->addFlash('warning', 'wrong coupon code');
                 return $this->redirectToRoute('shopcard_index');
             } else {
 
                 $discount =  "0.".  $coupon->getDiscount();
                 $total = $total * $discount ;
             }
-
-
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -85,6 +89,8 @@ class ShopcardController extends AbstractController
             $this->addFlash('success', 'OK!');
             return $this->redirectToRoute('home');
         }
+
+
         return $this->render('shopcard/index.html.twig', [
             'shopcards' =>  $shopcards,
             'title' => "shopcard details",
