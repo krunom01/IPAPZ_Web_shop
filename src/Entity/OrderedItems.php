@@ -71,7 +71,7 @@ class OrderedItems
     /**
      * @param mixed $discount
      */
-    public function setDiscount($discount): void
+    public function setDiscount($discount)
     {
         $this->discount = $discount;
     }

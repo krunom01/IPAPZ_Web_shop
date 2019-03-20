@@ -6,11 +6,14 @@ use App\Entity\Shopcard;
 use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Wishlist;
+use App\Entity\Coupon;
 use App\Entity\OrderedItems;
 use App\Form\ShopcardType;
 use App\Form\WishListType;
+use App\Form\InsertCouponType;
 use App\Repository\ShopcardRepository;
 use App\Repository\ProductRepository;
+use App\Repository\CouponRepository;
 use Doctrine\ORM\EntityManager;
 use App\Form\OrderedItemsType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,8 +29,11 @@ class ShopcardController extends AbstractController
 {
     /**
      * @Route("/", name="shopcard_index")
+     * @param Request $request
+     * @param CouponRepository $couponRepository
+     * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Request $request, CouponRepository $couponRepository)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -48,6 +54,24 @@ class ShopcardController extends AbstractController
         $form = $this->createForm(OrderedItemsType::class, $orderedItem);
         $form->handleRequest($request);
 
+        $formCoupon = $this->createForm(InsertCouponType::class);
+        $formCoupon->handleRequest($request);
+
+        if ($formCoupon->isSubmitted() && $formCoupon->isValid()) {
+            $code = $formCoupon->getData();
+
+            $coupon = $couponRepository->findOneBy(['code' => $code]);
+            if(!$coupon){
+                $this->addFlash('success', 'wrong coupon code');
+                return $this->redirectToRoute('shopcard_index');
+            } else {
+
+                $discount =  "0.".  $coupon->getDiscount();
+                $total = $total * $discount ;
+            }
+
+
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -65,7 +89,8 @@ class ShopcardController extends AbstractController
             'shopcards' =>  $shopcards,
             'title' => "shopcard details",
             'total' => $total,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formCoupon' => $formCoupon->createView()
         ]);
 
     }

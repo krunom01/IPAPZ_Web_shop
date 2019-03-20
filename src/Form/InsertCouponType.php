@@ -2,30 +2,29 @@
 
 namespace App\Form;
 
-use App\Entity\OrderedItems;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-
-class OrderedItemsType extends AbstractType
+class InsertCouponType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('adress')
-            ->add('phone',IntegerType::class)
-            ->add('city')
+            ->add('code', TextareaType::class, [
+                'label' => 'coupon Code',
 
-        ;
+
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => OrderedItems::class,
+            // Configure your form options here
         ]);
     }
 }

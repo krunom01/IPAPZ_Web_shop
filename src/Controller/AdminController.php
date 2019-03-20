@@ -226,7 +226,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    function str_random($length = 16)
+    function str_random($length = 6)
     {
         $numbers = '0123456789';
         return substr(str_shuffle(str_repeat($numbers, $length)), 0, $length);
