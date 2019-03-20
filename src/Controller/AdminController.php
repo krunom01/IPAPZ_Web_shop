@@ -228,9 +228,22 @@ class AdminController extends AbstractController
 
     function str_random($length = 16)
     {
-        $pool = '0123456789';
+        $numbers = '0123456789';
+        return substr(str_shuffle(str_repeat($numbers, $length)), 0, $length);
+    }
+    /**
+     * @Route("/admin/coupons/delete/{id}", name="coupon_delete")
+     * @param Coupon $coupon
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteUser(Coupon $coupon, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($coupon);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully deleted!');
+        return $this->redirectToRoute('admin_coupons');
 
-        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
 
 

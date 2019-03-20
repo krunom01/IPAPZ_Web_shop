@@ -63,8 +63,26 @@ class OrderedItems
      */
     private $totalPrice;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Coupon")
+     */
+    private $discount;
 
+    /**
+     * @param mixed $discount
+     */
+    public function setDiscount($discount): void
+    {
+        $this->discount = $discount;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")

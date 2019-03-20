@@ -25,6 +25,7 @@
             <tr>
                 <td>{{ coupon.discount }}</td>
                 <td>{{ coupon.code }}</td>
+                <td><a href="{{ path('coupon_delete', {id: coupon.id}) }}" class="btn btn-danger">Delete</a></td>
             </tr>
         {% else %}
             <tr>

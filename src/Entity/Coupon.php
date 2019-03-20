@@ -24,6 +24,8 @@ class Coupon
      *     message     = "Numbers only")
      * @Assert\LessThan(100)
      * @Assert\GreaterThanOrEqual(10)
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="coupon")
+     *
      */
     private $discount;
 
