@@ -33,8 +33,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/", name="admin")
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     public function index()
@@ -197,7 +195,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route ("/admin/coupons", name ="admin_coupons")
      * @param CouponRepository $couponRepository
@@ -208,7 +205,6 @@ class AdminController extends AbstractController
      *
      */
     public function coupons(Request $request,EntityManagerInterface $entityManager,CouponRepository $couponRepository){
-
 
         $form = $this->createForm(CouponFormType::class);
         $form->handleRequest($request);
@@ -224,7 +220,6 @@ class AdminController extends AbstractController
             $this->addFlash('success', 'Successfully added new coupon!');
             return $this->redirectToRoute('admin_coupons');
         }
-
         return $this->render('admin/coupons.html.twig', [
             'coupons' => $couponRepository->findAll(),
             'form' => $form->createView()

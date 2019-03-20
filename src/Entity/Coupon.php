@@ -22,7 +22,8 @@ class Coupon
      * @Assert\Regex(
      *     pattern     = "/^[1-9][0-9]*$/",
      *     message     = "Numbers only")
-     * @Assert\NotBlank(message="insert coupon discount")
+     * @Assert\LessThan(100)
+     * @Assert\GreaterThanOrEqual(10)
      */
     private $discount;
 
