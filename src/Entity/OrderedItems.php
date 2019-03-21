@@ -22,7 +22,6 @@ class OrderedItems
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ordereditems", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $user;
     /**
@@ -32,12 +31,11 @@ class OrderedItems
     private $adress;
     /**
      * @ORM\Column(type="string")
-     *
      */
     private $paid;
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="ordereditems", cascade={"persist", "remove"})
-     * @var Collection
+     * @var                                               Collection
      */
     private $items;
 
@@ -83,18 +81,24 @@ class OrderedItems
     {
         return $this->discount;
     }
+
     /**
-     * @var \DateTime
+     * @var                         \DateTime
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $discountPrice;
 
     public function __construct()
     {
         $this->items = new ArrayCollection();
         $this->date = new \DateTime();
-
     }
+
     /**
      * @return Collection
      */
@@ -102,6 +106,7 @@ class OrderedItems
     {
         return $this->items;
     }
+
     public function addorderItems(Shopcard $shopcard): self
     {
         if (!$this->items->contains($shopcard)) {
@@ -110,10 +115,12 @@ class OrderedItems
         }
         return $this;
     }
+
     public function getId()
     {
         return $this->id;
     }
+
     /**
      * @return mixed
      */
@@ -121,6 +128,7 @@ class OrderedItems
     {
         return $this->user;
     }
+
     /**
      * @param mixed $user
      */
@@ -128,19 +136,23 @@ class OrderedItems
     {
         $this->user = $user;
     }
+
     public function getAdress()
     {
         return $this->adress;
     }
+
     public function setAdress($adress): self
     {
         $this->adress = $adress;
         return $this;
     }
+
     public function getPaid()
     {
         return $this->paid;
     }
+
     public function setPaid($paid): self
     {
         $this->paid = $paid;
@@ -211,5 +223,15 @@ class OrderedItems
         return $this->totalPrice;
     }
 
+    public function getDiscountPrice(): ?int
+    {
+        return $this->discountPrice;
+    }
 
+    public function setDiscountPrice(?int $discountPrice): self
+    {
+        $this->discountPrice = $discountPrice;
+
+        return $this;
+    }
 }

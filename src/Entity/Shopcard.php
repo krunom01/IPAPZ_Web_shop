@@ -1,10 +1,14 @@
 <?php
+
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Class Shopcard
- * @package App\Entity
+ *
+ * @package                                                         App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\ShopcardRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -23,7 +27,6 @@ class Shopcard
     private $product;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="shopcards" )
-     *
      */
     private $user;
     /**
@@ -35,18 +38,22 @@ class Shopcard
      * @Assert\NotBlank()
      */
     private $productnumber;
+
     public function getId()
     {
         return $this->id;
     }
+
     public function getProduct()
     {
         return $this->product;
     }
+
     public function setProduct($product)
     {
         $this->product = $product;
     }
+
     /**
      * @return mixed
      */
@@ -54,6 +61,7 @@ class Shopcard
     {
         return $this->user;
     }
+
     /**
      * @param mixed $user
      */
@@ -61,15 +69,18 @@ class Shopcard
     {
         $this->user = $user;
     }
+
     public function getProductnumber()
     {
         return $this->productnumber;
     }
+
     public function setProductnumber($productnumber): self
     {
         $this->productnumber = $productnumber;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -77,6 +88,7 @@ class Shopcard
     {
         return $this->ordereditems;
     }
+
     /**
      * @param mixed $ordereditems
      */

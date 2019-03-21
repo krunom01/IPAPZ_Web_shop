@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserEditType;
@@ -16,9 +18,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class UserController
+ *
  * @package App\Controller
  *
- * Security annotation on login will throw 403 and on register route we use redirect to route. Both examples are correct.
+ * Security annotation on login will throw 403
+ * and on register route we use redirect to route. Both examples are correct.
  */
 class UserController extends AbstractController
 {
@@ -28,16 +32,20 @@ class UserController extends AbstractController
     public function index()
     {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('admin/users.html.twig', [
-            'title' => 'User list',
-            'users' => $users,
-        ]);
+        return $this->render(
+            'admin/users.html.twig',
+            [
+                'title' => 'User list',
+                'users' => $users,
+            ]
+        );
     }
+
     /**
      * @Route("/login", name="app_login")
-     * @Security("not is_granted('ROLE_USER')")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
+     * @Security("not   is_granted('ROLE_USER')")
+     * @param           AuthenticationUtils $authenticationUtils
+     * @return          Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -50,12 +58,12 @@ class UserController extends AbstractController
 
     /**
      * @Route("/register", name="app_register")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param GuardAuthenticatorHandler $guardHandler
-     * @param LoginFormAuthenticator $authenticator
-     * @param EntityManagerInterface $entityManager
-     * @return null|Response
+     * @param              Request $request
+     * @param              UserPasswordEncoderInterface $passwordEncoder
+     * @param              GuardAuthenticatorHandler $guardHandler
+     * @param              LoginFormAuthenticator $authenticator
+     * @param              EntityManagerInterface $entityManager
+     * @return             null|Response
      */
     public function register(
         Request $request,
@@ -88,9 +96,12 @@ class UserController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
-        return $this->render('security/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        return $this->render(
+            'security/register.html.twig',
+            [
+                'registrationForm' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -98,14 +109,13 @@ class UserController extends AbstractController
      */
     public function logout()
     {
-
     }
 
     /**
      * @Route("/admin/users/delete/{id}", name="user_delete")
-     * @param User $user
-     * @param EntityManagerInterface $entityManager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param                             User $user
+     * @param                             EntityManagerInterface $entityManager
+     * @return                            \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteUser(User $user, EntityManagerInterface $entityManager)
     {
@@ -113,16 +123,21 @@ class UserController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', 'Successfully deleted!');
         return $this->redirectToRoute('admin_users');
-
     }
 
     /**
      * @Route("/profile", name="profile")
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return null|Response
+     * @param             EntityManagerInterface $entityManager
+     * @param             Request $request
+     * @return            null|Response
      */
-    public function profile(Request $request,LoginFormAuthenticator $authenticator,UserPasswordEncoderInterface $passwordEncoder,GuardAuthenticatorHandler $guardHandler,EntityManagerInterface $entityManager) {
+    public function profile(
+        Request $request,
+        LoginFormAuthenticator $authenticator,
+        UserPasswordEncoderInterface $passwordEncoder,
+        GuardAuthenticatorHandler $guardHandler,
+        EntityManagerInterface $entityManager
+    ) {
 
         $user = $this->getUser();
         $form = $this->createForm(UserEditType::class, $user);
@@ -146,12 +161,11 @@ class UserController extends AbstractController
             );
             $this->addFlash('success', 'Profile updated!');
         }
-        return $this->render('security/useredit.html.twig', [
-            'userEdit' => $form->createView(),
-        ]);
+        return $this->render(
+            'security/useredit.html.twig',
+            [
+                'userEdit' => $form->createView(),
+            ]
+        );
     }
-
-
-
-
 }

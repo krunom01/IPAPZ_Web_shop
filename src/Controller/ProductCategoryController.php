@@ -23,9 +23,12 @@ class ProductCategoryController extends AbstractController
      */
     public function index(ProductCategoryRepository $productCategoryRepository): Response
     {
-        return $this->render('product_category/index.html.twig', [
-            'product_categories' => $productCategoryRepository->findAll(),
-        ]);
+        return $this->render(
+            'product_category/index.html.twig',
+            [
+                'product_categories' => $productCategoryRepository->findAll(),
+            ]
+        );
     }
 
     /**
@@ -45,12 +48,14 @@ class ProductCategoryController extends AbstractController
             return $this->redirectToRoute('product_category_index');
         }
 
-        return $this->render('product_category/new.html.twig', [
-            'product_category' => $productCategory,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'product_category/new.html.twig',
+            [
+                'product_category' => $productCategory,
+                'form' => $form->createView(),
+            ]
+        );
     }
-
 
 
     /**
@@ -58,7 +63,7 @@ class ProductCategoryController extends AbstractController
      */
     public function delete(Request $request, ProductCategory $productCategory)
     {
-        if ($this->isCsrfTokenValid('delete'.$productCategory->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $productCategory->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($productCategory);
             $entityManager->flush();

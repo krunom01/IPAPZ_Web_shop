@@ -12,14 +12,15 @@ class CouponFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('discount')
-        ;
+            ->add('discount');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Coupon::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Coupon::class,
+            ]
+        );
     }
 }

@@ -1,18 +1,22 @@
 <?php
+
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
 /**
  * Class User
+ *
  * @ORM\Entity()
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"},                              message="There is already an account with this email")
  * @ORM\HasLifecycleCallbacks()
- * @package App\Entity
+ * @package                                                     App\Entity
  */
 class User implements UserInterface
 {
@@ -26,6 +30,7 @@ class User implements UserInterface
         $this->ordereditems = new ArrayCollection();
         $this->shopcards = new ArrayCollection();
     }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy = "AUTO")
@@ -43,7 +48,7 @@ class User implements UserInterface
      */
     private $roles = [];
     /**
-     * @var string The hashed password
+     * @var                       string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
@@ -60,17 +65,14 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="user", cascade={"persist", "remove"})
-     *
      */
     private $ordereditems;
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="user", cascade={"persist", "remove"})
-     *
      */
     private $shopcards;
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="user", cascade={"persist", "remove"})
-     *
      */
     private $wishList;
 
@@ -81,6 +83,7 @@ class User implements UserInterface
     {
         return $this->wishList;
     }
+
     /**
      * @param mixed $wishList
      */
@@ -96,6 +99,7 @@ class User implements UserInterface
     {
         return $this->ordereditems;
     }
+
     /**
      * @return Collection|Shopcard[]
      */
@@ -105,11 +109,11 @@ class User implements UserInterface
     }
 
 
-
     public function getFullName()
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
+
     /**
      * @return mixed
      */
@@ -117,6 +121,7 @@ class User implements UserInterface
     {
         return $this->firstName;
     }
+
     /**
      * @param mixed $firstName
      */
@@ -124,6 +129,7 @@ class User implements UserInterface
     {
         $this->firstName = $firstName;
     }
+
     /**
      * @return mixed
      */
@@ -131,6 +137,7 @@ class User implements UserInterface
     {
         return $this->lastName;
     }
+
     /**
      * @param mixed $lastName
      */
@@ -138,19 +145,23 @@ class User implements UserInterface
     {
         $this->lastName = $lastName;
     }
+
     public function getId()
     {
         return $this->id;
     }
+
     public function getEmail()
     {
         return $this->email;
     }
+
     public function setEmail($email): self
     {
         $this->email = $email;
         return $this;
     }
+
     /**
      * A visual identifier that represents this user.
      *
@@ -160,6 +171,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
+
     /**
      * @see UserInterface
      */
@@ -168,18 +180,20 @@ class User implements UserInterface
 
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        if($this->email === 'krunom92@gmail.com'){
+        if ($this->email === 'krunom92@gmail.com') {
             $roles[] = 'ROLE_ADMIN';
         } else {
             $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
     }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
         return $this;
     }
+
     /**
      * @see UserInterface
      */
@@ -187,6 +201,7 @@ class User implements UserInterface
     {
         return $this->password;
     }
+
     public function setPassword($password): self
     {
         $this->password = $password;
@@ -200,6 +215,7 @@ class User implements UserInterface
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
+
     /**
      * @see UserInterface
      */
@@ -208,8 +224,4 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
-
-    
-
 }

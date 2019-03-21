@@ -14,14 +14,15 @@ class UserFormType extends AbstractType
         $builder
             ->add('email')
             ->add('firstName')
-            ->add('lastName')
-        ;
+            ->add('lastName');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => User::class,
+            ]
+        );
     }
 }

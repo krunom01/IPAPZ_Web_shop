@@ -12,14 +12,15 @@ class ShopcardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product')
-        ;
+            ->add('product');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Shopcard::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Shopcard::class,
+            ]
+        );
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,9 +10,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class Category
+ *
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-
 class Category
 {
 
@@ -33,7 +32,6 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="category", cascade={"persist", "remove"})
-     *
      */
     private $categories;
 
@@ -66,9 +64,12 @@ class Category
     {
         return $this->products;
     }
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->getName();
     }
+
     /**
      * @return int
      */
@@ -84,5 +85,4 @@ class Category
 
         return $this;
     }
-
 }

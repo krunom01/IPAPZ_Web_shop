@@ -14,18 +14,23 @@ class WishListType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', EntityType::class, [
-                'class' => User::class,
+            ->add(
+                'user',
+                EntityType::class,
+                [
+                    'class' => User::class,
 
-            ])
-            ->add('product')
-        ;
+                ]
+            )
+            ->add('product');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Wishlist::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Wishlist::class,
+            ]
+        );
     }
 }

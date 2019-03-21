@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Security;
+
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,6 +18,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
@@ -23,18 +26,25 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
-    {
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UrlGeneratorInterface $urlGenerator,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
+
     public function supports(Request $request)
     {
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
+
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -48,6 +58,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         );
         return $credentials;
     }
+
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -61,18 +72,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
         return $user;
     }
+
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
+
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-            return new RedirectResponse($this->urlGenerator->generate('home'));
-
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
+
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate('app_login');

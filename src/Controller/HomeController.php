@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Category;
 use App\Entity\Shopcard;
 use App\Entity\User;
@@ -21,23 +22,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Psr\Container\ContainerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
-
-
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
-     * @param CategoryRepository $CategoryRepository
-     * @param ProductRepository $ProductRepository
-     * @param PaginatorInterface $paginator
-     * @return Response
+     * @param      CategoryRepository $CategoryRepository
+     * @param      ProductRepository $ProductRepository
+     * @param      PaginatorInterface $paginator
+     * @param      Request $request
+     * @return     Response
      */
-    public function index(Request $request, PaginatorInterface $paginator,CategoryRepository $CategoryRepository ,ProductRepository $ProductRepository)
-    {
-
-
-
-
+    public function index(
+        Request $request,
+        PaginatorInterface $paginator,
+        CategoryRepository $CategoryRepository,
+        ProductRepository $ProductRepository
+    ) {
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
         $pagination = $paginator->paginate(
@@ -45,41 +45,49 @@ class HomeController extends AbstractController
             $request->query->getInt('page', 1)/*page number*/,
             10/*limit per page*/
         );
-        return $this->render('home/index.html.twig', [
-            'title' => 'Sport webshop',
-            'categories' => $categories,
-            'pagination' => $pagination,
-        ]);
+        return $this->render(
+            'home/index.html.twig',
+            [
+                'title' => 'Sport webshop',
+                'categories' => $categories,
+                'pagination' => $pagination,
+            ]
+        );
     }
+
     /**
      * @Route("/product_details/{id}/{urlCustom}", name="product_details", methods={"GET"})
-     * @param ProductRepository $ProductRepository
-     * @param WishlistRepository $WishlistRepository
-     * @return Response
-     * @param $id
+     * @param                                      ProductRepository $ProductRepository
+     * @param                                      WishlistRepository $WishlistRepository
+     * @return                                     Response
+     * @param                                      $id
      */
-    public function showProduct($id,ProductRepository $ProductRepository, WishlistRepository $WishlistRepository)
+    public function showProduct($id, ProductRepository $ProductRepository, WishlistRepository $WishlistRepository)
     {
         $product = $ProductRepository->find($id);
         $user = $this->getUser();
-        $wishlistProduct = $WishlistRepository->findOneBy([
-            'product' => $product,
-            'user' => $user->getId()
-        ]);
+        $wishlistProduct = $WishlistRepository->findOneBy(
+            [
+                'product' => $product,
+                'user' => $user->getId()
+            ]
+        );
 
-        return $this->render('home/productdetails.html.twig', [
-            'product' => $product,
-            'title' => 'Product details',
-            'wishlistProduct' => $wishlistProduct
+        return $this->render(
+            'home/productdetails.html.twig',
+            [
+                'product' => $product,
+                'title' => 'Product details',
+                'wishlistProduct' => $wishlistProduct
 
-        ]);
+            ]
+        );
     }
 
     /**
      * @Route("/category/{id}", name="category_details", methods={"GET"})
-     * @param CategoryRepository $CategoryRepository
-     * @return Response
-     *
+     * @param                   CategoryRepository $CategoryRepository
+     * @return                  Response
      */
     public function showCategory(CategoryRepository $CategoryRepository, $id)
     {
@@ -95,12 +103,14 @@ class HomeController extends AbstractController
         $products = $statement->fetchAll();
 
 
+        return $this->render(
+            'home/categorydetails.html.twig',
+            [
+                'products' => $products,
+                'title' => 'category details',
+                'categories' => $categories
 
-        return $this->render('home/categorydetails.html.twig', [
-            'products' => $products,
-            'title' => 'category details',
-            'categories' => $categories
-
-        ]);
+            ]
+        );
     }
 }

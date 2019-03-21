@@ -15,14 +15,15 @@ class ProductUpdateFormType extends AbstractType
             ->add('name')
             ->add('productnumber')
             ->add('price')
-            ->add('image')
-        ;
+            ->add('image');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Product::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Product::class,
+            ]
+        );
     }
 }

@@ -13,21 +13,26 @@ class CustomPageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class, [
-                'label' => 'content',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control'
+            ->add(
+                'content',
+                TextareaType::class,
+                [
+                    'label' => 'content',
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
                 ]
-            ])
-            ->add('customUrl')
-        ;
+            )
+            ->add('customUrl');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => CustomPage::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => CustomPage::class,
+            ]
+        );
     }
 }

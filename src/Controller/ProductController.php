@@ -23,7 +23,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 
-
 /**
  * @Route("admin/products")
  */
@@ -31,7 +30,6 @@ class ProductController extends AbstractController
 {
     /**
      * @Route("/", name="product_index")
-
      * @return Response
      */
     public function index()
@@ -44,29 +42,37 @@ class ProductController extends AbstractController
         $statement->execute();
         $products = $statement->fetchAll();
 
-        return $this->render('admin/products.html.twig', [
-            'products' => $products,
+        return $this->render(
+            'admin/products.html.twig',
+            [
+                'products' => $products,
 
-        ]);
+            ]
+        );
     }
 
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     * @param CategoryRepository $categoryRepository
+     * @param         Request $request
+     * @param         EntityManagerInterface $entityManager
+     * @return        Response
+     * @param         CategoryRepository $categoryRepository
      */
-    public function createProduct(Request $request,CategoryRepository $categoryRepository ,EntityManagerInterface $entityManager)
-    {
+    public function createProduct(
+        Request $request,
+        CategoryRepository $categoryRepository,
+        EntityManagerInterface $entityManager
+    ) {
 
         $form = $this->createForm(ProductFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Product $product */
+            /**
+             * @var Product $product
+             */
             $product = $form->getData();
             $file = $product->getImage();
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
             try {
                 $file->move(
                     $this->getParameter('image_directory'),
@@ -78,36 +84,42 @@ class ProductController extends AbstractController
             $product->setImage($fileName);
             $spaceReplace = $product->getUrlCustom();
             $string = preg_replace('/\s+/', '-', $spaceReplace);
-            $product->setUrlCustom($string.$product->getProductnumber());
+            $product->setUrlCustom($string . $product->getProductnumber());
             $entityManager->persist($product);
             $entityManager->flush();
             $this->addFlash('success', 'Inserted new product!');
             return $this->redirectToRoute('product_index');
-
         }
 
-        return $this->render('product/new.html.twig', [
-            'categories' => $categoryRepository->findAll(),
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'product/new.html.twig',
+            [
+                'categories' => $categoryRepository->findAll(),
+                'form' => $form->createView(),
+            ]
+        );
     }
 
 
     /**
      * @Route("/updateproduct/{id}", name="update_product")
-     * @param EntityManagerInterface $entityManager
-     * @param ProductCategoryRepository $productCategoryRepository
-     * @param Request $request
-     * @param Product $product
-     * @return Response
+     * @param                        EntityManagerInterface $entityManager
+     * @param                        ProductCategoryRepository $productCategoryRepository
+     * @param                        Request $request
+     * @param                        Product $product
+     * @return                       Response
      */
-    public function updateProduct(Product $product,Request $request,EntityManagerInterface $entityManager,ProductCategoryRepository $productCategoryRepository)
-    {
+    public function updateProduct(
+        Product $product,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        ProductCategoryRepository $productCategoryRepository
+    ) {
 
 
         $product->setProductnumber($product->getProductnumber());
         $product->setPrice($product->getPrice());
-        $product->setImage(new File($this->getParameter('image_directory').'/'.$product->getImage()));
+        $product->setImage(new File($this->getParameter('image_directory') . '/' . $product->getImage()));
 
 
         $form = $this->createForm(UpdateProductType::class, $product);
@@ -117,7 +129,7 @@ class ProductController extends AbstractController
              * @var Product $product
              */
             $file = $product->getImage();
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
             try {
                 $file->move(
                     $this->getParameter('image_directory'),
@@ -129,24 +141,29 @@ class ProductController extends AbstractController
             $product = $form->getData();
             $product->setImage($fileName);
 
-            $productCategory = $productCategoryRepository->findBy([
-                'product' => $product->getId()
-            ]);
-            foreach ($productCategory as $proCategory){
+            $productCategory = $productCategoryRepository->findBy(
+                [
+                    'product' => $product->getId()
+                ]
+            );
+            foreach ($productCategory as $proCategory) {
                 $entityManager->remove($proCategory);
                 $entityManager->flush();
             }
             $spaceReplace = $product->getUrlCustom();
             $string = preg_replace('/\s+/', '-', $spaceReplace);
-            $product->setUrlCustom($string.$product->getProductnumber());
+            $product->setUrlCustom($string . $product->getProductnumber());
             $entityManager->merge($product);
             $entityManager->flush();
             $this->addFlash('success', 'Updated!');
             return $this->redirectToRoute('product_index');
         }
-        return $this->render('admin/updateproduct.html.twig', [
-            'form' => $form->createView()
-        ]);
+        return $this->render(
+            'admin/updateproduct.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
 
 
@@ -156,13 +173,14 @@ class ProductController extends AbstractController
     public function delete(Request $request, Product $product): Response
     {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($product);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
 
 
         return $this->redirectToRoute('product_index');
     }
+
     private function generateUniqueFileName()
     {
         // md5() reduces the similarity of the file names generated by
@@ -172,13 +190,17 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route ("/newCategory/{id}" , name = "product_new_category")
-     * @param CategoryRepository $categoryRepository
+     * @Route  ("/newCategory/{id}" , name = "product_new_category")
+     * @param  CategoryRepository $categoryRepository
      * @return Response
-     *
      */
-    public function newCategory($id, Request $request,ProductRepository $productRepository
-        ,CategoryRepository $categoryRepository,EntityManagerInterface $entityManager){
+    public function newCategory(
+        $id,
+        Request $request,
+        ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
+        EntityManagerInterface $entityManager
+    ) {
 
         $product = $productRepository->find($id);
         $form = $this->createForm(ProductUpdateForm::class);
@@ -188,11 +210,11 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productCategories = $form->getData();
             $cat = $productCategories->getCategory();
-            foreach($cat as $category){
+            foreach ($cat as $category) {
                 /**
                  * @var ProductCategory $productCategory
                  */
-                $productCategory= new ProductCategory();
+                $productCategory = new ProductCategory();
                 $productCategory->setProduct($product);
                 $productCategory->setCategory($category);
                 $entityManager->persist($productCategory);
@@ -201,10 +223,11 @@ class ProductController extends AbstractController
         }
 
 
-        return $this->render("admin/newcategory.html.twig", [
-            'form' => $form->createView(),
-        ]);
-
-
+        return $this->render(
+            "admin/newcategory.html.twig",
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 }

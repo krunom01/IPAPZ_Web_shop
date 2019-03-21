@@ -19,12 +19,16 @@ class OrderedItemsController extends AbstractController
 {
     /**
      * @Route("/admin/orders", name="ordered_items_index", methods={"GET"})
-     * @param OrderedItemsRepository $orderedItemsRepository
-     * @param PaginatorInterface $paginator
-     * @return Response
+     * @param                  OrderedItemsRepository $orderedItemsRepository
+     * @param                  PaginatorInterface $paginator
+     * @param                  Request $request
+     * @return                 Response
      */
-    public function index(Request $request,OrderedItemsRepository $orderedItemsRepository,PaginatorInterface $paginator)
-    {
+    public function index(
+        Request $request,
+        OrderedItemsRepository $orderedItemsRepository,
+        PaginatorInterface $paginator
+    ) {
 
         $em = $this->getDoctrine()->getManager();
         $orders = $em->getRepository('OrderedItemsRepository')->findAll();
@@ -35,10 +39,13 @@ class OrderedItemsController extends AbstractController
             1/*limit per page*/
         );
 
-        return $this->render('admin/orders.html.twig', [
-            'orders' => $pagination,
+        return $this->render(
+            'admin/orders.html.twig',
+            [
+                'orders' => $pagination,
 
-        ]);
+            ]
+        );
     }
 
     /**
@@ -52,7 +59,6 @@ class OrderedItemsController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->getDoctrine()->getManager();
             $orderedItem->setUser($this->getUser());
             $orderedItem->setUserEmail($this->getUser()->getEmail());
@@ -64,52 +70,52 @@ class OrderedItemsController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('ordered_items/new.html.twig', [
-            'ordered_item' => $orderedItem,
-            'form' => $form->createView(),
-            'message' => '',
-        ]);
+        return $this->render(
+            'ordered_items/new.html.twig',
+            [
+                'ordered_item' => $orderedItem,
+                'form' => $form->createView(),
+                'message' => '',
+            ]
+        );
     }
 
     /**
      * @Route("/admin/allOrders", name="order_index", methods={"GET"})
-     * @param OrderedItemsRepository $orderedItemsRepository
-     * @param PaginatorInterface $paginator
-     * @param Request $request
-     * @return Response
-     *
+     * @param                     OrderedItemsRepository $orderedItemsRepository
+     * @param                     PaginatorInterface $paginator
+     * @param                     Request $request
+     * @return                    Response
      */
-    public function orders(Request $request,OrderedItemsRepository $orderedItemsRepository,PaginatorInterface $paginator)
-    {
+    public function orders(
+        Request $request,
+        OrderedItemsRepository $orderedItemsRepository,
+        PaginatorInterface $paginator
+    ) {
 
 
-        if(isset($_GET['email']))
-        {
+        if (isset($_GET['email'])) {
             $email = $_GET['email'];
             $orders = $orderedItemsRepository->findByEmail($email);
-        }
-        elseif (isset($_GET['name']))
-        {
+        } elseif (isset($_GET['name'])) {
             $orders = $orderedItemsRepository->findByName($_GET['name']);
-        }
-        elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd']))
-        {
-            $orders =$orderedItemsRepository->getRange($_GET['dateStart'], $_GET['dateEnd'] );
-        }
-        else {
+        } elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd'])) {
+            $orders = $orderedItemsRepository->getRange($_GET['dateStart'], $_GET['dateEnd']);
+        } else {
             $orders = $orderedItemsRepository->findAll();
         };
-            $pagination = $paginator->paginate(
+        $pagination = $paginator->paginate(
             $orders, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             2/*limit per page*/
         );
 
 
-        return $this->render('admin/allOrders.html.twig', [
-            'orders' => $pagination,
-        ]);
+        return $this->render(
+            'admin/allOrders.html.twig',
+            [
+                'orders' => $pagination,
+            ]
+        );
     }
-
-
 }

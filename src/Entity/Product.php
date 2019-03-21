@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,13 +9,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Entity\Category;
 
-
 /**
  * Class Product
- * @package App\Entity
+ *
+ * @package                                                        App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"productnumber"}, message="There is already an product with this productnumber")
+ * @UniqueEntity(fields={"productnumber"},
+ * message="There is already an product with this productnumber")
  */
 class Product
 {
@@ -35,7 +35,7 @@ class Product
     private $productCategory;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string",       length=50)
      * @Assert\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
      *     message     = "Letters only")
@@ -51,26 +51,25 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="decimal",      scale=2)
      * @Assert\NotBlank(message="insert product price")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string",       length=255)
      * @Assert\NotBlank(message="upload image with .jpg or .jpeg!")
-     * @Assert\File(mimeTypes={ "image/jpg", "image/jpeg" })
+     * @Assert\File(mimeTypes={         "image/jpg", "image/jpeg" })
      */
     private $image;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="product", cascade={"persist", "remove"})
-     *
      */
     private $shopcards;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string",       length=50)
      * @Assert\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
      *     message     = "Letters only")
@@ -80,7 +79,6 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="product", cascade={"persist", "remove"})
-     *
      */
     private $wishList;
 
@@ -91,6 +89,7 @@ class Product
     {
         return $this->shopcards;
     }
+
     /**
      * Category constructor.
      */
@@ -122,13 +121,13 @@ class Product
     public function setName($name)
     {
         $this->name = $name;
-
     }
 
     public function getProductnumber()
     {
         return $this->productnumber;
     }
+
     /**
      * @param mixed $productnumber
      */
@@ -136,7 +135,6 @@ class Product
     public function setProductnumber($productnumber)
     {
         $this->productnumber = $productnumber;
-
     }
 
     public function getPrice()
@@ -151,13 +149,13 @@ class Product
     public function setPrice($price)
     {
         $this->price = $price;
-
     }
 
     public function getImage()
     {
         return $this->image;
     }
+
     /**
      * @param mixed $image
      */
@@ -165,8 +163,8 @@ class Product
     public function setImage($image)
     {
         $this->image = $image;
-
     }
+
     /**
      * @return ArrayCollection|Category[]
      */
@@ -181,6 +179,7 @@ class Product
         }
         return $categories;
     }
+
     /**
      * @param ArrayCollection|ProductCategory $productCategory
      */
@@ -208,9 +207,9 @@ class Product
 
         return $this;
     }
+
     /**
      * @return ArrayCollection|Wishlist[]
-     *
      */
     public function getWishList()
     {

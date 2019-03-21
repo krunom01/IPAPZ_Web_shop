@@ -30,9 +30,9 @@ class ShopcardController extends AbstractController
 {
     /**
      * @Route("/", name="shopcard_index")
-     * @param Request $request
-     * @param CouponRepository $couponRepository
-     * @return Response
+     * @param      Request $request
+     * @param      CouponRepository $couponRepository
+     * @return     Response
      */
     public function index(Request $request, CouponRepository $couponRepository)
     {
@@ -42,19 +42,17 @@ class ShopcardController extends AbstractController
                 from shopcard s
                 left join product p on s.product_id = p.id
                 where s.product_id = p.id and s.user_id = :userid";
-
         $statement = $em->getConnection()->prepare($sql);
         $statement->bindValue('userid', $user->getId());
         $statement->execute();
         $shopcards = $statement->fetchAll();
 
 
-        $total = 0;
-        foreach ($shopcards as $shopcard){
-            $total = $total + ($shopcard['productnumber'] * $shopcard['price']);
+        $subTotal = 0;
+        foreach ($shopcards as $shopcard) {
+            $subTotal = $subTotal + ($shopcard['productnumber'] * $shopcard['price']);
         }
-
-
+        $total = $subTotal;
         $orderedItem = new OrderedItems();
         $form = $this->createForm(OrderedItemsType::class, $orderedItem);
         $form->handleRequest($request);
@@ -62,28 +60,29 @@ class ShopcardController extends AbstractController
         $formCoupon = $this->createForm(InsertCouponType::class);
         $formCoupon->handleRequest($request);
 
+        $code = $formCoupon->getData();
+
+        $coupon = $couponRepository->findOneBy(['code' => $code]);
+
         if ($formCoupon->isSubmitted() && $formCoupon->isValid()) {
-            $code = $formCoupon->getData();
-
-            $coupon = $couponRepository->findOneBy(['code' => $code]);
-
-            if(!$coupon){
+            if (!$coupon) {
                 $this->addFlash('warning', 'wrong coupon code');
                 return $this->redirectToRoute('shopcard_index');
             } else {
+                $discount = "0." . $coupon->getDiscount();
 
-                $discount =  "0.".  $coupon->getDiscount();
-                $total = $total * $discount ;
+                $total = $total * $discount;
             }
         }
 
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $orderedItem->setUser($this->getUser());
             $orderedItem->setUserEmail($this->getUser()->getEmail());
             $orderedItem->setPaid('new');
-            $orderedItem->setTotalPrice($total);
+            $orderedItem->setTotalPrice($subTotal);
+            $orderedItem->setDiscountPrice($total);
             $entityManager->persist($orderedItem);
             $entityManager->flush();
             $this->addFlash('success', 'OK!');
@@ -91,14 +90,16 @@ class ShopcardController extends AbstractController
         }
 
 
-        return $this->render('shopcard/index.html.twig', [
-            'shopcards' =>  $shopcards,
-            'title' => "shopcard details",
-            'total' => $total,
-            'form' => $form->createView(),
-            'formCoupon' => $formCoupon->createView()
-        ]);
-
+        return $this->render(
+            'shopcard/index.html.twig',
+            [
+                'shopcards' => $shopcards,
+                'title' => "shopcard details",
+                'total' => $total,
+                'form' => $form->createView(),
+                'formCoupon' => $formCoupon->createView()
+            ]
+        );
     }
 
     /**
@@ -110,32 +111,45 @@ class ShopcardController extends AbstractController
         $shopcard = new Shopcard();
         $form = $this->createForm(ShopcardType::class, $shopcard);
         $form->handleRequest($request);
-            $user = $this->getUser();
-            $shopcard->setUser($user);
-            $shopcard->setProduct($product);
-            $shopcard->setProductnumber($request->request->get('quantity'));
-            $entityManager->persist($shopcard);
-            $entityManager->flush();
+        $user = $this->getUser();
+        $shopcard->setUser($user);
+        $shopcard->setProduct($product);
+        $shopcard->setProductnumber($request->request->get('quantity'));
+        $entityManager->persist($shopcard);
+        $entityManager->flush();
 
         $form->handleRequest($request);
         $this->addFlash('success', 'go to shopcart to order!');
-            return $this->redirectToRoute('home');
-
-
-
+        return $this->redirectToRoute('home');
     }
 
 
     /**
      * @Route("/{id}/delete", name="shopcard_delete")
+     * @param Shopcard $shopcard
+     * @return Response
      */
-    public function delete(Request $request, Shopcard $shopcard): Response
+    public function delete(Shopcard $shopCard)
     {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($shopcard);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($shopCard);
+        $entityManager->flush();
 
+        return $this->redirectToRoute('shopcard_index');
+    }
+
+    /**
+     * @Route("/newOrder/{$id}", name="shopcard_delete")
+     * @param Shopcard $shopcard
+     * @return Response
+     */
+    public function newOrder(Shopcard $shopCard)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($shopCard);
+        $entityManager->flush();
 
         return $this->redirectToRoute('shopcard_index');
     }

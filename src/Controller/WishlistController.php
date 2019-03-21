@@ -16,9 +16,9 @@ class WishlistController extends AbstractController
 {
     /**
      * @Route("/shopcard/newWishlist/{id}", name="wishlist_new")
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
+     * @param                               EntityManagerInterface $entityManager
+     * @param                               Request $request
+     * @return                              Response
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
     {
@@ -35,25 +35,22 @@ class WishlistController extends AbstractController
         $form->handleRequest($request);
         $this->addFlash('success', 'ok');
         return $this->redirectToRoute('home');
-
     }
 
     /**
      * @Route("/shopcard/removeWishlist/{id}", name="wishlist_remove")
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @param Wishlist $wishlist
-     * @return Response
+     * @param                                  EntityManagerInterface $entityManager
+     * @param                                  Request $request
+     * @param                                  Wishlist $wishlist
+     * @return                                 Response
      */
     public function remove(Request $request, EntityManagerInterface $entityManager, Wishlist $wishlist)
     {
-        if ($this->isCsrfTokenValid('delete'.$wishlist->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $wishlist->getId(), $request->request->get('_token'))) {
             $entityManager->remove($wishlist);
             $entityManager->flush();
         }
         $this->addFlash('success', 'You deleted item from wishlist!');
         return $this->redirectToRoute('home');
-
-
     }
 }

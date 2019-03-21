@@ -20,7 +20,6 @@ class OrderedItemsRepository extends ServiceEntityRepository
     }
 
 
-
     public function findByEmail($email)
     {
         return $this->createQueryBuilder('o')
@@ -30,9 +29,9 @@ class OrderedItemsRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->setParameter(':email', $email)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
+
     public function findByName($name)
     {
         return $this->createQueryBuilder('o')
@@ -43,8 +42,7 @@ class OrderedItemsRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->setParameter(':name', $name)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function getRange($start, $end)
@@ -57,7 +55,6 @@ class OrderedItemsRepository extends ServiceEntityRepository
             ->orderBy('e.date', 'DESC')
             ->getQuery()
             ->getResult();
-
     }
 
 

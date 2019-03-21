@@ -15,19 +15,25 @@ class UpdateProductCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', EntityType::class,[
-                'class' => Category::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'expanded' => true,
+            ->add(
+                'category',
+                EntityType::class,
+                [
+                    'class' => Category::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded' => true,
 
-            ]);
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Product::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Product::class,
+            ]
+        );
     }
 }

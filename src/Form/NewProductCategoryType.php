@@ -13,19 +13,25 @@ class NewProductCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'choice_label' => 'name'
-            ]);
+            ->add(
+                'category',
+                EntityType::class,
+                [
+                    'class' => Category::class,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'choice_label' => 'name'
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            // Configure your form options here
-        ]);
+        $resolver->setDefaults(
+            [
+                // Configure your form options here
+            ]
+        );
     }
 }

@@ -17,7 +17,7 @@ paginacija 10 po stranici preko ajaxa
 svakom proizvodu se moze dodati vise slika, a jedna je glavna
 proizvodu se moze dodjeliti youtube video.
 
-
+phpcs src
 
 opcionalne :
 za proizvod se moze generirati 2d barkod od sku proizvoda

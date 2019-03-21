@@ -33,26 +33,29 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/", name="admin")
-     * @return Response
+     * @return           Response
      */
     public function index()
     {
 
-        return $this->render('admin/base.html.twig', [
-            'title' => 'Admin panel',
+        return $this->render(
+            'admin/base.html.twig',
+            [
+                'title' => 'Admin panel',
 
-        ]);
+            ]
+        );
     }
 
     /**
-     * @Route ("/admin/userEdit/{id}", name ="admin_user_edit")
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
+     * @Route  ("/admin/userEdit/{id}", name ="admin_user_edit")
+     * @param  Request $request
+     * @param  EntityManagerInterface $entityManager
      * @return Response
-     *
      */
 
-    public function editUser(Request $request,EntityManagerInterface $entityManager, User $user){
+    public function editUser(Request $request, EntityManagerInterface $entityManager, User $user)
+    {
 
         $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
@@ -64,20 +67,23 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_users');
         }
 
-            return $this->render('admin/edituser.html.twig', [
+        return $this->render(
+            'admin/edituser.html.twig',
+            [
                 'title' => 'Edit list',
                 'user' => $user,
                 'form' => $form->createView(),
-            ]);
-
+            ]
+        );
     }
+
     /**
-     * @Route ("/admin/userOrder/{id}", name ="admin_user_order")
+     * @Route  ("/admin/userOrder/{id}", name ="admin_user_order")
      * @return Response
-     *
      */
 
-    public function showUserOrder($id){
+    public function showUserOrder($id)
+    {
 
         $em = $this->getDoctrine()->getManager();
         $sql = "select s.id,  p.name, p.price, s.productnumber
@@ -86,7 +92,7 @@ class AdminController extends AbstractController
                 where s.product_id = p.id and s.user_id = :userid";
 
         $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('userid',$id);
+        $statement->bindValue('userid', $id);
         $statement->execute();
         $shopcard = $statement->fetchAll();
         $total = 0;
@@ -94,44 +100,48 @@ class AdminController extends AbstractController
         $sql = "select * from ordered_items where user_id = :userid";
 
         $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('userid',$id);
+        $statement->bindValue('userid', $id);
         $statement->execute();
         $orderedItems = $statement->fetchAll();
 
 
+        return $this->render(
+            'admin/orders.html.twig',
+            [
+                'title' => 'Orders',
+                'shopcards' => $shopcard,
+                'total' => $total,
+                'orderedItems' => $orderedItems,
 
-        return $this->render('admin/orders.html.twig', [
-            'title' => 'Orders',
-            'shopcards' => $shopcard,
-            'total' => $total,
-            'orderedItems' => $orderedItems,
-
-        ]);
-
+            ]
+        );
     }
+
     /**
-     * @Route ("/admin/updateOrder/{id}", name ="admin_update_order")
+     * @Route  ("/admin/updateOrder/{id}", name ="admin_update_order")
      * @return Response
-     *
      */
 
-    public function updateOrder($id,OrderedItemsRepository $orderedItemsRepository, EntityManagerInterface $entityManager){
+    public function updateOrder(
+        $id,
+        OrderedItemsRepository $orderedItemsRepository,
+        EntityManagerInterface $entityManager
+    ) {
 
         $order = $orderedItemsRepository->find($id);
         $order->setPaid('shipping');
         $entityManager->merge($order);
         $entityManager->flush();
         return $this->redirectToRoute('admin_users');
-
     }
 
     /**
-     * @Route ("/admin/categoryProducts/{id}", name ="admin_category_products")
+     * @Route  ("/admin/categoryProducts/{id}", name ="admin_category_products")
      * @return Response
-     *
      */
 
-    public function categoryProducts($id){
+    public function categoryProducts($id)
+    {
 
         $em = $this->getDoctrine()->getManager();
         $sql = "select a.name, a.image, a.name, a.price, a.id
@@ -144,44 +154,53 @@ class AdminController extends AbstractController
         $products = $statement->fetchAll();
 
 
-
-        return $this->render('admin/categoryProducts.html.twig', [
-            'products' => $products,
-        ]);
-
+        return $this->render(
+            'admin/categoryProducts.html.twig',
+            [
+                'products' => $products,
+            ]
+        );
     }
 
     /**
-     * @Route ("/admin/customPages", name ="admin_custom_pages")
-     * @param $customPageRepository CustomPageRepository
+     * @Route  ("/admin/customPages", name ="admin_custom_pages")
+     * @param  $customPageRepository CustomPageRepository
      * @return Response
-     *
      */
 
-    public function customPages(CustomPageRepository $customPageRepository ){
+    public function customPages(CustomPageRepository $customPageRepository)
+    {
 
 
-
-        return $this->render('admin/customPages.html.twig', [
-            'customPages' => $customPageRepository->findAll()
-        ]);
+        return $this->render(
+            'admin/customPages.html.twig',
+            [
+                'customPages' => $customPageRepository->findAll()
+            ]
+        );
     }
+
     /**
-     * @Route ("/admin/customPages/new", name ="customPage_new")
-     * @param $customPageRepository CustomPageRepository
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
+     * @Route  ("/admin/customPages/new", name ="customPage_new")
+     * @param  $customPageRepository CustomPageRepository
+     * @param  EntityManagerInterface $entityManager
+     * @param  Request $request
      * @return Response
-     *
      */
 
-    public function customPagesNew(Request $request, EntityManagerInterface $entityManager, CustomPageRepository $customPageRepository){
+    public function customPagesNew(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        CustomPageRepository $customPageRepository
+    ) {
 
         $form = $this->createForm(CustomPageType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var CustomPage $customPage */
-            $customPage= $form->getData();
+            /**
+             * @var CustomPage $customPage
+             */
+            $customPage = $form->getData();
             $entityManager->persist($customPage);
             $entityManager->flush();
             $this->addFlash('success', 'Successfully added new custom page!');
@@ -189,29 +208,31 @@ class AdminController extends AbstractController
         }
 
 
-
-        return $this->render('admin/customPagesNew.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'admin/customPagesNew.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
-     * @Route ("/admin/coupons", name ="admin_coupons")
-     * @param CouponRepository $couponRepository
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @param Coupon $coupon
+     * @Route  ("/admin/coupons", name ="admin_coupons")
+     * @param  CouponRepository $couponRepository
+     * @param  EntityManagerInterface $entityManager
+     * @param  Request $request
+     * @param  Coupon $coupon
      * @return Response
-     *
      */
-    public function coupons(Request $request,EntityManagerInterface $entityManager,CouponRepository $couponRepository){
+    public function coupons(Request $request, EntityManagerInterface $entityManager, CouponRepository $couponRepository)
+    {
 
         $form = $this->createForm(CouponFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $req = $request->request->all();
             $discount = $req['coupon_form']['discount'];
-            $code = $this->str_random(6);
+            $code = $this->strRandom(6);
             $coupon = new Coupon();
             $coupon->setCode($code);
             $coupon->setDiscount($discount);
@@ -220,22 +241,30 @@ class AdminController extends AbstractController
             $this->addFlash('success', 'Successfully added new coupon!');
             return $this->redirectToRoute('admin_coupons');
         }
-        return $this->render('admin/coupons.html.twig', [
-            'coupons' => $couponRepository->findAll(),
-            'form' => $form->createView()
-        ]);
+        return $this->render(
+            'admin/coupons.html.twig',
+            [
+                'coupons' => $couponRepository->findAll(),
+                'form' => $form->createView()
+            ]
+        );
     }
 
-    function str_random($length = 6)
+    /**
+     * @param int $length
+     * @return bool|string
+     */
+    public function strRandom($length = 6)
     {
         $numbers = '0123456789';
         return substr(str_shuffle(str_repeat($numbers, $length)), 0, $length);
     }
+
     /**
      * @Route("/admin/coupons/delete/{id}", name="coupon_delete")
-     * @param Coupon $coupon
-     * @param EntityManagerInterface $entityManager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param                               Coupon $coupon
+     * @param                               EntityManagerInterface $entityManager
+     * @return                              \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteUser(Coupon $coupon, EntityManagerInterface $entityManager)
     {
@@ -243,12 +272,5 @@ class AdminController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', 'Successfully deleted!');
         return $this->redirectToRoute('admin_coupons');
-
     }
-
-
-
-
-
-
 }

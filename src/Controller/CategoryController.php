@@ -10,29 +10,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
  * * Class CategoryController
- * @package App\Controller
+ *
+ * @package                  App\Controller
  * @Route("/admin/category")
  */
 class CategoryController extends AbstractController
 {
     /**
      * @Route("/", name="category_index", methods={"GET"})
-     * @param CategoryRepository $categoryRepository
-     * @return Response
-     *
+     * @param      CategoryRepository $categoryRepository
+     * @return     Response
      */
     public function index(CategoryRepository $categoryRepository)
     {
-       $number =  $categoryRepository->findAll();
+        $number = $categoryRepository->findAll();
 
 
-        return $this->render('category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),
-            'number' => $number,
-        ]);
+        return $this->render(
+            'category/index.html.twig',
+            [
+                'categories' => $categoryRepository->findAll(),
+                'number' => $number,
+            ]
+        );
     }
 
     /**
@@ -52,10 +54,13 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_index');
         }
 
-        return $this->render('category/new.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'category/new.html.twig',
+            [
+                'category' => $category,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -63,9 +68,12 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
-        return $this->render('category/show.html.twig', [
-            'category' => $category,
-        ]);
+        return $this->render(
+            'category/show.html.twig',
+            [
+                'category' => $category,
+            ]
+        );
     }
 
     /**
@@ -79,15 +87,21 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('category_index', [
-                'id' => $category->getId(),
-            ]);
+            return $this->redirectToRoute(
+                'category_index',
+                [
+                    'id' => $category->getId(),
+                ]
+            );
         }
 
-        return $this->render('category/edit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'category/edit.html.twig',
+            [
+                'category' => $category,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -95,7 +109,7 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
