@@ -99,7 +99,7 @@
 
 {% block popularcategory %}
     <h1>Product</h1>
-    <form action = "{{ path('shopcard_new', {id: product.id}) }}" name="ShopcardType" method="post">
+
     <table class="table">
         <tbody>
         <tr>
@@ -118,18 +118,16 @@
             <th>Image</th>
             <td><img src="../../../../../upload/image/{{ product.image }}" alt="{{ product.name }}"></td>
         </tr>
-        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
-        <tr>
-            <th>Quantity</th>
-            <td><input type="number" name="quantity" value="1" placeholder="set product quantity"></td>
-        </tr>
-        {% endif %}
+
         </tbody>
     </table>
         {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
-            <button class="btn" type="submit">Add to cart</button>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn">{{ button_label|default('Add product to cart') }}</button>
+            {{ form_end(form) }}
         {% endif %}
-    </form>
+
     {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
         {% if wishlistProduct %}
             <form method="post" action="{{ path('wishlist_remove', {'id': wishlistProduct.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item from wishlist?');">

@@ -63,15 +63,7 @@ class User implements UserInterface
      */
     private $lastName;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $ordereditems;
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $shopcards;
-    /**
+      /**
      * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="user", cascade={"persist", "remove"})
      */
     private $wishList;
@@ -90,22 +82,6 @@ class User implements UserInterface
     public function setWish($wishList)
     {
         $this->wishList = $wishList;
-    }
-
-    /**
-     * @return Collection|OrderedItems[]
-     */
-    public function getOrdereditems()
-    {
-        return $this->ordereditems;
-    }
-
-    /**
-     * @return Collection|Shopcard[]
-     */
-    public function getShopcards()
-    {
-        return $this->shopcards;
     }
 
 

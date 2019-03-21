@@ -64,11 +64,6 @@ class Product
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Shopcard", mappedBy="product", cascade={"persist", "remove"})
-     */
-    private $shopcards;
-
-    /**
      * @ORM\Column(type="string",       length=50)
      * @Assert\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
@@ -82,20 +77,12 @@ class Product
      */
     private $wishList;
 
-    /**
-     * @return Collection|Shopcard[]
-     */
-    public function getProducts()
-    {
-        return $this->shopcards;
-    }
 
     /**
      * Category constructor.
      */
     public function __construct()
     {
-        $this->shopcards = new ArrayCollection();
         $this->productCategory = new ArrayCollection();
         $this->wishList = new ArrayCollection();
     }

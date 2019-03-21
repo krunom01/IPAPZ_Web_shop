@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\UserFormType;
 use App\Form\ProductCategoryType;
 
-
 class AdminController extends AbstractController
 {
 
@@ -117,23 +116,7 @@ class AdminController extends AbstractController
         );
     }
 
-    /**
-     * @Route  ("/admin/updateOrder/{id}", name ="admin_update_order")
-     * @return Response
-     */
 
-    public function updateOrder(
-        $id,
-        OrderedItemsRepository $orderedItemsRepository,
-        EntityManagerInterface $entityManager
-    ) {
-
-        $order = $orderedItemsRepository->find($id);
-        $order->setPaid('shipping');
-        $entityManager->merge($order);
-        $entityManager->flush();
-        return $this->redirectToRoute('admin_users');
-    }
 
     /**
      * @Route  ("/admin/categoryProducts/{id}", name ="admin_category_products")

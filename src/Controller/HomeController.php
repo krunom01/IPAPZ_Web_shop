@@ -2,15 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
+use App\Entity\CartItem;
 use App\Entity\Category;
-use App\Entity\Shopcard;
 use App\Entity\User;
 use App\Form\CategoryType;
+use App\Form\CartItemType;
 use App\Entity\Wishlist;
+use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\ProductCategoryRepository;
 use App\Repository\WishlistRepository;
 use App\Repository\UserRepository;
-use App\Repository\ShopcardRepository;
+use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,30 +60,74 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/product_details/{id}/{urlCustom}", name="product_details", methods={"GET"})
+     * @Route("/product_details/{id}/{urlCustom}", name="product_details")
      * @param                                      ProductRepository $ProductRepository
-     * @param                                      WishlistRepository $WishlistRepository
-     * @return                                     Response
+     * @param                                      WishlistRepository $WishListRepository
+     * @param                                      CartRepository $cartRepository
+     * @param                                      CartItemRepository $cartItemRepository
      * @param                                      $id
+     * @param                                      Request $request
+     * @param                                      EntityManagerInterface $entityManager
+     * @return                                     Response
      */
-    public function showProduct($id, ProductRepository $ProductRepository, WishlistRepository $WishlistRepository)
-    {
+    public function showProduct(
+        $id,
+        ProductRepository $ProductRepository,
+        WishlistRepository $WishListRepository,
+        CartRepository $cartRepository,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        CartItemRepository $cartItemRepository
+    ) {
+
         $product = $ProductRepository->find($id);
         $user = $this->getUser();
-        $wishlistProduct = $WishlistRepository->findOneBy(
+        $wishListProduct = $WishListRepository->findOneBy(
             [
                 'product' => $product,
                 'user' => $user->getId()
             ]
         );
 
+        $cartItem = new CartItem();
+        $form = $this->createForm(CartItemType::class, $cartItem);
+        $form->handleRequest($request);
+        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // find user in cart
+            $cart = new Cart();
+            if (!$userCart) {
+                $cart->setUserId($user->getId());
+                $entityManager->persist($cart);
+                $entityManager->flush();
+            }
+
+            $cartItem->setProductId($product->getId());
+            $cartItem->setProductPrice($product->getPrice());
+            $cartItem->setCart($userCart);
+            $entityManager->persist($cartItem);
+            $entityManager->flush();
+
+            $totalCartMoney = 0;
+
+            $userCardTotals = $cartItemRepository->findUserCart($user->getId());
+
+            foreach ($userCardTotals as $userCardTotal) {
+                $totalCartMoney += $userCardTotal->getProductPrice() * $userCardTotal->getProductQuantity();
+            }
+
+            $userCart->setSubTotal($totalCartMoney);
+            $entityManager->persist($userCart);
+            $entityManager->flush();
+        }
+
         return $this->render(
             'home/productdetails.html.twig',
             [
                 'product' => $product,
                 'title' => 'Product details',
-                'wishlistProduct' => $wishlistProduct
-
+                'wishlistProduct' => $wishListProduct,
+                'form' => $form->createView()
             ]
         );
     }
@@ -109,6 +157,48 @@ class HomeController extends AbstractController
                 'products' => $products,
                 'title' => 'category details',
                 'categories' => $categories
+
+            ]
+        );
+    }
+
+    /**
+     * @Route("/category/{id}", name="new_cart", methods={"GET"})
+     * @param $id
+     * @param ProductRepository $productRepository
+     * @return Response
+     */
+    public function newUserCart($id, ProductRepository $productRepository)
+    {
+
+        $product = $productRepository->findBy($id);
+
+        return $this->render(
+            'home/categorydetails.html.twig',
+            [
+
+
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/shopcart", name="shopCart", methods={"GET"})
+     * @param CartRepository $cartRepository
+     * @return Response
+     */
+    public function usershopCart(CartRepository $cartRepository)
+    {
+        $user = $this->getUser();
+        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+
+        $nesto = $userCart->getCartItems();
+
+        return $this->render(
+            'home/shopcart.html.twig',
+            [
+                'items' => $userCart->getCartItems(),
 
             ]
         );
