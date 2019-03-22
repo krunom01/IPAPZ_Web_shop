@@ -7,10 +7,12 @@ use App\Entity\CartItem;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Form\CategoryType;
+use App\Form\InsertCouponType;
 use App\Form\CartItemType;
 use App\Entity\Wishlist;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\CouponRepository;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\WishlistRepository;
 use App\Repository\UserRepository;
@@ -41,7 +43,8 @@ class HomeController extends AbstractController
         PaginatorInterface $paginator,
         CategoryRepository $CategoryRepository,
         ProductRepository $ProductRepository
-    ) {
+    )
+    {
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
         $pagination = $paginator->paginate(
@@ -92,17 +95,20 @@ class HomeController extends AbstractController
         $cartItem = new CartItem();
         $form = $this->createForm(CartItemType::class, $cartItem);
         $form->handleRequest($request);
-        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
             // find user in cart
             $cart = new Cart();
             if (!$userCart) {
                 $cart->setUserId($user->getId());
+                $cart->setCoupon(0);
                 $entityManager->persist($cart);
                 $entityManager->flush();
             }
-
-            $cartItem->setProductId($product->getId());
+            $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+            $cartItem->setUserId($user->getId());
+            $cartItem->setProduct($product);
             $cartItem->setProductPrice($product->getPrice());
             $cartItem->setCart($userCart);
             $entityManager->persist($cartItem);
@@ -112,14 +118,23 @@ class HomeController extends AbstractController
 
             $userCardTotals = $cartItemRepository->findUserCart($user->getId());
 
+
             foreach ($userCardTotals as $userCardTotal) {
                 $totalCartMoney += $userCardTotal->getProductPrice() * $userCardTotal->getProductQuantity();
+            }
+
+            if ($totalCartMoney == 0) {
+                $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+                $totalCartMoney = $product->getPrice() * $form->get('productQuantity')->getData();
             }
 
             $userCart->setSubTotal($totalCartMoney);
             $entityManager->persist($userCart);
             $entityManager->flush();
+            $this->addFlash('success', 'Successfully added new item in cart !');
+            return $this->redirectToRoute('home');
         }
+
 
         return $this->render(
             'home/productdetails.html.twig',
@@ -127,7 +142,8 @@ class HomeController extends AbstractController
                 'product' => $product,
                 'title' => 'Product details',
                 'wishlistProduct' => $wishListProduct,
-                'form' => $form->createView()
+                'form' => $form->createView(),
+
             ]
         );
     }
@@ -184,23 +200,87 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/shopcart", name="shopCart", methods={"GET"})
+     * @Route("/shopcart", name="shopCart")
      * @param CartRepository $cartRepository
+     * @param Request $request
+     * @param CouponRepository $couponRepository
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function usershopCart(CartRepository $cartRepository)
-    {
+    public function userShopCart(
+        Request $request,
+        CartRepository $cartRepository,
+        CouponRepository $couponRepository,
+        EntityManagerInterface $entityManager
+    ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+        $userCart->getSubTotal();
+        $form = $this->createForm(InsertCouponType::class);
+        $form->handleRequest($request);
 
-        $nesto = $userCart->getCartItems();
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $coupon = $couponRepository->findOneBy(['code' => $form->get('code')->getData()]);
+            if (!$coupon) {
+                $this->addFlash('success', 'Wrong coupon code!');
+                return $this->redirectToRoute('shopCart');
+            } else {
+                 $total = $userCart->getSubTotal();
+                 $discount = 1 - ( '0.'. $coupon->getDiscount());
+                 $priceWithDiscount = $total * $discount;
+                 $userCart->setSubTotal($priceWithDiscount);
+                 $userCart->setCoupon(1);
+                 $entityManager->persist($userCart);
+                 $entityManager->flush();
+                $this->addFlash('success', 'You get '.$coupon->getDiscount().'% discount on total price');
+                return $this->redirectToRoute('shopCart');
+            }
+
+        }
         return $this->render(
             'home/shopcart.html.twig',
             [
                 'items' => $userCart->getCartItems(),
+                'total' => $userCart->getSubTotal(),
+                'form' => $form->createView(),
+                'coupon' => $userCart->getCoupon()
 
             ]
         );
+    }
+
+    /**
+     * @Route("/shopcart/delete/{id}", name="shopCartDeleteIdem")
+     * @param CartItemRepository $cartItemRepository
+     * @param CartRepository $cartRepository
+     * @param $id
+     * @return Response
+     *
+     */
+    public function deleteItemFromShopCart(
+        CartItemRepository $cartItemRepository,
+        CartRepository $cartRepository,
+        $id
+    ) {
+
+        $user = $this->getUser();
+        $userCartItem = $cartItemRepository->findOneBy(['userId' => $user->getId(), 'product' => $id]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($userCartItem);
+        $entityManager->flush();
+
+        $totalCartMoney = 0;
+        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+        $userCardTotals = $cartItemRepository->findUserCart($user->getId());
+
+        foreach ($userCardTotals as $userCardTotal) {
+            $totalCartMoney += $userCardTotal->getProductPrice() * $userCardTotal->getProductQuantity();
+        }
+        $userCart->setSubTotal($totalCartMoney);
+        $entityManager->persist($userCart);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('shopCart');
     }
 }

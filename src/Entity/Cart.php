@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Cart
 {
-
     public function __construct()
     {
         $this->cartItems = new ArrayCollection();
@@ -43,27 +42,25 @@ class Cart
     private $cartItems;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $coupon;
+
+    /**
      * @return ArrayCollection|CartItem[]
      */
-
     public function getCartItems()
     {
-        $categories = new ArrayCollection();
+        $cartItems = new ArrayCollection();
         foreach ($this->cartItems as $prod) {
             /**
              * @var CartItem $prod
              */
-            $categories[] = $prod->getProductPrice();
+            $cartItems[] = $prod->getProduct();
         }
-        return $categories;
+        return $cartItems;
     }
 
-    public function setCategories($cartItems): self
-    {
-        $this->cartItems = $cartItems;
-
-        return $this;
-    }
 
     public function getId()
     {
@@ -102,6 +99,18 @@ class Cart
     public function setTotal($total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getCoupon(): ?int
+    {
+        return $this->coupon;
+    }
+
+    public function setCoupon(int $coupon): self
+    {
+        $this->coupon = $coupon;
 
         return $this;
     }

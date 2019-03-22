@@ -249,7 +249,7 @@ class AdminController extends AbstractController
      * @param                               EntityManagerInterface $entityManager
      * @return                              \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteUser(Coupon $coupon, EntityManagerInterface $entityManager)
+    public function deleteCoupon(Coupon $coupon, EntityManagerInterface $entityManager)
     {
         $entityManager->remove($coupon);
         $entityManager->flush();

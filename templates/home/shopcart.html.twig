@@ -2,7 +2,48 @@
 
 
 
-{% for item in items %}
 
 
-{% endfor %}
+    <h1>Shopcart index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td><img width="80" height="80" src="../../../../../upload/image/{{ item.image }}" alt=""></td>
+
+                <td>
+                    <a href="{{ path('shopCartDeleteIdem', {'id': item.id}) }}">delete item from shop cart</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    Total price : {{ total }}
+     {% for message in app.flashes('success') %}
+         <div class="row mt-3">
+             <div class="col">
+                 <div class="alert alert-success">
+                     {{ message }}
+                 </div>
+             </div>
+         </div>
+     {% endfor %}
+
+    {% if coupon != 1 %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Add coupon code') }}</button>
+    {{ form_end(form) }}
+    {% endif %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,9 +19,9 @@ class CartItem
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
      */
-    private $productId;
+    private $product;
 
     /**
      * @ORM\Column(type="integer")
@@ -38,6 +39,19 @@ class CartItem
      */
     private $productQuantity;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userId;
+
+
+    /**
+     * CartItem constructor.
+     */
+    public function __construct()
+    {
+        $this->product = new ArrayCollection();
+    }
 
 
     /**
@@ -59,16 +73,21 @@ class CartItem
         return $this->id;
     }
 
-    public function getProductId()
+    /**
+     * @return mixed
+     */
+    public function getProduct()
     {
-        return $this->productId;
+        return $this->product;
     }
 
-    public function setProductId($productId): self
-    {
-        $this->productId = $productId;
+    /**
+     * @param mixed $product
+     */
 
-        return $this;
+    public function setProduct($product): void
+    {
+        $this->product = $product;
     }
 
     public function getProductPrice()
@@ -91,6 +110,18 @@ class CartItem
     public function setProductQuantity($productQuantity): self
     {
         $this->productQuantity = $productQuantity;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }

@@ -28,12 +28,6 @@ class Product
      */
     private $id;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist","remove"})
-     */
-    private $productCategory;
-
     /**
      * @ORM\Column(type="string",       length=50)
      * @Assert\Regex(
@@ -77,14 +71,25 @@ class Product
      */
     private $wishList;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist","remove"})
+     */
+    private $productCategory;
 
     /**
-     * Category constructor.
+     * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", cascade={"persist", "remove"})
+     */
+    private $products;
+
+
+    /**
+     * Product constructor.
      */
     public function __construct()
     {
         $this->productCategory = new ArrayCollection();
         $this->wishList = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -151,7 +156,6 @@ class Product
     {
         $this->image = $image;
     }
-
     /**
      * @return ArrayCollection|Category[]
      */
@@ -209,4 +213,19 @@ class Product
 
         return $this;
     }
+    /**
+     * @return ArrayCollection|Cart[]
+     */
+    public function getProduct()
+    {
+        return $this->products;
+    }
+
+    public function setProduct($products): self
+    {
+        $this->products = $products;
+
+        return $this;
+    }
+
 }
