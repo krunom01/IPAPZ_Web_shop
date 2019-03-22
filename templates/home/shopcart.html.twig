@@ -31,19 +31,8 @@
         </tbody>
     </table>
     Total price : {{ total }}
-     {% for message in app.flashes('success') %}
-         <div class="row mt-3">
-             <div class="col">
-                 <div class="alert alert-success">
-                     {{ message }}
-                 </div>
-             </div>
-         </div>
-     {% endfor %}
 
-    {% if coupon != 1 %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Add coupon code') }}</button>
-    {{ form_end(form) }}
-    {% endif %}
+    <a href="{{ path('newOrder')}}">
+        <button class="btn" type="submit">Order</button>
+    </a>
+

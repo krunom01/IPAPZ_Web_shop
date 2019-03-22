@@ -46,6 +46,13 @@ class Cart
      */
     private $coupon;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="Order")
+     *
+     */
+    private $order;
+
     /**
      * @return ArrayCollection|CartItem[]
      */
@@ -113,5 +120,20 @@ class Cart
         $this->coupon = $coupon;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+    /**
+     * @param mixed $order
+     */
+    public function setOrder($order): void
+    {
+        $this->order = $order;
     }
 }

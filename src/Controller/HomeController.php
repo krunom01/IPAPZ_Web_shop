@@ -5,10 +5,13 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Category;
+use App\Entity\Order;
+use App\Entity\OrderedItems;
 use App\Entity\User;
 use App\Form\CategoryType;
 use App\Form\InsertCouponType;
 use App\Form\CartItemType;
+use App\Form\OrderFormType;
 use App\Entity\Wishlist;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
@@ -81,7 +84,8 @@ class HomeController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         CartItemRepository $cartItemRepository
-    ) {
+    )
+    {
 
         $product = $ProductRepository->find($id);
         $user = $this->getUser();
@@ -212,7 +216,8 @@ class HomeController extends AbstractController
         CartRepository $cartRepository,
         CouponRepository $couponRepository,
         EntityManagerInterface $entityManager
-    ) {
+    )
+    {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
         $userCart->getSubTotal();
@@ -226,17 +231,16 @@ class HomeController extends AbstractController
                 $this->addFlash('success', 'Wrong coupon code!');
                 return $this->redirectToRoute('shopCart');
             } else {
-                 $total = $userCart->getSubTotal();
-                 $discount = 1 - ( '0.'. $coupon->getDiscount());
-                 $priceWithDiscount = $total * $discount;
-                 $userCart->setSubTotal($priceWithDiscount);
-                 $userCart->setCoupon(1);
-                 $entityManager->persist($userCart);
-                 $entityManager->flush();
-                $this->addFlash('success', 'You get '.$coupon->getDiscount().'% discount on total price');
+                $total = $userCart->getSubTotal();
+                $discount = 1 - ('0.' . $coupon->getDiscount());
+                $priceWithDiscount = $total * $discount;
+                $userCart->setSubTotal($priceWithDiscount);
+                $userCart->setCoupon(1);
+                $entityManager->persist($userCart);
+                $entityManager->flush();
+                $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
                 return $this->redirectToRoute('shopCart');
             }
-
         }
         return $this->render(
             'home/shopcart.html.twig',
@@ -262,7 +266,8 @@ class HomeController extends AbstractController
         CartItemRepository $cartItemRepository,
         CartRepository $cartRepository,
         $id
-    ) {
+    )
+    {
 
         $user = $this->getUser();
         $userCartItem = $cartItemRepository->findOneBy(['userId' => $user->getId(), 'product' => $id]);
@@ -282,5 +287,82 @@ class HomeController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('shopCart');
+    }
+
+    /**
+     * @Route("/neworder", name="newOrder")
+     * @param CartRepository $cartRepository
+     * @param Request $request
+     * @param CouponRepository $couponRepository
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function userNewOrder(
+        Request $request,
+        CartRepository $cartRepository,
+        CouponRepository $couponRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        $user = $this->getUser();
+        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+        $userCart->getSubTotal();
+        $form = $this->createForm(InsertCouponType::class);
+        $form->handleRequest($request);
+        $formOrder = $this->createForm(OrderFormType::class);
+        $formOrder->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $coupon = $couponRepository->findOneBy(['code' => $form->get('code')->getData()]);
+            if (!$coupon) {
+                $this->addFlash('success', 'Wrong coupon code!');
+                return $this->redirectToRoute('newOrder');
+            } else {
+                $total = $userCart->getSubTotal();
+                $discount = 1 - ('0.' . $coupon->getDiscount());
+                $priceWithDiscount = $total * $discount;
+                $userCart->setSubTotal($priceWithDiscount);
+                $userCart->setCoupon(1);
+                $entityManager->persist($userCart);
+                $entityManager->flush();
+                $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
+                return $this->redirectToRoute('newOrder');
+            }
+        }
+        if ($formOrder->isSubmitted() && $formOrder->isValid()) {
+            $order = new Order();
+            $order->setCart($userCart);
+            $order->setTotalPrice($userCart->getSubTotal());
+            $order->setState($formOrder->get('state')->getData());
+            $order->setType($formOrder->get('type')->getData());
+            $order->setUserMail($user->getEmail());
+            $order->setUserName($user->getFirstName());
+            $entityManager->persist($order);
+            $entityManager->flush();
+
+
+            $cartItems = $userCart->getCartItems();
+            foreach ($cartItems as $cartItem) {
+                $itemsOrder = new OrderedItems();
+                $itemsOrder->setUserId($user->getId());
+                $itemsOrder->setProductPrice($cartItem->getPrice());
+                $itemsOrder->setProductQuantity($cartItem->getProductQuantity());
+                $itemsOrder->setProductId($cartItem->getId());
+                $itemsOrder->setOrderId(1);
+                $entityManager->persist($itemsOrder);
+                $entityManager->flush();
+            }
+        }
+        return $this->render(
+            'home/newOrder.html.twig',
+            [
+                'items' => $userCart->getCartItems(),
+                'total' => $userCart->getSubTotal(),
+                'form' => $form->createView(),
+                'coupon' => $userCart->getCoupon(),
+                'formCoupon' => $formOrder->createView(),
+
+            ]
+        );
     }
 }

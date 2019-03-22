@@ -1,0 +1,25 @@
+
+Total price : {{ total }} kn
+
+
+
+{% for message in app.flashes('success') %}
+    <div class="row mt-3">
+        <div class="col">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    {% if coupon != 1 %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">{{ button_label|default('Add coupon code') }}</button>
+        {{ form_end(form) }}
+    {% endif %}
+
+{{ form_start(formCoupon) }}
+    {{ form_widget(formCoupon) }}
+<button class="btn">{{ button_label|default('Order') }}</button>
+{{ form_end(formCoupon) }}
