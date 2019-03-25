@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac597815-00a9-4600-811f-55f009843a5e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webshop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webshop.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inchooRuleset.xml" beforeDir="false" afterPath="$PROJECT_DIR$/inchooRuleset.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Order.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/OrderedItems.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/OrderedItems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/OrderFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OrderFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/orders.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/orders.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,20 +104,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="-225">
+              <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/OrderedItems.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="585">
+              <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -220,8 +207,8 @@
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Order.php" />
         <option value="$PROJECT_DIR$/src/Entity/OrderedItems.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Order.php" />
       </list>
     </option>
   </component>
@@ -485,12 +472,12 @@
       <workItem from="1553152749388" duration="21819000" />
       <workItem from="1553235548939" duration="25306000" />
       <workItem from="1553261903730" duration="1522000" />
-      <workItem from="1553494616148" duration="18680000" />
+      <workItem from="1553494616148" duration="18895000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392464000" />
+    <option name="totallyTimeSpent" value="392679000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -505,7 +492,7 @@
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.21237993" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.21237993" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info id="Favorites" order="2" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -518,7 +505,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286026" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50160086" side_tool="true" weight="0.28056768" />
       <window_info anchor="bottom" id="Database Console" order="12" sideWeight="0.4994664" weight="0.32751092" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -911,17 +898,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/OrderedItems.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="585">
+          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/OrderedItems.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="-225">
+          <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
         </state>
       </provider>
     </entry>

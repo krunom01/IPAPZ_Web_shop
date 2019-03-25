@@ -6,8 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
- * @ORM\Table(name="`order`")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @Doctrine\ORM\Mapping\Table(name="`order`")
  */
 class Order
 {
@@ -16,54 +16,55 @@ class Order
         $this->orderedItems = new ArrayCollection();
     }
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50)
      */
     private $userName;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50)
      */
     private $userMail;
 
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $totalPrice;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50)
      */
     private $state;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cart")
+     * @Doctrine\ORM\Mapping\OneToOne(targetEntity="Cart")
      */
     private $cart;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=30)
      */
     private $type;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="order", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\OrderedItems",
+     * mappedBy="order", cascade={"persist", "remove"})
      */
     private $orderedItems;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $userId;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50)
      */
     private $address;
 

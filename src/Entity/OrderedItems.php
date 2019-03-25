@@ -3,40 +3,41 @@
 namespace App\Entity;
 
 
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OrderedItemsRepository")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\OrderedItemsRepository")
  */
 class OrderedItems
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderedItems")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderedItems")
      */
     private $order;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
      */
     private $product;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $productPrice;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $productQuantity;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $userId;
 
