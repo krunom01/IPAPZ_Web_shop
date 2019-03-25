@@ -28,6 +28,7 @@ class Order
      */
     private $userMail;
 
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -51,10 +52,20 @@ class Order
      * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="order", cascade={"persist", "remove"})
      */
     private $orderedItems;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userId;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $address;
     /**
      * @return ArrayCollection|OrderedItems[]
      */
-    public function getCartItems()
+    public function getOrderedItems()
     {
         $orderedItems = new ArrayCollection();
         foreach ($this->orderedItems as $prod) {
@@ -139,6 +150,30 @@ class Order
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

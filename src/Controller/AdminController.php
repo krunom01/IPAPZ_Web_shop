@@ -79,29 +79,30 @@ class AdminController extends AbstractController
 
     /**
      * @Route  ("/admin/userOrder/{id}", name ="admin_user_order")
+     * @param $id
      * @param OrderRepository $orderRepository
      * @return Response
      */
 
     public function showUserOrder(
         $id,
-        OrderRepository $orderRepository,
-        EntityManagerInterface $entityManager
-    ) {
-
-
-
-
+        OrderRepository $orderRepository
+    )
+    {
+        $userOrder = $orderRepository->findOneBy(['userId' => $id]);
+        $items = $userOrder->getOrderedItems();
 
         return $this->render(
             'admin/orders.html.twig',
             [
-                'title' => 'Orders',
+                'title' => 'User Order',
+                'items' => $items,
+                'userOrder' => $userOrder,
+
 
             ]
         );
     }
-
 
 
     /**
@@ -161,7 +162,8 @@ class AdminController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         CustomPageRepository $customPageRepository
-    ) {
+    )
+    {
 
         $form = $this->createForm(CustomPageType::class);
         $form->handleRequest($request);

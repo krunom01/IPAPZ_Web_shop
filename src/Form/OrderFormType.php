@@ -14,6 +14,7 @@ class OrderFormType extends AbstractType
         $builder
             ->add('state')
             ->add('type')
+            ->add('address')
         ;
     }
 

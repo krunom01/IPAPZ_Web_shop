@@ -40,36 +40,44 @@
         </div>
     {% endfor %}
 
-
-
-
     <table class="table">
         <thead>
         <tr>
-            <th>Shopcard id</th>
-            <th>Product name</th>
-            <th>Product number</th>
-            <th>Product price</th>
+            <th>User name </th>
+            <th>User email</th>
+            <th>Total price</th>
+            <th>Country</th>
+            <th>Method</th>
+
 
 
         </tr>
         </thead>
         <tbody>
-        {% for shopcard in shopcards %}
             <tr>
-                <td>{{ shopcard.id }}</td>
-                <td>{{ shopcard.name }}</td>
-                <td>{{ shopcard.productnumber }}</td>
-                <td>{{ shopcard.productnumber * shopcard.price }} kn</td>
-
-                <td>
-
-
-                </td>
+                <td>{{ userOrder.userName }}</td>
+                <td>{{ userOrder.userMail }}</td>
+                <td>{{ userOrder.totalPrice }} kn</td>
+                <td>{{ userOrder.state }}</td>
+                <td>{{ userOrder.type }}</td>
             </tr>
+        </tbody>
+    </table>
 
-            {%  set total = total + (shopcard.productnumber * shopcard.price) %}
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product Name </th>
+            <th>Product price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }} kn</td>
+            </tr>
         {% else %}
             <tr>
                 <td colspan="2">no records found</td>
@@ -78,27 +86,7 @@
 
         </tbody>
     </table>
-    Total :{{ total }} kn
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Adress</th>
-            <th>Status</th>
-            <th>Update order</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in orderedItems %}
-            <tr>
-                <td>{{ item.adress }}</td>
-                <td>{{ item.paid }}</td>
-                <td><a href="{{ path('admin_update_order', {id: item.id}) }}" class="btn btn-primary">Update order</a></td>
 
-            </tr>
 
-        {% endfor %}
-
-        </tbody>
-    </table>
 
 {% endblock %}

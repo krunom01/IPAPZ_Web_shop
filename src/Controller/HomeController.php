@@ -334,8 +334,10 @@ class HomeController extends AbstractController
             $order->setTotalPrice($userCart->getSubTotal());
             $order->setState($formOrder->get('state')->getData());
             $order->setType($formOrder->get('type')->getData());
+            $order->setAddress($formOrder->get('address')->getData());
             $order->setUserMail($user->getEmail());
             $order->setUserName($user->getFirstName());
+            $order->setUserId($user->getId());
             $entityManager->persist($order);
             $entityManager->flush();
 
@@ -351,6 +353,7 @@ class HomeController extends AbstractController
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
             }
+
         }
         return $this->render(
             'home/newOrder.html.twig',
