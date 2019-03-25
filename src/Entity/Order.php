@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +47,24 @@ class Order
      * @ORM\Column(type="string", length=30)
      */
     private $type;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderedItems", mappedBy="order", cascade={"persist", "remove"})
+     */
+    private $orderedItems;
+    /**
+     * @return ArrayCollection|OrderedItems[]
+     */
+    public function getCartItems()
+    {
+        $orderedItems = new ArrayCollection();
+        foreach ($this->orderedItems as $prod) {
+            /**
+             * @var OrderedItems $prod
+             */
+            $orderedItems[] = $prod->getProduct();
+        }
+        return $orderedItems;
+    }
 
     public function getId()
     {

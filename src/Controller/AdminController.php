@@ -10,6 +10,7 @@ use App\Form\ProductFormType;
 use App\Form\CustomPageType;
 use App\Form\CouponFormType;
 use App\Form\UpdateProductCategoryType;
+use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -78,39 +79,24 @@ class AdminController extends AbstractController
 
     /**
      * @Route  ("/admin/userOrder/{id}", name ="admin_user_order")
+     * @param OrderRepository $orderRepository
      * @return Response
      */
 
-    public function showUserOrder($id)
-    {
+    public function showUserOrder(
+        $id,
+        OrderRepository $orderRepository,
+        EntityManagerInterface $entityManager
+    ) {
 
-        $em = $this->getDoctrine()->getManager();
-        $sql = "select s.id,  p.name, p.price, s.productnumber
-                from shopcard s
-                left join product p on s.product_id = p.id
-                where s.product_id = p.id and s.user_id = :userid";
 
-        $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('userid', $id);
-        $statement->execute();
-        $shopcard = $statement->fetchAll();
-        $total = 0;
 
-        $sql = "select * from ordered_items where user_id = :userid";
-
-        $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('userid', $id);
-        $statement->execute();
-        $orderedItems = $statement->fetchAll();
 
 
         return $this->render(
             'admin/orders.html.twig',
             [
                 'title' => 'Orders',
-                'shopcards' => $shopcard,
-                'total' => $total,
-                'orderedItems' => $orderedItems,
 
             ]
         );

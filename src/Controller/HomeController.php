@@ -46,8 +46,7 @@ class HomeController extends AbstractController
         PaginatorInterface $paginator,
         CategoryRepository $CategoryRepository,
         ProductRepository $ProductRepository
-    )
-    {
+    ) {
         $categories = $CategoryRepository->findAll();
         $products = $ProductRepository->findAll();
         $pagination = $paginator->paginate(
@@ -84,8 +83,7 @@ class HomeController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         CartItemRepository $cartItemRepository
-    )
-    {
+    ) {
 
         $product = $ProductRepository->find($id);
         $user = $this->getUser();
@@ -216,13 +214,13 @@ class HomeController extends AbstractController
         CartRepository $cartRepository,
         CouponRepository $couponRepository,
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
         $userCart->getSubTotal();
         $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
+
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -266,8 +264,7 @@ class HomeController extends AbstractController
         CartItemRepository $cartItemRepository,
         CartRepository $cartRepository,
         $id
-    )
-    {
+    ) {
 
         $user = $this->getUser();
         $userCartItem = $cartItemRepository->findOneBy(['userId' => $user->getId(), 'product' => $id]);
@@ -300,11 +297,13 @@ class HomeController extends AbstractController
     public function userNewOrder(
         Request $request,
         CartRepository $cartRepository,
+        CartItemRepository $cartItemRepository,
         CouponRepository $couponRepository,
         EntityManagerInterface $entityManager
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+
         $userCart->getSubTotal();
         $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
@@ -340,15 +339,15 @@ class HomeController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush();
 
-
+            $userCartItems = $cartItemRepository->findOneBy(['userId' => $user->getId()]);
             $cartItems = $userCart->getCartItems();
             foreach ($cartItems as $cartItem) {
                 $itemsOrder = new OrderedItems();
                 $itemsOrder->setUserId($user->getId());
-                $itemsOrder->setProductPrice($cartItem->getPrice());
-                $itemsOrder->setProductQuantity($cartItem->getProductQuantity());
-                $itemsOrder->setProductId($cartItem->getId());
-                $itemsOrder->setOrderId(1);
+                $itemsOrder->setProductPrice($userCartItems->getProductPrice());
+                $itemsOrder->setProductQuantity($userCartItems->getProductQuantity());
+                $itemsOrder->setProductId($userCartItems->getProduct());
+                $itemsOrder->setOrder($order);
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
             }
