@@ -205,11 +205,19 @@ class HomeController extends AbstractController
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
-        $userCart->getSubTotal();
+
+        if (!$userCart) {
+            $shopCartTotal = 0;
+            $items = 0;
+            $coupon = 0;
+        } else {
+            $shopCartTotal = $userCart->getSubTotal();
+            $items = $userCart->getCartItems();
+            $coupon = $userCart->getCoupon();
+        }
+
         $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
-
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $coupon = $couponRepository->findOneBy(['code' => $form->get('code')->getData()]);
@@ -224,16 +232,16 @@ class HomeController extends AbstractController
                 $userCart->setCoupon(1);
                 $entityManager->persist($userCart);
                 $entityManager->flush();
-                $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
+                $this->addFlash('success', '' . $coupon->getDiscount() . '% discount on total price');
                 return $this->redirectToRoute('shopCart');
             }
         } return $this->render(
             'home/shopcart.html.twig',
             [
-                'items' => $userCart->getCartItems(),
-                'total' => $userCart->getSubTotal(),
+                'items' => $items,
+                'total' => $shopCartTotal,
                 'form' => $form->createView(),
-                'coupon' => $userCart->getCoupon()
+                'coupon' => $coupon,
 
             ]
         );
@@ -336,9 +344,8 @@ class HomeController extends AbstractController
                 $itemsOrder->setOrder($order);
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
-            }
-            $entityManager->remove($userCart);
-            $entityManager->flush();
+            } $entityManager->remove($userCart);
+              $entityManager->flush();
         } return $this->render(
             'home/newOrder.html.twig',
             [

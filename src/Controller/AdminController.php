@@ -28,7 +28,6 @@ class AdminController extends AbstractController
             'admin/base.html.twig',
             [
                 'title' => 'Admin panel',
-
             ]
         );
     }

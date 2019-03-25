@@ -25,14 +25,16 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">add items to shopcart!</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% if total != 0 %}
     Total price : {{ total }}
 
     <a href="{{ path('newOrder')}}">
         <button class="btn" type="submit">Order</button>
     </a>
+    {% endif %}
 
