@@ -2,84 +2,87 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use App\Entity\Category;
 
 /**
  * Class Product
  *
  * @package                                                        App\Entity
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
- * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"productnumber"},
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @Doctrine\ORM\Mapping\HasLifecycleCallbacks()
+ * @Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity(fields={"productnumber"},
  * message="There is already an product with this productnumber")
  */
 class Product
 {
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string",       length=50)
-     * @Assert\Regex(
+     * @Doctrine\ORM\Mapping\Column(type="string",       length=50)
+     * @Symfony\Component\Validator\Constraints\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
      *     message     = "Letters only")
-     * @Assert\NotBlank(message="insert name")
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert name")
      */
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="insert product number")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert product number")
      */
     private $productnumber;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Column(type="decimal",      scale=2)
-     * @Assert\NotBlank(message="insert product price")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="decimal",      scale=2)
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert product price")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string",       length=255)
-     * @Assert\NotBlank(message="upload image with .jpg or .jpeg!")
-     * @Assert\File(mimeTypes={         "image/jpg", "image/jpeg" })
+     * @Doctrine\ORM\Mapping\Column(type="string",       length=255)
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="upload image with .jpg or .jpeg!")
+     * @Symfony\Component\Validator\Constraints\File(mimeTypes={         "image/jpg", "image/jpeg" })
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string",       length=50)
-     * @Assert\Regex(
+     * @Doctrine\ORM\Mapping\Column(type="string",       length=50)
+     * @Symfony\Component\Validator\Constraints\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
      *     message     = "Letters only")
-     * @Assert\NotBlank(message="insert your custom url")
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert your custom url")
      */
     private $urlCustom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="product", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\Wishlist",
+     * mappedBy="product", cascade={"persist", "remove"})
      */
     private $wishList;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="product", cascade={"persist","remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\ProductCategory",
+     * mappedBy="product", cascade={"persist","remove"})
      */
     private $productCategory;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\CartItem",
+     * mappedBy="product", cascade={"persist", "remove"})
      */
     private $products;
+    /**
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\OrderedItems",
+     * mappedBy="product", cascade={"persist", "remove"})
+     */
+    private $orderProducts;
 
 
     /**
@@ -90,6 +93,7 @@ class Product
         $this->productCategory = new ArrayCollection();
         $this->wishList = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
     }
 
     /**
@@ -167,8 +171,7 @@ class Product
              * @var ProductCategory $prod
              */
             $categories[] = $prod->getCategory();
-        }
-        return $categories;
+        } return $categories;
     }
 
     /**
@@ -178,7 +181,7 @@ class Product
     {
         foreach ($productCategory as $category) {
             /**
-             * @var ProductCategory $newProductCategory
+             * @var \App\Entity\ProductCategory $newProductCategory
              */
             $newProductCategory = new ProductCategory();
             $newProductCategory->setProduct($this);

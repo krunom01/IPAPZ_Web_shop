@@ -22,7 +22,7 @@ class OrderedItems
     private $order;
 
     /**
-     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Product", inversedBy="orderProducts")
      */
     private $product;
 
