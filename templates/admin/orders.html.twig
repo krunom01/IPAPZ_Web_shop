@@ -43,40 +43,19 @@
     <table class="table">
         <thead>
         <tr>
-            <th>User name </th>
-            <th>User email</th>
-            <th>Total price</th>
-            <th>Country</th>
-            <th>Method</th>
-
-
-
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ userOrder.userName }}</td>
-                <td>{{ userOrder.userMail }}</td>
-                <td>{{ userOrder.totalPrice }} kn</td>
-                <td>{{ userOrder.state }}</td>
-                <td>{{ userOrder.type }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <table class="table">
-        <thead>
-        <tr>
             <th>Product Name </th>
             <th>Product price</th>
+            <th>Product quantity</th>
+
         </tr>
         </thead>
         <tbody>
         {% for item in items %}
             <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price }} kn</td>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.product.price }}</td>
+                <td>{{ item.productQuantity }}</td>
+
             </tr>
         {% else %}
             <tr>
@@ -86,7 +65,29 @@
 
         </tbody>
     </table>
-
-
-
+    {% if userOrder == null %}
+        <tr>
+        </tr>
+    {% else %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User name </th>
+            <th>User email</th>
+            <th>Total price</th>
+            <th>Country</th>
+            <th>Method</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ userOrder.userName }}</td>
+            <td>{{ userOrder.userMail }}</td>
+            <td>{{ userOrder.totalPrice }} kn</td>
+            <td>{{ userOrder.state }}</td>
+            <td>{{ userOrder.type }}</td>
+        </tr>
+        </tbody>
+    </table>
+    {% endif %}
 {% endblock %}

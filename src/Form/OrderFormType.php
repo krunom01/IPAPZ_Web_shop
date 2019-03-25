@@ -14,14 +14,15 @@ class OrderFormType extends AbstractType
         $builder
             ->add('state')
             ->add('type')
-            ->add('address')
-        ;
+            ->add('address');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => Order::class,
-        ]);
+            ]
+        );
     }
 }

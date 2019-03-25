@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Order
 {
+    public function __construct()
+    {
+        $this->orderedItems = new ArrayCollection();
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -62,21 +66,14 @@ class Order
      * @ORM\Column(type="string", length=50)
      */
     private $address;
+
     /**
-     * @return ArrayCollection|OrderedItems[]
+     * @return mixed $orderedItems
      */
     public function getOrderedItems()
     {
-        $orderedItems = new ArrayCollection();
-        foreach ($this->orderedItems as $prod) {
-            /**
-             * @var OrderedItems $prod
-             */
-            $orderedItems[] = $prod->getProduct();
-        }
-        return $orderedItems;
+        return $this->orderedItems;
     }
-
     public function getId()
     {
         return $this->id;

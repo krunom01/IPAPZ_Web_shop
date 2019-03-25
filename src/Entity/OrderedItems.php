@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderedItemsRepository")
@@ -63,7 +62,7 @@ class OrderedItems
         return $this->product;
     }
 
-    public function setProductId($product): self
+    public function setProduct($product): self
     {
         $this->product = $product;
 

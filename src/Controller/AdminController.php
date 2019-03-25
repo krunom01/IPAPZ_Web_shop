@@ -3,37 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Coupon;
-use App\Entity\Product;
 use App\Entity\User;
-use App\Entity\CustomPage;
-use App\Form\ProductFormType;
 use App\Form\CustomPageType;
 use App\Form\CouponFormType;
-use App\Form\UpdateProductCategoryType;
 use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\ProductCategory;
-use App\Repository\ProductCategoryRepository;
-use App\Repository\ProductRepository;
-use App\Repository\UserRepository;
 use App\Repository\CouponRepository;
 use App\Repository\CustomPageRepository;
-use App\Entity\OrderedItems;
-use App\Repository\OrderedItemsRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use App\Form\UserFormType;
-use App\Form\ProductCategoryType;
 
 class AdminController extends AbstractController
 {
 
     /**
-     * @Route("/admin/", name="admin")
-     * @return           Response
+     * @Symfony\Component\Routing\Annotation\Route("/admin", name="admin")
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
@@ -48,11 +34,30 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route  ("/admin/userEdit/{id}", name ="admin_user_edit")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/users", name="users")
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function users()
+    {
+
+
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render(
+            'admin/users.html.twig',
+            [
+                'title' => 'User list',
+                'users' => $users,
+            ]
+        );
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/userEdit/{id}", name ="admin_user_edit")
      * @param  Request $request
      * @param  EntityManagerInterface $entityManager
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
+
 
     public function editUser(Request $request, EntityManagerInterface $entityManager, User $user)
     {
@@ -78,36 +83,35 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route  ("/admin/userOrder/{id}", name ="admin_user_order")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/userOrder/{id}", name ="admin_user_order")
      * @param $id
      * @param OrderRepository $orderRepository
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
     public function showUserOrder(
         $id,
         OrderRepository $orderRepository
-    )
-    {
+    ) {
         $userOrder = $orderRepository->findOneBy(['userId' => $id]);
-        $items = $userOrder->getOrderedItems();
-
-        return $this->render(
+        if ($userOrder) {
+            $items = $userOrder->getOrderedItems();
+        } else {
+            $items = 0;
+        } return $this->render(
             'admin/orders.html.twig',
             [
                 'title' => 'User Order',
                 'items' => $items,
-                'userOrder' => $userOrder,
-
-
+                'userOrder' => $userOrder
             ]
         );
     }
 
 
     /**
-     * @Route  ("/admin/categoryProducts/{id}", name ="admin_category_products")
-     * @return Response
+     * @Symfony\Component\Routing\Annotation\Route("/admin/categoryProducts/{id}", name ="admin_category_products")
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
     public function categoryProducts($id)
@@ -133,9 +137,9 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route  ("/admin/customPages", name ="admin_custom_pages")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/customPages", name ="admin_custom_pages")
      * @param  $customPageRepository CustomPageRepository
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
     public function customPages(CustomPageRepository $customPageRepository)
@@ -151,20 +155,18 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route  ("/admin/customPages/new", name ="customPage_new")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/customPages/new", name ="customPage_new")
      * @param  $customPageRepository CustomPageRepository
      * @param  EntityManagerInterface $entityManager
      * @param  Request $request
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
     public function customPagesNew(
         Request $request,
         EntityManagerInterface $entityManager,
         CustomPageRepository $customPageRepository
-    )
-    {
-
+    ) {
         $form = $this->createForm(CustomPageType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -188,12 +190,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route  ("/admin/coupons", name ="admin_coupons")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/coupons", name ="admin_coupons")
      * @param  CouponRepository $couponRepository
      * @param  EntityManagerInterface $entityManager
      * @param  Request $request
-     * @param  Coupon $coupon
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function coupons(Request $request, EntityManagerInterface $entityManager, CouponRepository $couponRepository)
     {
@@ -211,13 +212,9 @@ class AdminController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Successfully added new coupon!');
             return $this->redirectToRoute('admin_coupons');
-        }
-        return $this->render(
+        } return $this->render(
             'admin/coupons.html.twig',
-            [
-                'coupons' => $couponRepository->findAll(),
-                'form' => $form->createView()
-            ]
+            ['coupons' => $couponRepository->findAll(), 'form' => $form->createView()]
         );
     }
 
@@ -232,7 +229,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/coupons/delete/{id}", name="coupon_delete")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/coupons/delete/{id}", name="coupon_delete")
      * @param                               Coupon $coupon
      * @param                               EntityManagerInterface $entityManager
      * @return                              \Symfony\Component\HttpFoundation\RedirectResponse

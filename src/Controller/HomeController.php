@@ -4,51 +4,40 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\CartItem;
-use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\OrderedItems;
-use App\Entity\User;
-use App\Form\CategoryType;
 use App\Form\InsertCouponType;
 use App\Form\CartItemType;
 use App\Form\OrderFormType;
-use App\Entity\Wishlist;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CouponRepository;
-use App\Repository\ProductCategoryRepository;
 use App\Repository\WishlistRepository;
-use App\Repository\UserRepository;
 use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Psr\Container\ContainerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
-     * @param      CategoryRepository $CategoryRepository
-     * @param      ProductRepository $ProductRepository
+     * @Symfony\Component\Routing\Annotation\Route("/", name="home")
+     * @param      CategoryRepository $categoryRepository
+     * @param      ProductRepository $productRepository
      * @param      PaginatorInterface $paginator
      * @param      Request $request
-     * @return     Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(
         Request $request,
         PaginatorInterface $paginator,
-        CategoryRepository $CategoryRepository,
-        ProductRepository $ProductRepository
+        CategoryRepository $categoryRepository,
+        ProductRepository $productRepository
     ) {
-        $categories = $CategoryRepository->findAll();
-        $products = $ProductRepository->findAll();
+        $categories = $categoryRepository->findAll();
+        $products = $productRepository->findAll();
         $pagination = $paginator->paginate(
             $products, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
@@ -65,29 +54,29 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/product_details/{id}/{urlCustom}", name="product_details")
-     * @param                                      ProductRepository $ProductRepository
-     * @param                                      WishlistRepository $WishListRepository
+     * @Symfony\Component\Routing\Annotation\Route("/product_details/{id}/{urlCustom}", name="product_details")
+     * @param                                      ProductRepository $productRepository
+     * @param                                      WishlistRepository $wishListRepository
      * @param                                      CartRepository $cartRepository
      * @param                                      CartItemRepository $cartItemRepository
      * @param                                      $id
      * @param                                      Request $request
      * @param                                      EntityManagerInterface $entityManager
-     * @return                                     Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function showProduct(
         $id,
-        ProductRepository $ProductRepository,
-        WishlistRepository $WishListRepository,
+        ProductRepository $productRepository,
+        WishlistRepository $wishListRepository,
         CartRepository $cartRepository,
         Request $request,
         EntityManagerInterface $entityManager,
         CartItemRepository $cartItemRepository
     ) {
 
-        $product = $ProductRepository->find($id);
+        $product = $productRepository->find($id);
         $user = $this->getUser();
-        $wishListProduct = $WishListRepository->findOneBy(
+        $wishListProduct = $wishListRepository->findOneBy(
             [
                 'product' => $product,
                 'user' => $user->getId()
@@ -107,14 +96,13 @@ class HomeController extends AbstractController
                 $cart->setCoupon(0);
                 $entityManager->persist($cart);
                 $entityManager->flush();
-            }
-            $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
-            $cartItem->setUserId($user->getId());
-            $cartItem->setProduct($product);
-            $cartItem->setProductPrice($product->getPrice());
-            $cartItem->setCart($userCart);
-            $entityManager->persist($cartItem);
-            $entityManager->flush();
+            }   $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+                $cartItem->setUserId($user->getId());
+                $cartItem->setProduct($product);
+                $cartItem->setProductPrice($product->getPrice());
+                $cartItem->setCart($userCart);
+                $entityManager->persist($cartItem);
+                $entityManager->flush();
 
             $totalCartMoney = 0;
 
@@ -151,13 +139,13 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/category/{id}", name="category_details", methods={"GET"})
-     * @param                   CategoryRepository $CategoryRepository
-     * @return                  Response
+     * @Symfony\Component\Routing\Annotation\Route("/category/{id}", name="category_details", methods={"GET"})
+     * @param                   CategoryRepository $categoryRepository
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function showCategory(CategoryRepository $CategoryRepository, $id)
+    public function showCategory(CategoryRepository $categoryRepository, $id)
     {
-        $categories = $CategoryRepository->findAll();
+        $categories = $categoryRepository->findAll();
         $em = $this->getDoctrine()->getManager();
         $sql = "select a.name, a.image, a.name, a.price, a.id
                 from product a
@@ -181,10 +169,10 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/category/{id}", name="new_cart", methods={"GET"})
+     * @Symfony\Component\Routing\Annotation\Route("/category/{id}", name="new_cart", methods={"GET"})
      * @param $id
      * @param ProductRepository $productRepository
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function newUserCart($id, ProductRepository $productRepository)
     {
@@ -202,12 +190,12 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/shopcart", name="shopCart")
+     * @Symfony\Component\Routing\Annotation\Route("/shopcart", name="shopCart")
      * @param CartRepository $cartRepository
      * @param Request $request
      * @param CouponRepository $couponRepository
      * @param EntityManagerInterface $entityManager
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userShopCart(
         Request $request,
@@ -239,8 +227,7 @@ class HomeController extends AbstractController
                 $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
                 return $this->redirectToRoute('shopCart');
             }
-        }
-        return $this->render(
+        } return $this->render(
             'home/shopcart.html.twig',
             [
                 'items' => $userCart->getCartItems(),
@@ -253,11 +240,11 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/shopcart/delete/{id}", name="shopCartDeleteIdem")
+     * @Symfony\Component\Routing\Annotation\Route("/shopcart/delete/{id}", name="shopCartDeleteIdem")
      * @param CartItemRepository $cartItemRepository
      * @param CartRepository $cartRepository
      * @param $id
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      *
      */
     public function deleteItemFromShopCart(
@@ -278,8 +265,7 @@ class HomeController extends AbstractController
 
         foreach ($userCardTotals as $userCardTotal) {
             $totalCartMoney += $userCardTotal->getProductPrice() * $userCardTotal->getProductQuantity();
-        }
-        $userCart->setSubTotal($totalCartMoney);
+        } $userCart->setSubTotal($totalCartMoney);
         $entityManager->persist($userCart);
         $entityManager->flush();
 
@@ -287,12 +273,12 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/neworder", name="newOrder")
+     * @Symfony\Component\Routing\Annotation\Route("/neworder", name="newOrder")
      * @param CartRepository $cartRepository
      * @param Request $request
      * @param CouponRepository $couponRepository
      * @param EntityManagerInterface $entityManager
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userNewOrder(
         Request $request,
@@ -327,8 +313,7 @@ class HomeController extends AbstractController
                 $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
                 return $this->redirectToRoute('newOrder');
             }
-        }
-        if ($formOrder->isSubmitted() && $formOrder->isValid()) {
+        } if ($formOrder->isSubmitted() && $formOrder->isValid()) {
             $order = new Order();
             $order->setCart($userCart);
             $order->setTotalPrice($userCart->getSubTotal());
@@ -353,9 +338,7 @@ class HomeController extends AbstractController
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
             }
-
-        }
-        return $this->render(
+        } return $this->render(
             'home/newOrder.html.twig',
             [
                 'items' => $userCart->getCartItems(),
@@ -363,7 +346,6 @@ class HomeController extends AbstractController
                 'form' => $form->createView(),
                 'coupon' => $userCart->getCoupon(),
                 'formCoupon' => $formOrder->createView(),
-
             ]
         );
     }

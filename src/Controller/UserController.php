@@ -7,11 +7,9 @@ use App\Form\RegistrationFormType;
 use App\Form\UserEditType;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -26,24 +24,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/admin/users", name="admin_users")
-     */
-    public function index()
-    {
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render(
-            'admin/users.html.twig',
-            [
-                'title' => 'User list',
-                'users' => $users,
-            ]
-        );
-    }
 
     /**
-     * @Route("/login", name="app_login")
-     * @Security("not   is_granted('ROLE_USER')")
+     * @Symfony\Component\Routing\Annotation\Route("/login", name="app_login")
+     * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("not   is_granted('ROLE_USER')")
      * @param           AuthenticationUtils $authenticationUtils
      * @return          Response
      */
@@ -57,7 +41,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="app_register")
+     * @Symfony\Component\Routing\Annotation\Route("/register", name="app_register")
      * @param              Request $request
      * @param              UserPasswordEncoderInterface $passwordEncoder
      * @param              GuardAuthenticatorHandler $guardHandler
@@ -74,8 +58,7 @@ class UserController extends AbstractController
     ) {
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('home');
-        }
-        $user = new User();
+        } $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,8 +78,7 @@ class UserController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-        }
-        return $this->render(
+        } return $this->render(
             'security/register.html.twig',
             [
                 'registrationForm' => $form->createView(),
@@ -105,14 +87,14 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Symfony\Component\Routing\Annotation\Route("/logout", name="app_logout")
      */
     public function logout()
     {
     }
 
     /**
-     * @Route("/admin/users/delete/{id}", name="user_delete")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/users/delete/{id}", name="user_delete")
      * @param                             User $user
      * @param                             EntityManagerInterface $entityManager
      * @return                            \Symfony\Component\HttpFoundation\RedirectResponse
@@ -126,7 +108,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile", name="profile")
+     * @Symfony\Component\Routing\Annotation\Route("/profile", name="profile")
      * @param             EntityManagerInterface $entityManager
      * @param             Request $request
      * @return            null|Response
@@ -153,19 +135,11 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+
             $this->addFlash('success', 'Profile updated!');
-        }
-        return $this->render(
+        } return $this->render(
             'security/useredit.html.twig',
-            [
-                'userEdit' => $form->createView(),
-            ]
+            ['userEdit' => $form->createView(),]
         );
     }
 }
