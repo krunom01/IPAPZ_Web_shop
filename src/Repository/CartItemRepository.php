@@ -24,8 +24,8 @@ class CartItemRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('o')
             ->select('o')
             ->innerJoin('o.cart', 'cart')
-            ->where('cart.userId = :userId')
-            ->setParameter(':userId', $userId)
+            ->where('cart.user = :user')
+            ->setParameter(':user', $userId)
             ->getQuery()
             ->getResult();
     }

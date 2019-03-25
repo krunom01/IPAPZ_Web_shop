@@ -6,12 +6,14 @@ use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Order;
 use App\Entity\OrderedItems;
+use App\Entity\ProductCategory;
 use App\Form\InsertCouponType;
 use App\Form\CartItemType;
 use App\Form\OrderFormType;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CouponRepository;
+use App\Repository\ProductCategoryRepository;
 use App\Repository\WishlistRepository;
 use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,15 +90,15 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+            $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
             // find user in cart
             $cart = new Cart();
             if (!$userCart) {
-                $cart->setUserId($user->getId());
+                $cart->setUser($user);
                 $cart->setCoupon(0);
                 $entityManager->persist($cart);
                 $entityManager->flush();
-            }   $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+            }   $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
                 $cartItem->setUserId($user->getId());
                 $cartItem->setProduct($product);
                 $cartItem->setProductPrice($product->getPrice());
@@ -141,28 +143,25 @@ class HomeController extends AbstractController
     /**
      * @Symfony\Component\Routing\Annotation\Route("/category/{id}", name="category_details", methods={"GET"})
      * @param                   CategoryRepository $categoryRepository
+     * @param $id
+     * @param ProductCategoryRepository $productCategoryRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function showCategory(CategoryRepository $categoryRepository, $id)
-    {
-        $categories = $categoryRepository->findAll();
-        $em = $this->getDoctrine()->getManager();
-        $sql = "select a.name, a.image, a.name, a.price, a.id
-                from product a
-                inner join product_category pc on a.id = pc.product_id
-                where category_id = :id";
-        $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('id', $id);
-        $statement->execute();
-        $products = $statement->fetchAll();
+    public function showCategory(
+        CategoryRepository $categoryRepository,
+        $id,
+        ProductCategoryRepository $productCategoryRepository
+    ) {
 
+        $categories = $categoryRepository->findAll();
+        $categoryProducts = $productCategoryRepository->findBy(['category' => $id]);
 
         return $this->render(
             'home/categorydetails.html.twig',
             [
-                'products' => $products,
                 'title' => 'category details',
-                'categories' => $categories
+                'categories' => $categories,
+                'categoryProducts' => $categoryProducts
 
             ]
         );
@@ -204,7 +203,7 @@ class HomeController extends AbstractController
         EntityManagerInterface $entityManager
     ) {
         $user = $this->getUser();
-        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+        $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
 
         if (!$userCart) {
             $shopCartTotal = 0;
@@ -268,7 +267,7 @@ class HomeController extends AbstractController
         $entityManager->flush();
 
         $totalCartMoney = 0;
-        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
+        $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
         $userCardTotals = $cartItemRepository->findUserCart($user->getId());
 
         foreach ($userCardTotals as $userCardTotal) {
@@ -285,6 +284,7 @@ class HomeController extends AbstractController
      * @param CartRepository $cartRepository
      * @param Request $request
      * @param CouponRepository $couponRepository
+     * @param CartItemRepository $cartItemRepository
      * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -296,8 +296,7 @@ class HomeController extends AbstractController
         EntityManagerInterface $entityManager
     ) {
         $user = $this->getUser();
-        $userCart = $cartRepository->findOneBy(['userId' => $user->getId()]);
-
+        $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
         $userCart->getSubTotal();
         $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
@@ -328,8 +327,8 @@ class HomeController extends AbstractController
             $order->setType($formOrder->get('type')->getData());
             $order->setAddress($formOrder->get('address')->getData());
             $order->setUserMail($user->getEmail());
-            $order->setUserName($user->getFirstName());
-            $order->setUserId($user->getId());
+            $order->setUserName($user->getFullName());
+            $order->setUserId($user);
             $entityManager->persist($order);
             $entityManager->flush();
 

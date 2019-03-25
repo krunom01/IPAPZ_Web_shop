@@ -92,7 +92,7 @@ class AdminController extends AbstractController
         $id,
         OrderRepository $orderRepository
     ) {
-        $userOrder = $orderRepository->findOneBy(['userId' => $id]);
+        $userOrder = $orderRepository->findOneBy(['user' => $id]);
         if ($userOrder) {
             $items = $userOrder->getOrderedItems();
         } else {

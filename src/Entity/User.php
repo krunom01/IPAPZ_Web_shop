@@ -21,16 +21,6 @@ use Doctrine\Common\Collections\Collection;
 class User implements UserInterface
 {
 
-
-    /**
-     * Category constructor.
-     */
-    public function __construct()
-    {
-        $this->ordereditems = new ArrayCollection();
-        $this->shopcards = new ArrayCollection();
-    }
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy = "AUTO")
@@ -63,10 +53,18 @@ class User implements UserInterface
      */
     private $lastName;
 
-      /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="user", cascade={"persist", "remove"})
      */
     private $wishList;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userCart;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userOrder;
 
     /**
      * @return mixed
@@ -75,7 +73,6 @@ class User implements UserInterface
     {
         return $this->wishList;
     }
-
     /**
      * @param mixed $wishList
      */
@@ -83,7 +80,34 @@ class User implements UserInterface
     {
         $this->wishList = $wishList;
     }
-
+    /**
+     * @param mixed $userCart
+     */
+    public function setUserCart($userCart)
+    {
+        $this->userCart = $userCart;
+    }
+    /**
+     * @return mixed
+     */
+    public function getUserCart()
+    {
+        return $this->userCart;
+    }
+    /**
+     * @param mixed $userOrder
+     */
+    public function setUserOrder($userOrder)
+    {
+        $this->userOrder = $userOrder;
+    }
+    /**
+     * @return mixed
+     */
+    public function getUserOrder()
+    {
+        return $this->userOrder;
+    }
 
     public function getFullName()
     {

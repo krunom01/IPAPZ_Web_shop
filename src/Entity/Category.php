@@ -37,7 +37,7 @@ class Category
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId()
@@ -57,13 +57,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return ArrayCollection|Product[]
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
 
     public function __toString()
     {
@@ -71,7 +64,7 @@ class Category
     }
 
     /**
-     * @return int
+     * @return mixed
      */
 
     public function getCategories()

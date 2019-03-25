@@ -44,11 +44,6 @@ class Order
     private $state;
 
     /**
-     * @Doctrine\ORM\Mapping\OneToOne(targetEntity="Cart")
-     */
-    private $cart;
-
-    /**
      * @Doctrine\ORM\Mapping\Column(type="string", length=30)
      */
     private $type;
@@ -59,9 +54,9 @@ class Order
     private $orderedItems;
 
     /**
-     * @Doctrine\ORM\Mapping\Column(type="integer")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\User", inversedBy="userOrder")
      */
-    private $userId;
+    private $user;
 
     /**
      * @Doctrine\ORM\Mapping\Column(type="string", length=50)
@@ -128,18 +123,6 @@ class Order
         return $this;
     }
 
-    public function getCart(): ?int
-    {
-        return $this->cart;
-    }
-
-    public function setCart($cartId): self
-    {
-        $this->cart = $cartId;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
@@ -152,14 +135,14 @@ class Order
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUser(): ?int
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(int $userId): self
+    public function setUserId($user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }

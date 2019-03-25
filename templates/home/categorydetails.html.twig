@@ -106,10 +106,7 @@
                                 <div class="cart_container d-flex flex-row align-items-center justify-content-end">
 
 
-                                    <div class="cart_content">
-                                        <div class="cart_text"><a href="{{ path('shopcard_index') }}">Shop Cart</a></div>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +167,7 @@
                         <div class="shop_bar clearfix">
 
 
-                            Number of products: {{ products|length }}
+                            Number of products: {{ categoryProducts|length }}
 
 
 
@@ -181,19 +178,20 @@
 
 
                             <div class="product_grid_border"></div>
-                            {% for product in products %}
+                            {% for categoryProduct in categoryProducts %}
 
                                 <!-- Product Item -->
                                 <div class="product_item is_new">
                                     <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="../../../../../upload/image/{{ product.image }}" alt="{{ product.name }}"></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="../../../../../upload/image/{{ categoryProduct.product.image }}" alt="{{ categoryProduct.product.name }}"></div>
                                     <div class="product_content">
-                                        <div class="product_price">{{ product.price }} kn</div>
-                                        <div class="product_name"><div><a href="#" tabindex="0">{{ product.name }}</a></div></div>
+                                        <div class="product_price">{{ categoryProduct.product.price }} kn</div>
+                                        <div class="product_name"><div><a href="#" tabindex="0">{{ categoryProduct.product.name }}</a></div></div>
 
 
                                     </div>
-                                    <td><a href="{{ path('product_details', {id: product.id}) }}" class="btn btn-primary">Details</a></td>
+                                    <td><a href="{{ path('product_details',{id: categoryProduct.product.id, urlCustom: categoryProduct.product.urlCustom }) }}" class="btn btn-primary">Details</a></td>
+
                                 </div>
                             {% else %}
                                 <tr>
@@ -211,6 +209,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

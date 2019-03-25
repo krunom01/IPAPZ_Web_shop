@@ -22,9 +22,9 @@ class Cart
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userCart")
      */
-    private $userId;
+    private $user;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -48,12 +48,6 @@ class Cart
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Order")
-     *
-     */
-    private $order;
-
-    /**
      * @return ArrayCollection|CartItem[]
      */
     public function getCartItems()
@@ -74,14 +68,14 @@ class Cart
         return $this->id;
     }
 
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId($userId): self
+    public function setUser($user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
@@ -122,18 +116,4 @@ class Cart
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-    /**
-     * @param mixed $order
-     */
-    public function setOrder($order): void
-    {
-        $this->order = $order;
-    }
 }
