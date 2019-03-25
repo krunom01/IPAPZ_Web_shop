@@ -18,7 +18,7 @@ class AdminController extends AbstractController
 {
 
     /**
-     * @Symfony\Component\Routing\Annotation\Route("/admin", name="admin")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/", name="admin")
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index()

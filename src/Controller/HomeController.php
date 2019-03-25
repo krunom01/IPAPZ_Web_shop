@@ -315,7 +315,6 @@ class HomeController extends AbstractController
             }
         } if ($formOrder->isSubmitted() && $formOrder->isValid()) {
             $order = new Order();
-            $order->setCart($userCart);
             $order->setTotalPrice($userCart->getSubTotal());
             $order->setState($formOrder->get('state')->getData());
             $order->setType($formOrder->get('type')->getData());
@@ -333,11 +332,13 @@ class HomeController extends AbstractController
                 $itemsOrder->setUserId($user->getId());
                 $itemsOrder->setProductPrice($userCartItems->getProductPrice());
                 $itemsOrder->setProductQuantity($userCartItems->getProductQuantity());
-                $itemsOrder->setProductId($userCartItems->getProduct());
+                $itemsOrder->setProduct($userCartItems->getProduct());
                 $itemsOrder->setOrder($order);
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
             }
+            $entityManager->remove($userCart);
+            $entityManager->flush();
         } return $this->render(
             'home/newOrder.html.twig',
             [
