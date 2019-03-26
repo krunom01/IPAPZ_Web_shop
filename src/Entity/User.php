@@ -2,67 +2,67 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 /**
  * Class User
  *
- * @ORM\Entity()
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"},                              message="There is already an account with this email")
- * @ORM\HasLifecycleCallbacks()
+ * @Doctrine\ORM\Mapping\Entity()
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity(fields={"email"},
+ * message="There is already an account with this email")
+ * @Doctrine\ORM\Mapping\HasLifecycleCallbacks()
  * @package                                                     App\Entity
  */
 class User implements UserInterface
 {
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy = "AUTO")
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue(strategy = "AUTO")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Doctrine\ORM\Mapping\Column(type="string", length=180, unique=true)
+     * @Symfony\Component\Validator\Constraints\NotBlank()
+     * @Symfony\Component\Validator\Constraints\Email()
      */
     private $email;
     /**
-     * @ORM\Column(type="json")
+     * @Doctrine\ORM\Mapping\Column(type="json")
      */
     private $roles = [];
     /**
      * @var                       string The hashed password
-     * @ORM\Column(type="string")
+     * @Doctrine\ORM\Mapping\Column(type="string")
      */
     private $password;
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Doctrine\ORM\Mapping\Column(type="string")
+     * @Symfony\Component\Validator\Constraints\NotBlank()
      */
     private $firstName;
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Doctrine\ORM\Mapping\Column(type="string")
+     * @Symfony\Component\Validator\Constraints\NotBlank()
      */
     private $lastName;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Wishlist", mappedBy="user", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\Wishlist",
+     * mappedBy="user", cascade={"persist", "remove"})
      */
     private $wishList;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="user", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\Cart",
+     * mappedBy="user", cascade={"persist", "remove"})
      */
     private $userCart;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\Order",
+     * mappedBy="user", cascade={"persist", "remove"})
      */
     private $userOrder;
 
@@ -184,8 +184,7 @@ class User implements UserInterface
             $roles[] = 'ROLE_ADMIN';
         } else {
             $roles[] = 'ROLE_USER';
-        }
-        return array_unique($roles);
+        } return array_unique($roles);
     }
 
     public function setRoles(array $roles): self

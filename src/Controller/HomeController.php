@@ -6,7 +6,6 @@ use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Order;
 use App\Entity\OrderedItems;
-use App\Entity\ProductCategory;
 use App\Form\InsertCouponType;
 use App\Form\CartItemType;
 use App\Form\OrderFormType;

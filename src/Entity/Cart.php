@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CartRepository")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\CartRepository")
  */
 class Cart
 {
@@ -15,34 +14,35 @@ class Cart
         $this->cartItems = new ArrayCollection();
     }
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userCart")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\User", inversedBy="userCart")
      */
     private $user;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
      */
     private $subTotal;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
      */
     private $total;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="cart", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\CartItem",
+     * mappedBy="cart", cascade={"persist", "remove"})
      */
     private $cartItems;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $coupon;
 
@@ -58,10 +58,8 @@ class Cart
              * @var CartItem $prod
              */
             $cartItems[] = $prod->getProduct();
-        }
-        return $cartItems;
+        } return $cartItems;
     }
-
 
     public function getId()
     {

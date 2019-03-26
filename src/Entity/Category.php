@@ -3,35 +3,31 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class Category
- *
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
 class Category
 {
 
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50)
      */
 
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductCategory", mappedBy="category", cascade={"persist", "remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\ProductCategory",
+     * mappedBy="category", cascade={"persist", "remove"})
      */
     private $categories;
 
