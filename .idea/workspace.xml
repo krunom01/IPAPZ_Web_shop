@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac597815-00a9-4600-811f-55f009843a5e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/56af3bff-bfc4-4bcb-baf1-75d332c950a8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CartItemRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CartItemRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/556cd712-8eaa-4649-a24f-ae35954dead6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/556cd712-8eaa-4649-a24f-ae35954dead6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Order.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,95 +88,19 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        <entry file="das://556cd712-8eaa-4649-a24f-ae35954dead6/schema/test/table/order">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Cart.php">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/CartItem.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" selection-start-line="5" selection-end-line="6" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Coupon.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/CustomPage.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CategoryRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
-              <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CustomPageRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-              <folding>
-                <element signature="e#34#60#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Repository/OrderedItemsRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
-              <folding>
-                <element signature="e#34#62#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CouponRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-              <folding>
-                <element signature="e#34#56#0#PHP" expanded="true" />
-              </folding>
+              <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -251,8 +170,6 @@
         <option value="$PROJECT_DIR$/src/Entity/CartItem.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/56af3bff-bfc4-4bcb-baf1-75d332c950a8/console.sql" />
         <option value="$PROJECT_DIR$/.env.local" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/556cd712-8eaa-4649-a24f-ae35954dead6/console.sql" />
-        <option value="$PROJECT_DIR$/src/Entity/Order.php" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/templates/home/categorydetails.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
@@ -261,6 +178,8 @@
         <option value="$PROJECT_DIR$/src/Entity/Category.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Entity/Cart.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/556cd712-8eaa-4649-a24f-ae35954dead6/console.sql" />
+        <option value="$PROJECT_DIR$/src/Entity/Order.php" />
       </list>
     </option>
   </component>
@@ -544,12 +463,12 @@
       <workItem from="1553261903730" duration="1522000" />
       <workItem from="1553494616148" duration="24532000" />
       <workItem from="1553543938816" duration="8062000" />
-      <workItem from="1553581188556" duration="1134000" />
+      <workItem from="1553581188556" duration="1649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="407512000" />
+    <option name="totallyTimeSpent" value="408027000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -564,7 +483,7 @@
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.21664888" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.21664888" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info id="Favorites" order="2" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -577,13 +496,13 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286026" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50160086" side_tool="true" weight="0.28056768" />
       <window_info anchor="bottom" id="Database Console" order="12" sideWeight="0.4994664" weight="0.32751092" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2497332" />
-      <window_info anchor="right" id="Database" order="3" weight="0.16755603" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.16755603" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19743863" />
@@ -815,27 +734,6 @@
     <entry file="file://$PROJECT_DIR$/src/Repository/OrderRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/556cd712-8eaa-4649-a24f-ae35954dead6/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="32" selection-start-column="32" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://556cd712-8eaa-4649-a24f-ae35954dead6/schema/test/table/ordered_items">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://556cd712-8eaa-4649-a24f-ae35954dead6/schema/test/table/order">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-589">
@@ -893,27 +791,10 @@
     <entry file="file://$PROJECT_DIR$/templates/admin/allOrders.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
-          <folding>
-            <element signature="e#34#56#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -998,6 +879,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://556cd712-8eaa-4649-a24f-ae35954dead6/schema/test/table/ordered_items">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/556cd712-8eaa-4649-a24f-ae35954dead6/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1716">
+          <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
+          <folding>
+            <element signature="e#34#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://556cd712-8eaa-4649-a24f-ae35954dead6/schema/test/table/order">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
         </state>
       </provider>
     </entry>

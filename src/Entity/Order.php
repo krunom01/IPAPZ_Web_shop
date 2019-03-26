@@ -14,6 +14,7 @@ class Order
     public function __construct()
     {
         $this->orderedItems = new ArrayCollection();
+        $this->date = new \DateTime();
     }
     /**
      * @Doctrine\ORM\Mapping\Id()
@@ -64,6 +65,11 @@ class Order
     private $address;
 
     /**
+     * @Doctrine\ORM\Mapping\Column(type="datetime")
+     */
+    private $date;
+
+    /**
      * @return mixed $orderedItems
      */
     public function getOrderedItems()
@@ -104,7 +110,7 @@ class Order
         return $this->totalPrice;
     }
 
-    public function setTotalPrice(int $totalPrice): self
+    public function setTotalPrice($totalPrice): self
     {
         $this->totalPrice = $totalPrice;
 
@@ -155,6 +161,18 @@ class Order
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
