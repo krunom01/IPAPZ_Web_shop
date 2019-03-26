@@ -32,7 +32,6 @@
                         <td>{{ user.email }}</td>
                         <td><a href="{{ path('user_delete', {id: user.id}) }}" class="btn btn-danger">Delete</a></td>
                         <td><a href="{{ path('admin_user_edit', {id: user.id}) }}" class="btn btn-primary">Edit</a></td>
-                        <td><a href="{{ path('admin_user_order', {id: user.id}) }}" class="btn btn-primary">Orders</a></td>
                     </tr>
 
                 {% endfor %}

@@ -327,6 +327,7 @@ class HomeController extends AbstractController
             $order->setAddress($formOrder->get('address')->getData());
             $order->setUserMail($user->getEmail());
             $order->setUserName($user->getFullName());
+            $order->setStatus('new');
             $order->setUserId($user);
             $entityManager->persist($order);
             $entityManager->flush();

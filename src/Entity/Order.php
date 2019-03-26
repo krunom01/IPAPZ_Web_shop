@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
  * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\OrderRepository")
  * @Doctrine\ORM\Mapping\Table(name="`order`")
@@ -68,6 +67,16 @@ class Order
      * @Doctrine\ORM\Mapping\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @Doctrine\ORM\Mapping\Column(type="string", length=20)
+     */
+    private $status;
+
+    /**
+     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
+     */
+    private $pdf;
 
     /**
      * @return mixed $orderedItems
@@ -165,9 +174,10 @@ class Order
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate()
     {
-        return $this->date;
+        $newDate = $this->date->format('d-m-Y,H:m');
+        return $newDate;
     }
 
     public function setDate(\DateTimeInterface $date): self
@@ -176,4 +186,29 @@ class Order
 
         return $this;
     }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPdf(): ?int
+    {
+        return $this->pdf;
+    }
+
+    public function setPdf(?int $pdf): self
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
 }

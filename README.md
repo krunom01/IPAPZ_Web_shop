@@ -28,60 +28,23 @@ kreiran javni rest api za detalje o proizvodi preko sku. u url ide sku , a rezul
 
 kreiranom useru se salje email sa svim kreiranim podacima i forsira ga se na promjenu lozinke.
 
-categorija
-/**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="categories", fetch="EAGER")
-     * @ORM\JoinTable(
-     *     name="ab_category_2_product",
-     *     joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)}
-     * )
-     */
-    private $products;
-    
-    
     
     /**
-         * @return ArrayCollection
-         */
-        public function getProducts(): ArrayCollection
-        {
-            return $this->products;
-        }
-        /**
-         * @param ArrayCollection $products
-         */
-        public function setProducts(ArrayCollection $products): void
-        {
-            $this->products = $products;
-        }
-        
-        
-       **
-            * Product constructor.
-            */
-           public function __construct()
-           {
-               $this->comments = new ArrayCollection();
-               $this->categories = new ArrayCollection();
-           }
+        <form action="{{ path('order_index') }}" method="get">
+            <label for="email">Filter by email</label>
+            <input type="text" name="email">
+            <button type="submit">Find email</button>
+        </form>
+            <form action="{{ path('order_index') }}" method="get">
+                <label for="name">Filter by name</label>
+                <input type="text" name="name">
+                <button type="submit">Find by user first name</button>
+            </form>
+            <form action="{{ path('order_index') }}" method="get">
+                <label for="name">Filter by name</label>
+                <input type="date" name="dateStart">
+                <input type="date" name="dateEnd">
+                <button type="submit">Find by user first name</button>
+            </form>
 
-    /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
-     */
-    private $categories;
-
-
-**
-     * @return ArrayCollection
-     */
-    public function getCategories(): ArrayCollection
-    {
-        return $this->categories;
-    }
-    public function setCategories(Category $category)
-    {
-        $this->categories[] = $category;
-    }
+  

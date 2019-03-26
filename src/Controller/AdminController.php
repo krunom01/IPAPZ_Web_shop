@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Coupon;
+use App\Entity\Order;
 use App\Entity\User;
 use App\Form\CustomPageType;
 use App\Form\CouponFormType;
@@ -13,6 +14,9 @@ use App\Repository\CouponRepository;
 use App\Repository\CustomPageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserFormType;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends AbstractController
 {
@@ -88,17 +92,16 @@ class AdminController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
-    public function showUserOrder(
+    public function showOrder(
         $id,
         OrderRepository $orderRepository
     ) {
-        $userOrder = $orderRepository->findOneBy(['user' => $id]);
-        if ($userOrder) {
-            $items = $userOrder->getOrderedItems();
-        } else {
-            $items = 0;
-        } return $this->render(
-            'admin/orders.html.twig',
+        $userOrder = $orderRepository->findOneBy(['id' => $id]);
+
+        $items = $userOrder->getOrderedItems();
+
+        return $this->render(
+            'admin/orderDetails.html.twig',
             [
                 'title' => 'User Order',
                 'items' => $items,
@@ -106,7 +109,26 @@ class AdminController extends AbstractController
             ]
         );
     }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/orderUpdate/{id}", name ="admin_order_update")
+     * @param $id
+     * @param OrderRepository $orderRepository
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
 
+    public function updateOrder(
+        $id,
+        OrderRepository $orderRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        $userOrder = $orderRepository->findOneBy(['id' => $id]);
+        $userOrder->setStatus('paid');
+        $entityManager->persist($userOrder);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully updated Order!');
+        return $this->redirectToRoute('admin_orders');
+    }
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/categoryProducts/{id}", name ="admin_category_products")
@@ -226,7 +248,6 @@ class AdminController extends AbstractController
         $numbers = '0123456789';
         return substr(str_shuffle(str_repeat($numbers, $length)), 0, $length);
     }
-
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/coupons/delete/{id}", name="coupon_delete")
      * @param                               Coupon $coupon
@@ -239,5 +260,88 @@ class AdminController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', 'Successfully deleted!');
         return $this->redirectToRoute('admin_coupons');
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/orders", name ="admin_orders")
+     * @param  OrderRepository $orderRepository
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function adminOrders(
+        OrderRepository $orderRepository
+    ) {
+        return $this->render(
+            'admin/allOrders.html.twig',
+            [
+                'orders' => $orderRepository->findAll(),
+            ]
+        );
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/ordersPdf/{id}", name ="admin_orders_pdf")
+     * @param Order $order
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function createPdf(
+        Order $order,
+        EntityManagerInterface $entityManager
+    ) {
+
+        $pdf = new Options();
+        $pdf->set('defaultFont', 'Arial');
+        $domPdf = new Dompdf($pdf);
+        $items = $order->getOrderedItems();
+        $page = $this->renderView(
+            'admin/orderPDF.html.twig',
+            [
+                'userOrder' => $order,
+                'items' => $items
+            ]
+        );
+        $fileName = $order->getId().'.pdf';
+        $domPdf->loadHtml($page);
+        $domPdf->setPaper('A4', 'portrait');
+        $domPdf->render();
+        $output = $domPdf->output();
+        $dir = '../public/pdf/';
+        $path =  $dir . $fileName;
+        file_put_contents($path, $output);
+        $order->setPdf(1);
+        $entityManager->persist($order);
+        $entityManager->flush();
+
+        return $this->render(
+            'admin/orderPDF.html.twig',
+            [
+                'userOrder' => $order,
+                'items' => $items
+            ]
+        );
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/order/download/{file}",name="order_download")
+     * @param $file
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function downloadPdf($file)
+    {
+        $filePath = $this->getParameter('kernel.project_dir') . '/public/pdf/' . $file . '.pdf';
+        $response = new Response();
+        $response->headers->set('Content-type', 'application/octet-stream');
+        $response->headers->set(
+            'Content-Disposition',
+            sprintf('attachment; filename="%s"', $file)
+        );
+        $response->setContent(file_get_contents($filePath));
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Transfer-Encoding', 'binary');
+        $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('Expires', '0');
+        return $response;
     }
 }

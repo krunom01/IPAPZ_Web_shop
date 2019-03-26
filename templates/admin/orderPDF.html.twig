@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <title>Order PDF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+{% block body %}
+<h4>Name:</h4>
+<p>{{ userOrder.userName }}</p><br>
+<h4>Country:</h4>
+<p>{{ userOrder.state }}</p><br>
+<h4>Address:</h4>
+<p>{{ userOrder.address }}</p><br>
+<h4>Date:</h4>
+<p>{{ userOrder.date }}</p><br>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Product Name </th>
+        <th>Product price</th>
+        <th>Product quantity</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.productQuantity }}</td>
+
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">no records found</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+<h4>Total price:</h4>
+<p>{{ userOrder.totalPrice }} €</p><br>
+
+
+{% endblock %}

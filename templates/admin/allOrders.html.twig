@@ -1,46 +1,49 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block content %}
-<form action="{{ path('order_index') }}" method="get">
-    <label for="email">Filter by email</label>
-    <input type="text" name="email">
-    <button type="submit">Find email</button>
-</form>
-    <form action="{{ path('order_index') }}" method="get">
-        <label for="name">Filter by name</label>
-        <input type="text" name="name">
-        <button type="submit">Find by user first name</button>
-    </form>
-    <form action="{{ path('order_index') }}" method="get">
-        <label for="name">Filter by name</label>
-        <input type="date" name="dateStart">
-        <input type="date" name="dateEnd">
-        <button type="submit">Find by user first name</button>
-    </form>
 
-
+    {% for message in app.flashes('success') %}
+        <div class="row mt-3">
+            <div class="col">
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     <table class="table">
     <thead>
     <tr>
         <th>User name</th>
         <th>User email</th>
-        <th>Phone</th>
-        <th>city</th>
-        <th>adress</th>
+        <th>Total price</th>
+        <th>Adress</th>
         <th>status</th>
-
+        <th>payment method</th>
+        <th>Date</th>
+        <th>details</th>
+        <th>Get PDF</th>
+        <th>Update order</th>
     </tr>
     </thead>
     <tbody>
 {% for order in orders %}
     <tr>
-        <td>{{ order.user.firstName }} {{ order.user.lastName }}</td>
-        <td>{{ order.user.email }}</td>
-        <td>{{ order.phone }}</td>
-        <td>{{ order.city }}</td>
-        <td>{{ order.adress }}</td>
-        <td>{{ order.paid }}</td>
+        <td>{{ order.userName }}</td>
+        <td>{{ order.userMail }}</td>
+        <td>{{ order.totalPrice }}</td>
+        <td>{{ order.address }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.type }}</td>
+        <td>{{ order.date }}</td>
+        <td><a href="{{ path('admin_user_order', {id: order.id}) }}" class="btn btn-primary">Orders</a></td>
+        {% if order.pdf == 1 %}
+        <td><a href="{{ path('order_download', {file: order.id }) }}" class="btn btn-primary">Download PDF</a></td>
+        {% endif %}
+        {% if order.pdf == 1 and order.status == 'new' %}
 
+            <td><a href="{{ path('admin_order_update', {id: order.id }) }}" class="btn btn-primary">Update Order</a></td>
+        {% endif %}
     </tr>
 {% else %}
     <tr>
@@ -49,9 +52,7 @@
 {% endfor %}
     </tbody>
     </table>
-    <div class="navigation">
-        {{ knp_pagination_render(orders) }}
-    </div>
+
 
 {% endblock %}
 
