@@ -12,16 +12,7 @@ class InsertCouponType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add(
-                'code',
-                TextareaType::class,
-                [
-                    'label' => 'coupon Code',
-
-
-                ]
-            );
+        $builder->add('code');
     }
 
     public function configureOptions(OptionsResolver $resolver)

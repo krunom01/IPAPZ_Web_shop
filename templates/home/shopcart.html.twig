@@ -1,15 +1,15 @@
+{% extends 'home/base.html.twig' %}
 
 
 
-
-
-
-    <h1>Shopcart index</h1>
+{% block content %}
+<h4>Shopcart items</h4>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Name</th>
+            <th>Product name</th>
+            <th>Product image</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -37,4 +37,4 @@
         <button class="btn" type="submit">Order</button>
     </a>
     {% endif %}
-
+{% endblock %}

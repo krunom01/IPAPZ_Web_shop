@@ -1,4 +1,5 @@
-
+{% extends 'home/base.html.twig' %}
+{% block content %}
 Total price : {{ total }} kn
 
 
@@ -23,3 +24,4 @@ Total price : {{ total }} kn
     {{ form_widget(formCoupon) }}
 <button class="btn">{{ button_label|default('Order') }}</button>
 {{ form_end(formCoupon) }}
+{% endblock %}
