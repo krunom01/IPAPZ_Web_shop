@@ -19,32 +19,40 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-    // /**
-    //  * @return Order[] Returns an array of Order objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByEmail($email)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
+            ->select('o')
+            ->where('o.userMail = :email')
+            ->orderBy('o.date', 'ASC')
             ->setMaxResults(10)
+            ->setParameter(':email', $email)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Order
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('o')
+            ->innerJoin('o.user', 'user')
+            ->where('user.firstName = :name')
+            ->orderBy('o.date', 'ASC')
+            ->setMaxResults(10)
+            ->setParameter(':name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
+    public function getRange($start, $end)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date BETWEEN :from AND :to')
+            ->setParameter('from', $start)
+            ->setParameter('to', $end . ' 23:59:59.993')
+            ->setMaxResults(10)
+            ->orderBy('e.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

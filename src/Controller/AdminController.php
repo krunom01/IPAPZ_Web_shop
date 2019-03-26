@@ -271,10 +271,24 @@ class AdminController extends AbstractController
     public function adminOrders(
         OrderRepository $orderRepository
     ) {
+        if (isset($_GET['email'])) {
+                $email = $_GET['email'];
+                $orders = $orderRepository->findByEmail($email);
+        } elseif (isset($_GET['name'])) {
+                $orders = $orderRepository->findByName($_GET['name']);
+        } elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd'])) {
+                $orders =$orderRepository->getRange($_GET['dateStart'], $_GET['dateEnd']);
+        } elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd'])) {
+            $orders = $orderRepository->getRange($_GET['dateStart'], $_GET['dateEnd']);
+        } else {
+            $orders = $orderRepository->findAll();
+        };
+
+
         return $this->render(
             'admin/allOrders.html.twig',
             [
-                'orders' => $orderRepository->findAll(),
+                'orders' => $orders,
             ]
         );
     }
