@@ -82,6 +82,7 @@ class UserController extends AbstractController
             'security/register.html.twig',
             [
                 'registrationForm' => $form->createView(),
+
             ]
         );
     }

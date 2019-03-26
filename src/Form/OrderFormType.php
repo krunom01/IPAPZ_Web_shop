@@ -13,13 +13,16 @@ class OrderFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, array(
+            ->add(
+                'type',
+                ChoiceType::class,
+                array(
                 'choices' => array(
                     'invoice' => 'invoice',
                     'paypal' => 'paypal',
                 ),
-                'expanded' => true,
-            ))
+                'expanded' => true,)
+            )
             ->add('state')
             ->add('address');
     }

@@ -345,6 +345,8 @@ class HomeController extends AbstractController
                 $entityManager->flush();
             } $entityManager->remove($userCart);
               $entityManager->flush();
+            $this->addFlash('success', 'You made new Order!');
+            return $this->redirectToRoute('home');
         } return $this->render(
             'home/newOrder.html.twig',
             [
