@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b72b5720f8f6eaefaadea21bd3c9c49d",
+    "content-hash": "9bc59e1e61d34208e98aa5f52aa38fc0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1255,6 +1255,70 @@
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
             "time": "2018-12-14T02:40:31+00:00"
+        },
+        {
+            "name": "helios-ag/fm-tinymce-bundle",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/helios-ag/FMTinyMCEBundle.git",
+                "reference": "583dff8fea59e6788704d8acb98112937f025291"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/helios-ag/FMTinyMCEBundle/zipball/583dff8fea59e6788704d8acb98112937f025291",
+                "reference": "583dff8fea59e6788704d8acb98112937f025291",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "symfony/form": "^3.4|^4.0",
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/twig-bundle": "^3.4|^4.0",
+                "tinymce/tinymce": "~4"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-config-test": "^3.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^2.0",
+                "symfony/phpunit-bridge": "^4.0"
+            },
+            "suggest": {
+                "helios-ag/fm-elfinder-bundle": "Elfinder bundle, file manager",
+                "helios-ag/fm-rfm-bundle": "Richfilemanager bundle, file manager"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FM\\TinyMCEBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Al Ganiev",
+                    "email": "helios.ag@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/helios-ag/FMTinyMCEBundle/contributors"
+                }
+            ],
+            "description": "TinyMCE bundle, adds TinyMCE editor to your Symfony project",
+            "homepage": "https://github.com/helios-ag/FMTinyMCEBundle",
+            "keywords": [
+                "file manager",
+                "tinymce",
+                "wisywig"
+            ],
+            "time": "2018-07-04T06:17:58+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -4632,6 +4696,37 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2019-02-23T15:17:42+00:00"
+        },
+        {
+            "name": "tinymce/tinymce",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinymce/tinymce-dist.git",
+                "reference": "c870c27fe6e11bdcf07834ae8a7aee993fd5887b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/c870c27fe6e11bdcf07834ae8a7aee993fd5887b",
+                "reference": "c870c27fe6e11bdcf07834ae8a7aee993fd5887b",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "description": "Web based JavaScript HTML WYSIWYG editor control.",
+            "homepage": "http://www.tinymce.com",
+            "keywords": [
+                "editor",
+                "html",
+                "javascript",
+                "richtext",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2014-05-06T10:58:13+00:00"
         },
         {
             "name": "twig/twig",

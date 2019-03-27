@@ -98,6 +98,9 @@
     "gitonomy/gitlib": {
         "version": "v1.0.4"
     },
+    "helios-ag/fm-tinymce-bundle": {
+        "version": "1.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -403,6 +406,9 @@
     },
     "symfony/yaml": {
         "version": "v4.2.3"
+    },
+    "tinymce/tinymce": {
+        "version": "4.9.4"
     },
     "twig/twig": {
         "version": "v2.6.2"

@@ -8,126 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-    <link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="styles/shop_styles.css">
-    <link rel="stylesheet" type="text/css" href="styles/shop_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('styles/bootstrap4/bootstrap.min.css')) }}">
+    <link href="{{ absolute_url(asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')) }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')) }}">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')) }}">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('plugins/OwlCarousel2-2.2.1/animate.css')) }}">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.css')) }}">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('styles/shop_styles.css')) }}">
+    <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('styles/shop_responsive.css')) }}">
     {% endblock %}
 </head>
-<div class="super_container">
-    {% for message in app.flashes('success') %}
-        <div class="row mt-3">
-            <div class="col">
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    <!-- Header -->
-    <header class="header">
+{% block header %}
 
-        <!-- Top Bar -->
+{% endblock %}
 
-        <div class="top_bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col d-flex flex-row">
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>098 94 88 312</div>
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:krunom@gmail.com">krunom92@gmail.com</a></div>
-                        <div class="top_bar_content ml-auto">
+{% block content %}
 
-                            <div class="top_bar_user">
-                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
-                                {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
-                                    <div><a href="{{ path('app_logout') }}">My wish list</a></div>
-                                    <div><a href="{{ path('app_logout') }}">Logout</a></div>
-                                {% else %}
-                                    <div><a href="{{ path('app_register') }}">Register</a></div>
-                                    <div><a href="{{ path('app_login') }}">Sign in</a></div>
-                                {% endif %}
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <div><a href="{{ path('admin') }}">Admin panel</a></div>
+{% endblock %}
 
-                                {% endif %}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Header Main -->
-
-        <div class="header_main">
-            <div class="container">
-                <div class="row">
-
-                    <!-- Logo -->
-                    <div class="col-lg-2 col-sm-3 col-3 order-1">
-                        <div class="logo_container">
-
-                            <div class="logo"><a href="{{ path('home') }}">WebShop</a></div>
-                        </div>
-                    </div>
-
-                    <!-- Search -->
-                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
-                        <div class="header_search">
-                            <div class="header_search_content">
-                                <div class="header_search_form_container">
-                                    <form action="#" class="header_search_form clearfix">
-
-                                        <div class="custom_dropdown">
-                                            <div class="custom_dropdown_list">
-                                                <span class="custom_dropdown_placeholder clc"></span>
-                                                <i class="fas fa-chevron-down"></i>
-                                                <ul class="custom_list clc">
-
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Wishlist -->
-                    <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
-                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-
-
-                            <!-- Cart -->
-                            <div class="cart">
-                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-
-
-                                    <div class="cart_content">
-                                        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
-                                        <div class="cart_text"><a href="{{ path('shopCart') }}">Shop Cart</a></div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-        {% block content %}
-
-
-        {% endblock %}
-
-    {% block footer %}
+{% block footer %}
     <!-- Footer -->
 
     <footer class="footer">
@@ -219,10 +118,10 @@
                         </div>
                         <div class="logos ml-sm-auto">
                             <ul class="logos_list">
-                                <li><a href="#"><img src="images/logos_1.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/logos_2.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/logos_3.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/logos_4.png" alt=""></a></li>
+                                <li><a href="#"><img src="{{ absolute_url(asset('images/logos_1.png')) }}" alt=""></a></li>
+                                <li><a href="#"><img src="{{ absolute_url(asset('images/logos_2.png')) }}" alt=""></a></li>
+                                <li><a href="#"><img src="{{ absolute_url(asset('images/logos_3.png')) }}" alt=""></a></li>
+                                <li><a href="#"><img src="{{ absolute_url(asset('images/logos_4.png')) }}" alt=""></a></li>
                             </ul>
                         </div>
                     </div>
@@ -230,23 +129,23 @@
             </div>
         </div>
     </div>
-</div>
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/shop_custom.js"></script>
-</body>
+
+<script src="{{ absolute_url(asset('js/jquery-3.3.1.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('styles/bootstrap4/popper.js')) }}"></script>
+<script src="{{ absolute_url(asset('styles/bootstrap4/bootstrap.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/greensock/TweenMax.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/greensock/TimelineMax.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/scrollmagic/ScrollMagic.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/greensock/animation.gsap.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/greensock/ScrollToPlugin.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/easing/easing.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/Isotope/isotope.pkgd.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.js')) }}"></script>
+<script src="{{ absolute_url(asset('plugins/parallax-js-master/parallax.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('js/shop_custom.js')) }}"></script>
+
 
 </html>
-    {% endblock %}
+{% endblock %}

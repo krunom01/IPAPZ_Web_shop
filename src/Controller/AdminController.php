@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Coupon;
+use App\Entity\CustomPage;
 use App\Entity\Order;
 use App\Entity\User;
 use App\Form\CustomPageType;
@@ -177,7 +178,6 @@ class AdminController extends AbstractController
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/customPages/new", name ="customPage_new")
-     * @param  $customPageRepository CustomPageRepository
      * @param  EntityManagerInterface $entityManager
      * @param  Request $request
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
@@ -185,8 +185,7 @@ class AdminController extends AbstractController
 
     public function customPagesNew(
         Request $request,
-        EntityManagerInterface $entityManager,
-        CustomPageRepository $customPageRepository
+        EntityManagerInterface $entityManager
     ) {
         $form = $this->createForm(CustomPageType::class);
         $form->handleRequest($request);
@@ -203,11 +202,62 @@ class AdminController extends AbstractController
 
 
         return $this->render(
-            'admin/customPagesNew.html.twig',
+            'admin/newCustomPage.html.twig',
             [
                 'form' => $form->createView(),
             ]
         );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/customPages/{id}", name ="customPage_edit")
+     * @param CustomPage $customPage
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function customPageEdit(
+        CustomPage $customPage,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ) {
+
+
+        $form = $this->createForm(CustomPageType::class, $customPage);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $customPage = $form->getData();
+            $entityManager->persist($customPage);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully edited!');
+            return $this->redirectToRoute('admin_custom_pages');
+        }
+
+        return $this->render(
+            'admin/editCustomPage.html.twig',
+            [
+
+                'form' => $form->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/customPageDelete/{id}", name ="customPage_delete")
+     * @param CustomPage $customPage
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function customPageDelete(
+        CustomPage $customPage,
+        EntityManagerInterface $entityManager
+    ) {
+
+
+            $entityManager->remove($customPage);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully deleted custom page!');
+            return $this->redirectToRoute('admin_custom_pages');
     }
 
     /**

@@ -6,6 +6,7 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "dompdf/dompdf": "^0.8.3",
+    "helios-ag/fm-tinymce-bundle": "^1.0",
     "knplabs/knp-paginator-bundle": "^2.8",
     "sensio/framework-extra-bundle": "^5.2",
     "substacks/simple-php-coupon-code-generator": "^1.0",
@@ -24,7 +25,8 @@
     "symfony/translation": "4.2.*",
     "symfony/twig-bundle": "4.2.*",
     "symfony/validator": "4.2.*",
-    "symfony/yaml": "4.2.*"
+    "symfony/yaml": "4.2.*",
+    "tinymce/tinymce": "4"
   },
   "config": {
     "preferred-install": {

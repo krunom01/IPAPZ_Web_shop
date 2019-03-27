@@ -1,0 +1,215 @@
+{% extends 'home/base.html.twig' %}
+
+{% block header %}
+<div class="super_container">
+    {% for message in app.flashes('success') %}
+        <div class="row mt-3">
+            <div class="col">
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <!-- Header -->
+    <header class="header">
+
+        <!-- Top Bar -->
+
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex flex-row">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Informations
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            {% for customPage in customPages %}
+                                                <a class="dropdown-item" href="{{ path('customPage', {'customPage': customPage.customUrl}) }}">{{ customPage.customUrl }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+
+                        <div class="top_bar_content ml-auto">
+
+                            <div class="top_bar_user">
+                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
+                                {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
+                                    <div><a href="{{ path('app_logout') }}">My wish list</a></div>
+                                    <div><a href="{{ path('app_logout') }}">Logout</a></div>
+                                {% else %}
+                                    <div><a href="{{ path('app_register') }}">Register</a></div>
+                                    <div><a href="{{ path('app_login') }}">Sign in</a></div>
+                                {% endif %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <div><a href="{{ path('admin') }}">Admin panel</a></div>
+
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Main -->
+
+        <div class="header_main">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Logo -->
+                    <div class="col-lg-2 col-sm-3 col-3 order-1">
+                        <div class="logo_container">
+
+                            <div class="logo"><a href="{{ path('home') }}">WebShop</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                        <div class="header_search">
+                            <div class="header_search_content">
+                                <div class="header_search_form_container">
+                                    <form action="#" class="header_search_form clearfix">
+
+                                        <div class="custom_dropdown">
+                                            <div class="custom_dropdown_list">
+                                                <span class="custom_dropdown_placeholder clc"></span>
+                                                <i class="fas fa-chevron-down"></i>
+                                                <ul class="custom_list clc">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+
+
+                            <!-- Cart -->
+                            <div class="cart">
+                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+
+
+                                    <div class="cart_content">
+                                        {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
+                                            <div class="cart_text"><a href="{{ path('shopCart') }}">Shop Cart</a></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
+        <div class="home_overlay"></div>
+        <div class="home_content d-flex flex-column align-items-center justify-content-center">
+            <h2 class="home_title">Sports</h2>
+        </div>
+    </div>
+
+    <!-- Shop -->
+
+    <div class="shop">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+
+                    <!-- Shop Sidebar -->
+                    <div class="shop_sidebar">
+                        <div class="sidebar_section">
+                            <div class="sidebar_title">Categories</div>
+                            <ul class="sidebar_categories">
+                                {% for category in categories %}
+
+                                    <li><a href="{{ path('category_details', {id: category.id}) }}">{{ category.name }}</a></li>
+
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <!-- Shop Content -->
+
+                    <div class="shop_content">
+                        <div class="shop_bar clearfix">
+
+
+                            Number of products: {{ pagination|length }}
+
+
+
+                        </div>
+
+                        <div class="product_grid">
+
+
+
+                            <div class="product_grid_border"></div>
+                            <div class="container"><br />
+                                {% for product in pagination %}
+
+                                    <!-- Product Item -->
+                                    <div class="product_item is_new">
+                                        <div class="product_border"></div>
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="../../../../../upload/image/{{ product.image }}" alt="{{ product.name }}"></div>
+                                        <div class="product_content">
+                                            <div class="product_price">{{ product.price }} kn</div>
+                                            <div class="product_name"><div><a href="#" tabindex="0">{{ product.name }}</a></div></div>
+
+
+                                        </div>
+                                        <td><a href="{{ path('product_details',{id: product.id, urlCustom: product.urlCustom }) }}" class="btn btn-primary">Details</a></td>
+
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

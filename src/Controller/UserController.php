@@ -26,7 +26,7 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Symfony\Component\Routing\Annotation\Route("/login", name="app_login")
+     * @Symfony\Component\Routing\Annotation\Route("/login/", name="app_login")
      * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("not   is_granted('ROLE_USER')")
      * @param           AuthenticationUtils $authenticationUtils
      * @return          Response

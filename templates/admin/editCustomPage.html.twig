@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button  class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
+
+  {% block javascripts %}
+      <script src="{{ absolute_url(asset('tinymce/tinymce.min.js')) }}"></script>
+      <script src="{{ absolute_url(asset('tinymce/tinymce.js')) }}"></script>
+
+  {% endblock %}

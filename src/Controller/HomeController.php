@@ -12,6 +12,7 @@ use App\Form\OrderFormType;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CouponRepository;
+use App\Repository\CustomPageRepository;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\WishlistRepository;
 use App\Repository\CartRepository;
@@ -27,6 +28,7 @@ class HomeController extends AbstractController
      * @Symfony\Component\Routing\Annotation\Route("/", name="home")
      * @param      CategoryRepository $categoryRepository
      * @param      ProductRepository $productRepository
+     * @param      CustomPageRepository $customPageRepository
      * @param      PaginatorInterface $paginator
      * @param      Request $request
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
@@ -35,6 +37,7 @@ class HomeController extends AbstractController
         Request $request,
         PaginatorInterface $paginator,
         CategoryRepository $categoryRepository,
+        CustomPageRepository $customPageRepository,
         ProductRepository $productRepository
     ) {
         $categories = $categoryRepository->findAll();
@@ -45,10 +48,11 @@ class HomeController extends AbstractController
             10/*limit per page*/
         );
         return $this->render(
-            'home/index.html.twig',
+            'home/home.html.twig',
             [
                 'title' => 'Sport webshop',
                 'categories' => $categories,
+                'customPages' => $customPageRepository->findAll(),
                 'pagination' => $pagination,
             ]
         );
@@ -80,7 +84,7 @@ class HomeController extends AbstractController
         $wishListProduct = $wishListRepository->findOneBy(
             [
                 'product' => $product,
-                'user' => $user->getId()
+
             ]
         );
 
@@ -355,6 +359,26 @@ class HomeController extends AbstractController
                 'form' => $form->createView(),
                 'coupon' => $userCart->getCoupon(),
                 'formCoupon' => $formOrder->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/cms/{customPage}/", name="customPage", methods={"GET"})
+     * @param CustomPageRepository $customPageRepository
+     * @param $customPage
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function showCustomPage(
+        CustomPageRepository $customPageRepository,
+        $customPage
+    ) {
+
+        $page = $customPageRepository->findOneBy(['customUrl' => $customPage]);
+
+        return $this->render(
+            'home/customPage.html.twig',
+            [
+                'page' => $page
             ]
         );
     }

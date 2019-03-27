@@ -17,11 +17,9 @@ class CustomPageType extends AbstractType
                 'content',
                 TextareaType::class,
                 [
-                    'label' => 'content',
+                    'label' => 'page Content',
+                    'attr' => array('rows' => '30'),
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ]
                 ]
             )
             ->add('customUrl');
