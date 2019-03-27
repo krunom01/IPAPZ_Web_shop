@@ -6,9 +6,12 @@ use App\Entity\Coupon;
 use App\Entity\CustomPage;
 use App\Entity\Order;
 use App\Entity\User;
+use App\Entity\PaymentType;
 use App\Form\CustomPageType;
 use App\Form\CouponFormType;
+use App\Form\PaymentTypeFormType;
 use App\Repository\OrderRepository;
+use App\Repository\PaymentTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CouponRepository;
@@ -407,5 +410,118 @@ class AdminController extends AbstractController
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', '0');
         return $response;
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/payments", name="admin_payments")
+     * @param PaymentTypeRepository $paymentTypeRepository
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function payments(
+        PaymentTypeRepository $paymentTypeRepository
+    ) {
+
+        return $this->render(
+            'admin/paymentType.html.twig',
+            [
+                'payments' => $paymentTypeRepository->findAll()
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/newPaymentType", name="admin_newPayments")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function newPayment(
+        EntityManagerInterface $entityManager,
+        Request $request
+    ) {
+
+        $paymentType = new PaymentType();
+        $form = $this->createForm(PaymentTypeFormType::class, $paymentType);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($paymentType);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully added new payment type!');
+            return $this->redirectToRoute('admin_payments');
+        }
+
+        return $this->render(
+            'admin/editCustomPage.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/editPaymentType/{id}", name="admin_editPayment")
+     * @param Request $request
+     * @param PaymentType $paymentType
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editPayment(
+        EntityManagerInterface $entityManager,
+        Request $request,
+        PaymentType $paymentType
+    ) {
+
+        $form = $this->createForm(PaymentTypeFormType::class, $paymentType);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($paymentType);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully updated payment type!');
+            return $this->redirectToRoute('admin_payments');
+        }
+
+        return $this->render(
+            'admin/editCustomPage.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/deletePaymentType/{id}", name="admin_deletePayment")
+     * @param PaymentType $paymentType
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deletePayment(
+        EntityManagerInterface $entityManager,
+        PaymentType $paymentType
+    ) {
+            $entityManager->remove($paymentType);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully deleted payment type!');
+            return $this->redirectToRoute('admin_payments');
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/updatePaymentVisibility/{id}", name="admin_updatePayment")
+     * @param PaymentType $paymentType
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function updatePayment(
+        EntityManagerInterface $entityManager,
+        PaymentType $paymentType
+    ) {
+        if ($paymentType->getVisibility() == true) {
+            $paymentType->setVisibility(false);
+            $entityManager->persist($paymentType);
+            $entityManager->flush();
+        } else {
+            $paymentType->setVisibility(true);
+            $entityManager->persist($paymentType);
+            $entityManager->flush();
+        }
+
+        $this->addFlash('success', 'Successfully updated payment type visibility!');
+        return $this->redirectToRoute('admin_payments');
     }
 }

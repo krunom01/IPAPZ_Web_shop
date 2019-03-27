@@ -1,8 +1,5 @@
 {% extends 'home/base.html.twig' %}
 {% block content %}
-Total price : {{ total }} kn
-
-
 
 {% for message in app.flashes('success') %}
     <div class="row mt-3">
@@ -24,4 +21,6 @@ Total price : {{ total }} kn
     {{ form_widget(formCoupon) }}
 <button class="btn">{{ button_label|default('Order') }}</button>
 {{ form_end(formCoupon) }}
+
+    Total price : {{ total }} kn
 {% endblock %}
