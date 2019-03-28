@@ -2,13 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PaymentTypeRepository")
- * @UniqueEntity(fields={"type"},                                message="There is already an payment with this type")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\PaymentTypeRepository")
+ * @Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity(fields={"type"},
+ * message="There is already an payment method with this type")
  */
 class PaymentType
 {
@@ -17,20 +14,20 @@ class PaymentType
         $this->visibility = true;
     }
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
-     * @Assert\NotBlank(message="insert payment type")
+     * @Doctrine\ORM\Mapping\Column(type="string", length=30)
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert payment type")
      */
     private $type;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @Doctrine\ORM\Mapping\Column(type="boolean")
      */
     private $visibility;
 

@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    Default value for Shipping price is 10.
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button  class="btn">{{ button_label|default('Insert new Country') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}

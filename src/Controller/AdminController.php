@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CountryShipping;
 use App\Entity\Coupon;
 use App\Entity\CustomPage;
 use App\Entity\Order;
@@ -9,9 +10,12 @@ use App\Entity\User;
 use App\Entity\PaymentType;
 use App\Form\CustomPageType;
 use App\Form\CouponFormType;
+use App\Form\ImportShippingCSVType;
 use App\Form\PaymentTypeFormType;
+use App\Form\ShippingCountryType;
 use App\Repository\OrderRepository;
 use App\Repository\PaymentTypeRepository;
+use App\Repository\CountryShippingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CouponRepository;
@@ -21,6 +25,7 @@ use App\Form\UserFormType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\HttpFoundation\Response;
+use League\Csv\Reader;
 
 class AdminController extends AbstractController
 {
@@ -523,5 +528,155 @@ class AdminController extends AbstractController
 
         $this->addFlash('success', 'Successfully updated payment type visibility!');
         return $this->redirectToRoute('admin_payments');
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/shippingCSV", name="admin_csv")
+     * @param Request $request
+     * @param CountryShippingRepository $countryRepository
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function newCsv(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        CountryShippingRepository $countryRepository
+    ) {
+        $formCsv = $this->createForm(ImportShippingCSVType::class);
+        $formCsv->handleRequest($request);
+        if ($this->isGranted('ROLE_ADMIN') && $formCsv->isSubmitted() && $formCsv->isValid()) {
+            $csvFile = $formCsv->get('file')->getData();
+            $ext = $csvFile->getClientOriginalExtension();
+            if ($ext === "csv") {
+                $path = $csvFile->getPathName();
+                $reader = Reader::createFromPath($path);
+                $reader->setHeaderOffset(0);
+                $records = $reader->getRecords();
+                $header = $reader->getHeader();
+                $values = array( "country", "code", "price");
+                $result = array_diff($header, $values);
+                if (empty($result)) {
+                    foreach ($records as $rec) {
+                        $existCountry = $countryRepository->findOneBy(['country' => $rec['country']]);
+                        if (!$existCountry) {
+                            $newShipping = new CountryShipping();
+                            $newShipping->setCountry($rec['country']);
+                            $newShipping->setCountryCode($rec['code']);
+                            $newShipping->setShippingPrice($rec['price']);
+                            $entityManager->persist($newShipping);
+                            $entityManager->flush();
+                        }
+                    }
+                } else {
+                    $this->addFlash('success', 'please insert CSV file with country, code and price!');
+                }
+            } else {
+                $this->addFlash('success', 'please insert CSV file!');
+            }
+        }
+
+        return $this->render(
+            'admin/newCSV.html.twig',
+            [
+                'form' => $formCsv->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/newShippingCountry", name="admin_newShippingConutry")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function newShippingCountry(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ) {
+        $newCounutry = new CountryShipping();
+        $form = $this->createForm(ShippingCountryType::class, $newCounutry);
+        $form->handleRequest($request);
+        if ($this->isGranted('ROLE_ADMIN') && $form->isSubmitted() && $form->isValid()) {
+            $nullPrice = $form->get('shippingPrice')->getData();
+            if ($nullPrice == null) {
+                $newCounutry->setShippingPrice(10);
+            }
+            $entityManager->persist($newCounutry);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully added new Country');
+            return $this->redirectToRoute('admin_ShippingCountries');
+        }
+
+        return $this->render(
+            'admin/newCountry.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/ShippingCountries", name="admin_ShippingCountries")
+     * @param CountryShippingRepository $countryRepository
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+
+    public function shippingCountries(
+        CountryShippingRepository $countryRepository
+    ) {
+
+        return $this->render(
+            'admin/shippingCountries.html.twig',
+            [
+                'countries' => $countryRepository->findAll(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/deleteCountry/{id}", name="admin_deleteCountry")
+     * @param CountryShipping $countryShipping
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteCountry(
+        EntityManagerInterface $entityManager,
+        CountryShipping $countryShipping
+    ) {
+        $entityManager->remove($countryShipping);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully deleted country!');
+        return $this->redirectToRoute('admin_ShippingCountries');
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/editCountry/{id}", name="admin_editCountry")
+     * @param Request $request
+     * @param CountryShipping $countryShipping
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editCountry(
+        EntityManagerInterface $entityManager,
+        Request $request,
+        CountryShipping $countryShipping
+    ) {
+
+        $form = $this->createForm(ShippingCountryType::class, $countryShipping);
+        $form->handleRequest($request);
+        if ($this->isGranted('ROLE_ADMIN') && $form->isSubmitted() && $form->isValid()) {
+            $nullPrice = $form->get('shippingPrice')->getData();
+            if ($nullPrice == null) {
+                $countryShipping->setShippingPrice(10);
+            }
+            $entityManager->persist($countryShipping);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully added new Country');
+            return $this->redirectToRoute('admin_ShippingCountries');
+        }
+
+        return $this->render(
+            'admin/editCountry.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 }
