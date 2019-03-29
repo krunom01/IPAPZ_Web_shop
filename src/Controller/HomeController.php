@@ -360,8 +360,7 @@ class HomeController extends AbstractController
         if ($userCart == null) {
             $this->addFlash('success', 'Add products in shopcart and set your address');
             return $this->redirectToRoute('home');
-        }
-        if (empty($userCart->getSubTotal()) or empty($userCart->getAddress())) {
+        } if (empty($userCart->getSubTotal()) or empty($userCart->getAddress())) {
             $this->addFlash('success', 'Add products in shopcart and set your address');
             return $this->redirectToRoute('home');
         } $form = $this->createForm(InsertCouponType::class);

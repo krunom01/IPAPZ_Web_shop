@@ -26,7 +26,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\HttpFoundation\Response;
 use League\Csv\Reader;
-
+use Knp\Component\Pager\PaginatorInterface;
 
 class AdminController extends AbstractController
 {
@@ -48,16 +48,26 @@ class AdminController extends AbstractController
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/users", name="users")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function users()
-    {
+    public function users(
+        PaginatorInterface $paginator,
+        Request $request
+    ) {
+
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $pagination = $paginator->paginate(
+            $users, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
         return $this->render(
             'admin/users.html.twig',
             [
                 'title' => 'User list',
-                'users' => $users,
+                'users' => $pagination,
             ]
         );
     }
@@ -321,11 +331,15 @@ class AdminController extends AbstractController
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/orders", name ="admin_orders")
      * @param  OrderRepository $orderRepository
+     * @param      PaginatorInterface $paginator
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
     public function adminOrders(
-        OrderRepository $orderRepository
+        OrderRepository $orderRepository,
+        PaginatorInterface $paginator,
+        Request $request
     ) {
         if (isset($_GET['email'])) {
             $email = $_GET['email'];
@@ -339,12 +353,17 @@ class AdminController extends AbstractController
         } else {
             $orders = $orderRepository->findAll();
         };
+        $pagination = $paginator->paginate(
+            $orders, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
 
         return $this->render(
             'admin/allOrders.html.twig',
             [
-                'orders' => $orders,
+                'orders' => $pagination,
             ]
         );
     }
