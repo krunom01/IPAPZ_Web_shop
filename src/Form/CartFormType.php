@@ -32,15 +32,15 @@ class CartFormType extends AbstractType
                     'choice_value' => 'country',
 
                 ]
-            )
-
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => Cart::class,
-        ]);
+            ]
+        );
     }
 }

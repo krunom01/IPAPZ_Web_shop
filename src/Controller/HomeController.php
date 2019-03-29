@@ -6,11 +6,9 @@ use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Order;
 use App\Entity\OrderedItems;
-use App\Entity\PaymentType;
 use App\Form\CartFormType;
 use App\Form\InsertCouponType;
 use App\Form\CartItemType;
-use App\Form\OrderFormType;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CountryShippingRepository;
@@ -306,12 +304,12 @@ class HomeController extends AbstractController
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
-        if ($userCart->getSubTotal() == 0) {
+        if ($userCart == null) {
             $this->addFlash('success', 'please add some products before order');
             return $this->redirectToRoute('home');
-        }
-        $userCart->getSubTotal();
+        } $userCart->getSubTotal();
         $form = $this->createForm(InsertCouponType::class);
+
         $form->handleRequest($request);
         $formCart = $this->createForm(CartFormType::class);
         $formCart->handleRequest($request);
@@ -359,12 +357,14 @@ class HomeController extends AbstractController
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
-
-        if (empty($userCart->getSubTotal()) or empty($userCart->getAddress())) {
+        if ($userCart == null) {
             $this->addFlash('success', 'Add products in shopcart and set your address');
             return $this->redirectToRoute('home');
         }
-        $form = $this->createForm(InsertCouponType::class);
+        if (empty($userCart->getSubTotal()) or empty($userCart->getAddress())) {
+            $this->addFlash('success', 'Add products in shopcart and set your address');
+            return $this->redirectToRoute('home');
+        } $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
         $gateway = self::gateway();
         $shippingPrice = $countryShippingRepository->findOneBy(['country' => $userCart->getCountry()]);
@@ -437,8 +437,7 @@ class HomeController extends AbstractController
                 $itemsOrder->setOrder($order);
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
-            }
-            $entityManager->remove($userCart);
+            } $entityManager->remove($userCart);
             $entityManager->flush();
             $this->addFlash('success', 'You made new Order!');
             return $this->redirectToRoute('home');
@@ -483,6 +482,10 @@ class HomeController extends AbstractController
 
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
+        if ($userCart == null) {
+            $this->addFlash('success', 'Add products in shopcart and set your address');
+            return $this->redirectToRoute('home');
+        }
 
         $order = new Order();
         $order->setUserName($user->getFullName());
@@ -509,8 +512,7 @@ class HomeController extends AbstractController
         if ($transaction == null) {
             $this->addFlash('warning', 'Payment unsuccessful!');
             return $this->redirectToRoute('confirmOrder');
-        }
-        $cartItems = $userCart->getCartItems();
+        } $cartItems = $userCart->getCartItems();
         foreach ($cartItems as $cartItem) {
             $itemsOrder = new OrderedItems();
             $itemsOrder->setUserId($user->getId());
@@ -520,10 +522,10 @@ class HomeController extends AbstractController
             $itemsOrder->setOrder($order);
             $entityManager->persist($itemsOrder);
             $entityManager->flush();
-        }
-        $entityManager->remove($userCart);
+        } $entityManager->remove($userCart);
         $entityManager->flush();
         $this->addFlash('success', 'You made new Order!');
+
         return $this->redirectToRoute('home');
     }
 

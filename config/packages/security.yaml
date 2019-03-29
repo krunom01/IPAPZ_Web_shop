@@ -38,3 +38,4 @@ security:
     - { path: ^/profile, roles: ROLE_USER  }
     - { path: ^/shopcart, roles: ROLE_USER }
     - { path: ^/confirmOrder, roles: ROLE_USER }
+    - { path: ^/neworder, roles: ROLE_USER }

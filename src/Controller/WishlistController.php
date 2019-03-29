@@ -7,18 +7,16 @@ use App\Entity\Wishlist;
 use App\Form\WishListType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class WishlistController extends AbstractController
 {
     /**
-     * @Route("/shopcard/newWishlist/{id}", name="wishlist_new")
+     * @Symfony\Component\Routing\Annotation\Route("/shopcard/newWishlist/{id}", name="wishlist_new")
      * @param                               EntityManagerInterface $entityManager
      * @param                               Request $request
      * @param Product $product
-     * @return                              Response
+     * @return          \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
     {
@@ -38,19 +36,18 @@ class WishlistController extends AbstractController
     }
 
     /**
-     * @Route("/shopcard/removeWishlist/{id}", name="wishlist_remove")
+     * @Symfony\Component\Routing\Annotation\Route("/shopcard/removeWishlist/{id}", name="wishlist_remove")
      * @param                                  EntityManagerInterface $entityManager
      * @param                                  Request $request
      * @param                                  Wishlist $wishlist
-     * @return                                 Response
+     * @return         \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function remove(Request $request, EntityManagerInterface $entityManager, Wishlist $wishlist)
     {
         if ($this->isCsrfTokenValid('delete' . $wishlist->getId(), $request->request->get('_token'))) {
             $entityManager->remove($wishlist);
             $entityManager->flush();
-        }
-        $this->addFlash('success', 'You deleted item from wishlist!');
+        } $this->addFlash('success', 'You deleted item from wishlist!');
         return $this->redirectToRoute('home');
     }
 }

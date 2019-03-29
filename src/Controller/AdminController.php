@@ -289,13 +289,11 @@ class AdminController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Successfully added new coupon!');
             return $this->redirectToRoute('admin_coupons');
-        }
-        return $this->render(
+        } return $this->render(
             'admin/coupons.html.twig',
             ['coupons' => $couponRepository->findAll(), 'form' => $form->createView()]
         );
     }
-
     /**
      * @param int $length
      * @return bool|string

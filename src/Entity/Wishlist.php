@@ -2,27 +2,25 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * @ORM\Entity(repositoryClass="App\Repository\WishlistRepository")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\WishlistRepository")
  */
 class Wishlist
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="wishList")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\User", inversedBy="wishList")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="wishList")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Product", inversedBy="wishList")
      */
     private $product;
 
