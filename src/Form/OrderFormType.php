@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\CountryShipping;
 use App\Entity\Order;
 use App\Entity\PaymentType;
 use Doctrine\ORM\EntityRepository;
@@ -16,6 +17,7 @@ class OrderFormType extends AbstractType
     {
         /**
          * @var \App\Entity\PaymentType $paymentType
+         * @var \App\Entity\CountryShipping $country
          */
         $builder
             ->add(
@@ -37,7 +39,21 @@ class OrderFormType extends AbstractType
 
                 ]
             )
-            ->add('state')
+            ->add(
+                'country',
+                EntityType::class,
+                [
+                    'class' => CountryShipping::class,
+                    'choice_label' => function ($country) {
+                        /**
+                         * @var CountryShipping $country
+                         */
+                        return $country->getCountry();
+                    },
+                    'choice_value' => 'country',
+
+                ]
+            )
             ->add('address');
     }
 

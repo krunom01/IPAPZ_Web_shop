@@ -16,11 +16,11 @@
         <tbody>
         {% for item in items %}
             <tr>
-                <td>{{ item.name }}</td>
-                <td><img width="80" height="80" src="../../../../../upload/image/{{ item.image }}" alt=""></td>
+                <td>{{ item.product.name }}</td>
+                <td><img width="80" height="80" src="../../../../../upload/image/{{ item.product.image }}" alt=""></td>
 
                 <td>
-                    <a href="{{ path('shopCartDeleteIdem', {'id': item.id}) }}">delete item from shop cart</a>
+                    <a href="{{ path('shopCartDeleteIdem', {'id': item.product.id}) }}">delete item from shop cart</a>
                 </td>
             </tr>
         {% else %}

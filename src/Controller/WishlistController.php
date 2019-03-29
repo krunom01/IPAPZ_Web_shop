@@ -8,7 +8,6 @@ use App\Form\WishListType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,6 +17,7 @@ class WishlistController extends AbstractController
      * @Route("/shopcard/newWishlist/{id}", name="wishlist_new")
      * @param                               EntityManagerInterface $entityManager
      * @param                               Request $request
+     * @param Product $product
      * @return                              Response
      */
     public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
@@ -33,7 +33,7 @@ class WishlistController extends AbstractController
         $entityManager->flush();
 
         $form->handleRequest($request);
-        $this->addFlash('success', 'ok');
+        $this->addFlash('success', 'Successfully added new item in your wishlist !');
         return $this->redirectToRoute('home');
     }
 

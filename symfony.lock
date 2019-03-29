@@ -5,6 +5,9 @@
     "cometcult/braintree-bundle": {
         "version": "0.1.0"
     },
+    "components/jquery": {
+        "version": "3.3.1"
+    },
     "composer/ca-bundle": {
         "version": "1.1.4"
     },

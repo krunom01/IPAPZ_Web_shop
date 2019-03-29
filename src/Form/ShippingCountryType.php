@@ -12,16 +12,23 @@ class ShippingCountryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country')
-            ->add('countryCode')
-            ->add('shippingPrice')
-        ;
+            ->add(
+                'country'
+            )
+            ->add(
+                'countryCode'
+            )
+            ->add(
+                'shippingPrice'
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => CountryShipping::class,
-        ]);
+            ]
+        );
     }
 }

@@ -1,0 +1,16 @@
+
+{% set count = 0 %}
+{% for userOrder in userOrders %}
+    {% set count = count + 1 %}
+    {{ count }}
+    {{ userOrder.userName }}
+    {{ userOrder.userMail }}
+    {{ userOrder.country }}
+    {{ userOrder.address }}
+    {{ userOrder.status }}
+    {{ userOrder.date }}
+    {{ userOrder.totalPrice }} €
+    <a href="{{ path('user_order_details', {'id': userOrder.id}) }}">
+        <button class="btn-primary" type="submit">Details</button>
+    </a>
+{% endfor %}

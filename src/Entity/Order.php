@@ -41,7 +41,7 @@ class Order
     /**
      * @Doctrine\ORM\Mapping\Column(type="string", length=50)
      */
-    private $state;
+    private $country;
 
     /**
      * @Doctrine\ORM\Mapping\Column(type="string", length=30)
@@ -126,14 +126,14 @@ class Order
         return $this;
     }
 
-    public function getState()
+    public function getCountry()
     {
-        return $this->state;
+        return $this->country;
     }
 
-    public function setState($state): self
+    public function setState($country): self
     {
-        $this->state = $state;
+        $this->country = $country;
 
         return $this;
     }

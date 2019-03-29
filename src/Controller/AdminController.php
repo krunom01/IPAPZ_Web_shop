@@ -27,6 +27,7 @@ use Dompdf\Options;
 use Symfony\Component\HttpFoundation\Response;
 use League\Csv\Reader;
 
+
 class AdminController extends AbstractController
 {
 
@@ -51,8 +52,6 @@ class AdminController extends AbstractController
      */
     public function users()
     {
-
-
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
         return $this->render(
             'admin/users.html.twig',
@@ -66,13 +65,17 @@ class AdminController extends AbstractController
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/userEdit/{id}", name ="admin_user_edit")
      * @param  Request $request
+     * @param User $user
      * @param  EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
 
-    public function editUser(Request $request, EntityManagerInterface $entityManager, User $user)
-    {
+    public function editUser(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        User $user
+    ) {
 
         $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
@@ -118,6 +121,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/orderUpdate/{id}", name ="admin_order_update")
      * @param $id
@@ -138,32 +142,24 @@ class AdminController extends AbstractController
         $this->addFlash('success', 'Successfully updated Order!');
         return $this->redirectToRoute('admin_orders');
     }
-
     /**
-     * @Symfony\Component\Routing\Annotation\Route("/admin/categoryProducts/{id}", name ="admin_category_products")
+     * @Symfony\Component\Routing\Annotation\Route("/admin/deleteOrder/{id}", name ="admin_order_delete")
+     * @param $id
+     * @param OrderRepository $orderRepository
+     * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
 
-    public function categoryProducts($id)
-    {
-
-        $em = $this->getDoctrine()->getManager();
-        $sql = "select a.name, a.image, a.name, a.price, a.id
-                from product a
-                inner join product_category pc on a.id = pc.product_id
-                where category_id = :id";
-        $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('id', $id);
-        $statement->execute();
-        $products = $statement->fetchAll();
-
-
-        return $this->render(
-            'admin/categoryProducts.html.twig',
-            [
-                'products' => $products,
-            ]
-        );
+    public function deleteOrder(
+        $id,
+        OrderRepository $orderRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        $userOrder = $orderRepository->findOneBy(['id' => $id]);
+        $entityManager->remove($userOrder);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully deleted Order!');
+        return $this->redirectToRoute('admin_orders');
     }
 
     /**
@@ -216,6 +212,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/customPages/{id}", name ="customPage_edit")
      * @param CustomPage $customPage
@@ -249,6 +246,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/customPageDelete/{id}", name ="customPage_delete")
      * @param CustomPage $customPage
@@ -262,10 +260,10 @@ class AdminController extends AbstractController
     ) {
 
 
-            $entityManager->remove($customPage);
-            $entityManager->flush();
-            $this->addFlash('success', 'Successfully deleted custom page!');
-            return $this->redirectToRoute('admin_custom_pages');
+        $entityManager->remove($customPage);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully deleted custom page!');
+        return $this->redirectToRoute('admin_custom_pages');
     }
 
     /**
@@ -291,7 +289,8 @@ class AdminController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Successfully added new coupon!');
             return $this->redirectToRoute('admin_coupons');
-        } return $this->render(
+        }
+        return $this->render(
             'admin/coupons.html.twig',
             ['coupons' => $couponRepository->findAll(), 'form' => $form->createView()]
         );
@@ -306,6 +305,7 @@ class AdminController extends AbstractController
         $numbers = '0123456789';
         return substr(str_shuffle(str_repeat($numbers, $length)), 0, $length);
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/coupons/delete/{id}", name="coupon_delete")
      * @param                               Coupon $coupon
@@ -330,12 +330,12 @@ class AdminController extends AbstractController
         OrderRepository $orderRepository
     ) {
         if (isset($_GET['email'])) {
-                $email = $_GET['email'];
-                $orders = $orderRepository->findByEmail($email);
+            $email = $_GET['email'];
+            $orders = $orderRepository->findByEmail($email);
         } elseif (isset($_GET['name'])) {
-                $orders = $orderRepository->findByName($_GET['name']);
+            $orders = $orderRepository->findByName($_GET['name']);
         } elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd'])) {
-                $orders =$orderRepository->getRange($_GET['dateStart'], $_GET['dateEnd']);
+            $orders = $orderRepository->getRange($_GET['dateStart'], $_GET['dateEnd']);
         } elseif (isset($_GET['dateStart']) and isset($_GET['dateEnd'])) {
             $orders = $orderRepository->getRange($_GET['dateStart'], $_GET['dateEnd']);
         } else {
@@ -374,13 +374,13 @@ class AdminController extends AbstractController
                 'items' => $items
             ]
         );
-        $fileName = $order->getId().'.pdf';
+        $fileName = $order->getId() . '.pdf';
         $domPdf->loadHtml($page);
         $domPdf->setPaper('A4', 'portrait');
         $domPdf->render();
         $output = $domPdf->output();
         $dir = '../public/pdf/';
-        $path =  $dir . $fileName;
+        $path = $dir . $fileName;
         file_put_contents($path, $output);
         $order->setPdf(1);
         $entityManager->persist($order);
@@ -433,6 +433,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/newPaymentType", name="admin_newPayments")
      * @param Request $request
@@ -461,6 +462,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/editPaymentType/{id}", name="admin_editPayment")
      * @param Request $request
@@ -490,6 +492,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/deletePaymentType/{id}", name="admin_deletePayment")
      * @param PaymentType $paymentType
@@ -500,11 +503,12 @@ class AdminController extends AbstractController
         EntityManagerInterface $entityManager,
         PaymentType $paymentType
     ) {
-            $entityManager->remove($paymentType);
-            $entityManager->flush();
-            $this->addFlash('success', 'Successfully deleted payment type!');
-            return $this->redirectToRoute('admin_payments');
+        $entityManager->remove($paymentType);
+        $entityManager->flush();
+        $this->addFlash('success', 'Successfully deleted payment type!');
+        return $this->redirectToRoute('admin_payments');
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/updatePaymentVisibility/{id}", name="admin_updatePayment")
      * @param PaymentType $paymentType
@@ -529,6 +533,7 @@ class AdminController extends AbstractController
         $this->addFlash('success', 'Successfully updated payment type visibility!');
         return $this->redirectToRoute('admin_payments');
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/shippingCSV", name="admin_csv")
      * @param Request $request
@@ -553,7 +558,7 @@ class AdminController extends AbstractController
                 $reader->setHeaderOffset(0);
                 $records = $reader->getRecords();
                 $header = $reader->getHeader();
-                $values = array( "country", "code", "price");
+                $values = array("country", "code", "price");
                 $result = array_diff($header, $values);
                 if (empty($result)) {
                     foreach ($records as $rec) {
@@ -582,6 +587,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/newShippingCountry", name="admin_newShippingConutry")
      * @param Request $request
@@ -598,9 +604,11 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($this->isGranted('ROLE_ADMIN') && $form->isSubmitted() && $form->isValid()) {
             $nullPrice = $form->get('shippingPrice')->getData();
+
             if ($nullPrice == null) {
                 $newCounutry->setShippingPrice(10);
             }
+
             $entityManager->persist($newCounutry);
             $entityManager->flush();
             $this->addFlash('success', 'Successfully added new Country');
@@ -614,6 +622,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/ShippingCountries", name="admin_ShippingCountries")
      * @param CountryShippingRepository $countryRepository
@@ -631,6 +640,7 @@ class AdminController extends AbstractController
             ]
         );
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/deleteCountry/{id}", name="admin_deleteCountry")
      * @param CountryShipping $countryShipping
@@ -646,6 +656,7 @@ class AdminController extends AbstractController
         $this->addFlash('success', 'Successfully deleted country!');
         return $this->redirectToRoute('admin_ShippingCountries');
     }
+
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/editCountry/{id}", name="admin_editCountry")
      * @param Request $request
@@ -663,9 +674,11 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($this->isGranted('ROLE_ADMIN') && $form->isSubmitted() && $form->isValid()) {
             $nullPrice = $form->get('shippingPrice')->getData();
+
             if ($nullPrice == null) {
                 $countryShipping->setShippingPrice(10);
             }
+
             $entityManager->persist($countryShipping);
             $entityManager->flush();
             $this->addFlash('success', 'Successfully added new Country');
@@ -679,4 +692,5 @@ class AdminController extends AbstractController
             ]
         );
     }
+
 }

@@ -44,10 +44,11 @@
                         <div class="top_bar_content ml-auto">
 
                             <div class="top_bar_user">
-                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
                                 {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
                                     <div><a href="{{ path('app_logout') }}">My wish list</a></div>
+                                    <div><a href="{{ path('profile') }}">My profile</a></div>
                                     <div><a href="{{ path('app_logout') }}">Logout</a></div>
+
                                 {% else %}
                                     <div><a href="{{ path('app_register') }}">Register</a></div>
                                     <div><a href="{{ path('app_login') }}">Sign in</a></div>

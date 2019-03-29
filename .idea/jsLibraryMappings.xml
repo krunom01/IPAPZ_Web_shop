@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{tinymce}" />
+    <file url="PROJECT" libraries="{checkout, client, dropin, jquery-3.3.1, paypal-checkout, tinymce}" />
   </component>
 </project>

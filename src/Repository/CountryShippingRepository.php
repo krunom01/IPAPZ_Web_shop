@@ -19,32 +19,15 @@ class CountryShippingRepository extends ServiceEntityRepository
         parent::__construct($registry, CountryShipping::class);
     }
 
-    // /**
-    //  * @return CountryShipping[] Returns an array of CountryShipping objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findCountry($value)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
+        return $this->createQueryBuilder('s')
+            ->select('s.country', 's.shippingPrice')
+            ->andWhere('s.country = :query')
+            ->setParameter('query', $value)
+            ->orderBy('s.country', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?CountryShipping
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

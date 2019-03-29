@@ -1,0 +1,100 @@
+{% if coupon != 1 %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Add coupon code') }}</button>
+    {{ form_end(form) }}
+{% endif %}
+{% for message in app.flashes('success') %}
+    <div class="row mt-3">
+        <div class="col">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Product Name </th>
+        <th>Product price</th>
+        <th>Product quantity</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.productQuantity }}</td>
+
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">no records found</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+Total price without shipping : {{ total }} kn, <br>
+Shipping Price: {{ shippingPrice }}, <br>
+Total price with shipping : {{ totalWithShipping }} kn <br>
+
+{% for payment in payments %}
+    {% if payment.type == 'invoice' %}
+            <a href="{{ path('invoiceOrder') }}"><button class="btn-primary">{{ payment.type }}</button></a>
+    {% elseif payment.type == 'paypal' %}
+        <form method="post" id="payment-form" action="{{ path('paypal_payment') }}">
+            <section>
+                <div class="bt-drop-in-wrapper">
+                    <div id="bt-dropin"></div>
+                </div>
+            </section>
+            <input id="nonce" name="payment_method_nonce" type="hidden" />
+            <button class="btn btn-primary" type="submit" onclick="submitOnce(this, form)"><span>Complete Transaction</span></button>
+        </form>
+        {% else %}
+            <a href="#"><button class="btn-primary">{{ payment.type }}</button></a>
+    {% endif %}
+{% endfor %}
+
+<script src="https://js.braintreegateway.com/web/dropin/1.16.0/js/dropin.min.js"></script>
+<script>
+    var form = document.querySelector('#payment-form');
+    var client_token = "{{ gateway.clientToken.generate }}";
+    braintree.dropin.create({
+        authorization: client_token,
+        selector: '#bt-dropin',
+        paypal: {
+            flow: 'vault'
+        }
+    }, function (createErr, instance) {
+        if (createErr) {
+            console.log('Create Error', createErr);
+            return;
+        }
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                    console.log('Request Payment Method Error', err);
+                    return;
+                }
+                // Add the nonce to the form and submit
+                document.querySelector('#nonce').value = payload.nonce;
+                form.submit();
+            });
+        });
+    });
+</script>
+<script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
+
+<!-- Load the client component. -->
+<script src="https://js.braintreegateway.com/web/3.43.0/js/client.min.js"></script>
+
+<!-- Load the PayPal Checkout component. -->
+<script src="https://js.braintreegateway.com/web/3.43.0/js/paypal-checkout.min.js"></script>

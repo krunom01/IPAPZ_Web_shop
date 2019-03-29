@@ -26,7 +26,7 @@ class User implements UserInterface
     private $id;
     /**
      * @Doctrine\ORM\Mapping\Column(type="string", length=180, unique=true)
-     * @Symfony\Component\Validator\Constraints\NotBlank()
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert email")
      * @Symfony\Component\Validator\Constraints\Email()
      */
     private $email;
@@ -41,12 +41,18 @@ class User implements UserInterface
     private $password;
     /**
      * @Doctrine\ORM\Mapping\Column(type="string")
-     * @Symfony\Component\Validator\Constraints\NotBlank()
+     * @Symfony\Component\Validator\Constraints\Regex(
+     *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
+     *     message     = "Letters only")
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert firstname")
      */
     private $firstName;
     /**
      * @Doctrine\ORM\Mapping\Column(type="string")
-     * @Symfony\Component\Validator\Constraints\NotBlank()
+     * @Symfony\Component\Validator\Constraints\Regex(
+     *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
+     *     message     = "Letters only")
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert lastname")
      */
     private $lastName;
 

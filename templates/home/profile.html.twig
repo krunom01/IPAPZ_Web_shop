@@ -1,0 +1,28 @@
+{% for message in app.flashes('success') %}
+    <div class="row mt-3">
+        <div class="col">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+Account details:
+firstname:
+{{ user.firstName }}
+lastname:
+{{ user.lastName }}
+email:
+{{ user.email }}
+<a href="{{ path('profile_edit')}}">
+    <button class="btn-primary" type="submit">Edit your details</button>
+</a>
+<a href="{{ path('changePassword')}}">
+    <button class="btn-primary" type="submit">Change password</button>
+</a>
+<a href="{{ path('wishList')}}">
+    <button class="btn-primary" type="submit">My wish list</button>
+</a>
+<a href="{{ path('orders')}}">
+    <button class="btn-primary" type="submit">My orders</button>
+</a>

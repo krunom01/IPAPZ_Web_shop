@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CountryShippingRepository")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\CountryShippingRepository")
  * @Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity(fields={"country"},
  * message="Country already exists!")
  * @Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity(fields={"countryCode"},
@@ -15,14 +15,14 @@ class CountryShipping
 {
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=40)
      * @Symfony\Component\Validator\Constraints\Regex(
      *     pattern     = "/^[a-z ćčžđš A-Z-]+$/i",
      *     message     = "Letters only"))
@@ -31,12 +31,12 @@ class CountryShipping
     private $country;
 
     /**
-     * @ORM\Column(type="string", length=3)
+     * @Doctrine\ORM\Mapping\Column(type="string", length=3)
      */
     private $countryCode;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
      */
     private $shippingPrice;
 
@@ -81,5 +81,9 @@ class CountryShipping
         $this->shippingPrice = $shippingPrice;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->getCountry();
     }
 }

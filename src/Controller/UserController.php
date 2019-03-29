@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserChangePasswordType;
 use App\Form\UserEditType;
+use App\Repository\OrderRepository;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -110,20 +113,59 @@ class UserController extends AbstractController
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/profile", name="profile")
+     * @return            null|Response
+     */
+    public function profile()
+    {
+        $user = $this->getUser();
+
+        return $this->render(
+            'home/profile.html.twig',
+            [
+                'user' => $user,
+            ]
+        );
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/profile/edit", name="profile_edit")
      * @param             EntityManagerInterface $entityManager
      * @param             Request $request
      * @return            null|Response
      */
-    public function profile(
+    public function editProfile(
         Request $request,
-        LoginFormAuthenticator $authenticator,
-        UserPasswordEncoderInterface $passwordEncoder,
-        GuardAuthenticatorHandler $guardHandler,
         EntityManagerInterface $entityManager
     ) {
 
         $user = $this->getUser();
         $form = $this->createForm(UserEditType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Profile updated!');
+            return $this->redirectToRoute('profile');
+        } return $this->render(
+            'security/useredit.html.twig',
+            ['userEdit' => $form->createView(),]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/profile/changePassword", name="changePassword")
+     * @param             EntityManagerInterface $entityManager
+     * @param             UserPasswordEncoderInterface $passwordEncoder
+     * @param             Request $request
+     * @return            null|Response
+     */
+    public function changePassword(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        EntityManagerInterface $entityManager
+    ) {
+        $user = $this->getUser();
+        $form = $this->createForm(UserChangePasswordType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -136,11 +178,63 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
-            $this->addFlash('success', 'Profile updated!');
+            $this->addFlash('success', 'Password changed!');
+            return $this->redirectToRoute('profile');
         } return $this->render(
-            'security/useredit.html.twig',
+            'security/userChangePassword.html.twig',
             ['userEdit' => $form->createView(),]
+        );
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/profile/wishlist", name="wishList")
+     * @return            null|Response
+     */
+    public function userWishlist()
+    {
+        $user = $this->getUser();
+
+        return $this->render(
+            'home/userWishList.html.twig',
+            ['wishlist' => $user->getWish(),]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/profile/orders", name="orders")
+     * @param OrderRepository $orderRepository
+     * @return            null|Response
+     */
+    public function userOrders(
+        OrderRepository $orderRepository
+    ) {
+        $user = $this->getUser();
+
+        return $this->render(
+            'home/userOrders.html.twig',
+            ['userOrders' => $orderRepository->findUserOrders($user),]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/profile/order/{id}", name="user_order_details")
+     * @param OrderRepository $orderRepository
+     * @param $id
+     * @return            null|Response
+     */
+    public function userOrderDetails(
+        OrderRepository $orderRepository,
+        $id
+    ) {
+        $user = $this->getUser();
+
+        $userItems = $orderRepository->findOneBy(
+            ['user' => $user,
+             'id' => $id
+            ]
+        );
+
+        return $this->render(
+            'home/userOrder.html.twig',
+            ['userItems' => $userItems->getOrderedItems(),]
         );
     }
 }

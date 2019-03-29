@@ -17,15 +17,17 @@ class ImportShippingCSVType extends AbstractType
                 'file',
                 FileType::class,
                 [
-                    'label' => 'Insert CSV: '
+                    'label' => 'Insert CSV:'
                 ]
             );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => null,
-        ]);
+            ]
+        );
     }
 }

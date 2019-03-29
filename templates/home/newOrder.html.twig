@@ -10,17 +10,11 @@
         </div>
     </div>
 {% endfor %}
-    {% if coupon != 1 %}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn">{{ button_label|default('Add coupon code') }}</button>
-        {{ form_end(form) }}
-    {% endif %}
 
-{{ form_start(formCoupon) }}
-    {{ form_widget(formCoupon) }}
-<button class="btn">{{ button_label|default('Order') }}</button>
-{{ form_end(formCoupon) }}
+{{ form_start(formCart) }}
+    {{ form_widget(formCart) }}
+<button href="{{ path('confirmOrder') }}" class="btn">{{ button_label|default('next') }}</button>
+{{ form_end(formCart) }}
 
     Total price : {{ total }} kn
 {% endblock %}

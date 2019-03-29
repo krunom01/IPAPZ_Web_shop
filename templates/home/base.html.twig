@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.css')) }}">
     <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('styles/shop_styles.css')) }}">
     <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('styles/shop_responsive.css')) }}">
+
     {% endblock %}
 </head>
 {% block header %}
@@ -130,22 +131,26 @@
         </div>
     </div>
 
-
-<script src="{{ absolute_url(asset('js/jquery-3.3.1.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('styles/bootstrap4/popper.js')) }}"></script>
-<script src="{{ absolute_url(asset('styles/bootstrap4/bootstrap.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/greensock/TweenMax.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/greensock/TimelineMax.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/scrollmagic/ScrollMagic.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/greensock/animation.gsap.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/greensock/ScrollToPlugin.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/easing/easing.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/Isotope/isotope.pkgd.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.js')) }}"></script>
-<script src="{{ absolute_url(asset('plugins/parallax-js-master/parallax.min.js')) }}"></script>
-<script src="{{ absolute_url(asset('js/shop_custom.js')) }}"></script>
-
-
 </html>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ absolute_url(asset('js/jquery-3.3.1.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('styles/bootstrap4/popper.js')) }}"></script>
+    <script src="{{ absolute_url(asset('styles/bootstrap4/bootstrap.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/greensock/TweenMax.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/greensock/TimelineMax.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/scrollmagic/ScrollMagic.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/greensock/animation.gsap.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/greensock/ScrollToPlugin.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/easing/easing.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/Isotope/isotope.pkgd.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.js')) }}"></script>
+    <script src="{{ absolute_url(asset('plugins/parallax-js-master/parallax.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/shop_custom.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/bloodhound.jquery.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/jquery.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/typeahead.jquery.min.js')) }}"></script>
+
 {% endblock %}

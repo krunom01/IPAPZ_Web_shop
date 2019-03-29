@@ -55,4 +55,14 @@ class OrderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findUserOrders($user)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o')
+            ->where('o.user = :user')
+            ->setMaxResults(10)
+            ->setParameter(':user', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

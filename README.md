@@ -28,23 +28,5 @@ kreiran javni rest api za detalje o proizvodi preko sku. u url ide sku , a rezul
 
 kreiranom useru se salje email sa svim kreiranim podacima i forsira ga se na promjenu lozinke.
 
-    
-    /**
-        <form action="{{ path('order_index') }}" method="get">
-            <label for="email">Filter by email</label>
-            <input type="text" name="email">
-            <button type="submit">Find email</button>
-        </form>
-            <form action="{{ path('order_index') }}" method="get">
-                <label for="name">Filter by name</label>
-                <input type="text" name="name">
-                <button type="submit">Find by user first name</button>
-            </form>
-            <form action="{{ path('order_index') }}" method="get">
-                <label for="name">Filter by name</label>
-                <input type="date" name="dateStart">
-                <input type="date" name="dateEnd">
-                <button type="submit">Find by user first name</button>
-            </form>
 
   

@@ -41,26 +41,31 @@
         <th>details</th>
         <th>Get PDF</th>
         <th>Update order</th>
+        <th>Deleteorder</th>
     </tr>
     </thead>
     <tbody>
 {% for order in orders %}
     <tr>
-        <td>{{ order.userName }}</td>
-        <td>{{ order.userMail }}</td>
-        <td>{{ order.totalPrice }}</td>
-        <td>{{ order.address }}</td>
-        <td>{{ order.status }}</td>
-        <td>{{ order.type }}</td>
-        <td>{{ order.date }}</td>
+            <td>{{ order.userName }}</td>
+            <td>{{ order.userMail }}</td>
+            <td>{{ order.totalPrice }}</td>
+            <td>{{ order.address }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.type }}</td>
+            <td>{{ order.date }}</td>
         <td><a href="{{ path('admin_user_order', {id: order.id}) }}" class="btn btn-primary">Orders</a></td>
         {% if order.pdf == 1 %}
-        <td><a href="{{ path('order_download', {file: order.id }) }}" class="btn btn-primary">Download PDF</a></td>
+            <td><a href="{{ path('order_download', {file: order.id }) }}" class="btn btn-primary">Download PDF</a></td>
+        {% else %}
+            <td> </td>
         {% endif %}
         {% if order.pdf == 1 and order.status == 'new' %}
-
             <td><a href="{{ path('admin_order_update', {id: order.id }) }}" class="btn btn-primary">Update Order</a></td>
+        {% else %}
+            <td> </td>
         {% endif %}
+        <td><a href="{{ path('admin_order_delete', {id: order.id}) }}" class="btn btn-danger">Delete</a></td>
     </tr>
 {% else %}
     <tr>

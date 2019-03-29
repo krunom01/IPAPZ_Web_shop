@@ -46,19 +46,23 @@ class Cart
      */
     private $coupon;
 
+    /**
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50, nullable=true)
+     */
+    private $address;
 
     /**
-     * @return ArrayCollection|CartItem[]
+     * @Doctrine\ORM\Mapping\Column(type="string", length=50, nullable=true)
+     */
+    private $country;
+
+
+    /**
+     * @return mixed $cartItems
      */
     public function getCartItems()
     {
-        $cartItems = new ArrayCollection();
-        foreach ($this->cartItems as $prod) {
-            /**
-             * @var CartItem $prod
-             */
-            $cartItems[] = $prod->getProduct();
-        } return $cartItems;
+        return $this->cartItems;
     }
 
     public function getId()
@@ -110,6 +114,30 @@ class Cart
     public function setCoupon(int $coupon): self
     {
         $this->coupon = $coupon;
+
+        return $this;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    public function setAddress($address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setCountry($country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

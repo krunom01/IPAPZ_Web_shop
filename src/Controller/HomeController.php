@@ -6,13 +6,17 @@ use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Order;
 use App\Entity\OrderedItems;
+use App\Entity\PaymentType;
+use App\Form\CartFormType;
 use App\Form\InsertCouponType;
 use App\Form\CartItemType;
 use App\Form\OrderFormType;
 use App\Repository\CartItemRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\CountryShippingRepository;
 use App\Repository\CouponRepository;
 use App\Repository\CustomPageRepository;
+use App\Repository\PaymentTypeRepository;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\WishlistRepository;
 use App\Repository\CartRepository;
@@ -84,7 +88,7 @@ class HomeController extends AbstractController
         $wishListProduct = $wishListRepository->findOneBy(
             [
                 'product' => $product,
-
+                'user' => $user,
             ]
         );
 
@@ -289,6 +293,7 @@ class HomeController extends AbstractController
      * @param CouponRepository $couponRepository
      * @param CartItemRepository $cartItemRepository
      * @param EntityManagerInterface $entityManager
+     * @param CountryShippingRepository $countryShippingRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userNewOrder(
@@ -296,46 +301,131 @@ class HomeController extends AbstractController
         CartRepository $cartRepository,
         CartItemRepository $cartItemRepository,
         CouponRepository $couponRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CountryShippingRepository $countryShippingRepository
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
+        if ($userCart->getSubTotal() == 0) {
+            $this->addFlash('success', 'please add some products before order');
+            return $this->redirectToRoute('home');
+        }
         $userCart->getSubTotal();
         $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
-        $formOrder = $this->createForm(OrderFormType::class);
-        $formOrder->handleRequest($request);
+        $formCart = $this->createForm(CartFormType::class);
+        $formCart->handleRequest($request);
 
+        if ($formCart->isSubmitted() && $formCart->isValid()) {
+            $price =  $formCart->get('country')->getData()->getShippingPrice();
+            if ($formCart->get('address')->getData() != null) {
+                $userCart->setTotal($userCart->getSubTotal() + $price);
+                $userCart->setCountry($formCart->get('country')->getData());
+                $userCart->setAddress($formCart->get('address')->getData());
+
+                $entityManager->persist($userCart);
+                $entityManager->flush();
+                $this->addFlash('success', 'Pick your payment method');
+                return $this->redirectToRoute('confirmOrder');
+            }
+        } return $this->render(
+            'home/newOrder.html.twig',
+            [
+                'items' => $userCart->getCartItems(),
+                'total' => $userCart->getSubTotal(),
+                'form' => $form->createView(),
+                'coupon' => $userCart->getCoupon(),
+                'formCart' => $formCart->createView(),
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/confirmOrder", name="confirmOrder")
+     * @param CartRepository $cartRepository
+     * @param Request $request
+     * @param CouponRepository $couponRepository
+     * @param PaymentTypeRepository $paymentType
+     * @param EntityManagerInterface $entityManager
+     * @param CountryShippingRepository $countryShippingRepository
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function userOrderConfirm(
+        Request $request,
+        CartRepository $cartRepository,
+        CouponRepository $couponRepository,
+        EntityManagerInterface $entityManager,
+        CountryShippingRepository $countryShippingRepository,
+        PaymentTypeRepository $paymentType
+    ) {
+        $user = $this->getUser();
+        $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
+
+        if (empty($userCart->getSubTotal()) or empty($userCart->getAddress())) {
+            $this->addFlash('success', 'Add products in shopcart and set your address');
+            return $this->redirectToRoute('home');
+        }
+        $form = $this->createForm(InsertCouponType::class);
+        $form->handleRequest($request);
+        $gateway = self::gateway();
+        $shippingPrice = $countryShippingRepository->findOneBy(['country' => $userCart->getCountry()]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $coupon = $couponRepository->findOneBy(['code' => $form->get('code')->getData()]);
             if (!$coupon) {
                 $this->addFlash('success', 'Wrong coupon code!');
-                return $this->redirectToRoute('newOrder');
+                return $this->redirectToRoute('confirmOrder');
             } else {
-                $total = $userCart->getSubTotal();
+                $total = $userCart->getTotal();
                 $discount = 1 - ('0.' . $coupon->getDiscount());
                 $priceWithDiscount = $total * $discount;
-                $userCart->setSubTotal($priceWithDiscount);
+                $userCart->setTotal($priceWithDiscount);
                 $userCart->setCoupon(1);
                 $entityManager->persist($userCart);
                 $entityManager->flush();
                 $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
-                return $this->redirectToRoute('newOrder');
+                return $this->redirectToRoute('confirmOrder');
             }
-        } if ($formOrder->isSubmitted() && $formOrder->isValid()) {
-            $order = new Order();
-            $order->setTotalPrice($userCart->getSubTotal());
-            $order->setState($formOrder->get('state')->getData());
-            $order->setType($formOrder->get('type')->getData());
-            $order->setAddress($formOrder->get('address')->getData());
-            $order->setUserMail($user->getEmail());
-            $order->setUserName($user->getFullName());
-            $order->setStatus('new');
-            $order->setUserId($user);
-            $entityManager->persist($order);
-            $entityManager->flush();
+        }  return $this->render(
+            'home/confirmOrder.html.twig',
+            [
+                'items' => $userCart->getCartItems(),
+                'total' => $userCart->getSubTotal(),
+                'totalWithShipping' => $userCart->getTotal(),
+                'shippingPrice' => $shippingPrice->getShippingPrice(),
+                'form' => $form->createView(),
+                'coupon' => $userCart->getCoupon(),
+                'payments' => $paymentType->findBy(['visibility' => '1']),
+                'gateway' => $gateway,
+                'usercart' => $userCart
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/invoiceOrder", name="invoiceOrder")
+     * @param CartRepository $cartRepository
+     * @param CartItemRepository $cartItemRepository
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function invoiceOrder(
+        CartRepository $cartRepository,
+        CartItemRepository $cartItemRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        $user = $this->getUser();
+        $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
 
+        $order = new Order();
+        $order->setUserName($user->getFullName());
+        $order->setState($userCart->getCountry());
+        $order->setStatus('new');
+        $order->setUserMail($user->getEmail());
+        $order->setType('invoice');
+        $order->setTotalPrice($userCart->getTotal());
+        $order->setUserId($user);
+        $order->setAddress($userCart->getAddress());
+        $entityManager->persist($order);
+        $entityManager->flush();
             $userCartItems = $cartItemRepository->findOneBy(['userId' => $user->getId()]);
             $cartItems = $userCart->getCartItems();
             foreach ($cartItems as $cartItem) {
@@ -347,20 +437,11 @@ class HomeController extends AbstractController
                 $itemsOrder->setOrder($order);
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();
-            } $entityManager->remove($userCart);
-              $entityManager->flush();
+            }
+            $entityManager->remove($userCart);
+            $entityManager->flush();
             $this->addFlash('success', 'You made new Order!');
             return $this->redirectToRoute('home');
-        } return $this->render(
-            'home/newOrder.html.twig',
-            [
-                'items' => $userCart->getCartItems(),
-                'total' => $userCart->getSubTotal(),
-                'form' => $form->createView(),
-                'coupon' => $userCart->getCoupon(),
-                'formCoupon' => $formOrder->createView(),
-            ]
-        );
     }
     /**
      * @Symfony\Component\Routing\Annotation\Route("/cms/{customPage}/", name="customPage", methods={"GET"})
@@ -379,6 +460,81 @@ class HomeController extends AbstractController
             'home/customPage.html.twig',
             [
                 'page' => $page
+            ]
+        );
+    }
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/paypal", name="paypal_payment")
+     * @param Request $request
+     * @param CartRepository $cartRepository
+     * @param CartItemRepository $cartItemRepository
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function payment(
+        EntityManagerInterface $entityManager,
+        CartRepository $cartRepository,
+        CartItemRepository $cartItemRepository,
+        Request $request
+
+    ) {
+
+
+        $user = $this->getUser();
+        $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
+
+        $order = new Order();
+        $order->setUserName($user->getFullName());
+        $order->setState($userCart->getCountry());
+        $order->setStatus('paid');
+        $order->setUserMail($user->getEmail());
+        $order->setType('paypal');
+        $order->setTotalPrice($userCart->getTotal());
+        $order->setUserId($user);
+        $order->setAddress($userCart->getAddress());
+        $entityManager->persist($order);
+        $entityManager->flush();
+        $userCartItems = $cartItemRepository->findOneBy(['userId' => $user->getId()]);
+        $gateway = self::gateway();
+
+        $nonce = $request->get('payment_method_nonce');
+        $result = $gateway->transaction()->sale(
+            [
+                'amount' => $userCart->getTotal(),
+                'paymentMethodNonce' => $nonce
+            ]
+        );
+        $transaction = $result->transaction;
+        if ($transaction == null) {
+            $this->addFlash('warning', 'Payment unsuccessful!');
+            return $this->redirectToRoute('confirmOrder');
+        }
+        $cartItems = $userCart->getCartItems();
+        foreach ($cartItems as $cartItem) {
+            $itemsOrder = new OrderedItems();
+            $itemsOrder->setUserId($user->getId());
+            $itemsOrder->setProductPrice($userCartItems->getProductPrice());
+            $itemsOrder->setProductQuantity($userCartItems->getProductQuantity());
+            $itemsOrder->setProduct($userCartItems->getProduct());
+            $itemsOrder->setOrder($order);
+            $entityManager->persist($itemsOrder);
+            $entityManager->flush();
+        }
+        $entityManager->remove($userCart);
+        $entityManager->flush();
+        $this->addFlash('success', 'You made new Order!');
+        return $this->redirectToRoute('home');
+    }
+
+    private function gateway()
+    {
+        return $gateway = new \Braintree_Gateway(
+            [
+                'environment' => 'sandbox',
+                'merchantId' => '3z58zqv68q7ktm5q',
+                'publicKey' => 'ttrdtktqbbqvn3wg',
+                'privateKey' => '595fa94c954f64725283892411cd9ddf'
             ]
         );
     }

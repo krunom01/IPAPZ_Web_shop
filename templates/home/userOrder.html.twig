@@ -1,0 +1,10 @@
+
+{% set count = 0 %}
+{% for userItem in userItems %}
+    {% set count = count + 1 %}
+    {{ count }}
+
+    {{ userItem.product.name }}
+
+
+{% endfor %}

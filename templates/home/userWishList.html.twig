@@ -1,0 +1,7 @@
+
+{% for wish in wishlist %}
+
+    {{ wish.product.name }}
+    <img src="../../../../../upload/image/{{ wish.product.image }}" alt="{{ wish.product.name }}">
+
+{% endfor %}
