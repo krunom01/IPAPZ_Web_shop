@@ -3,34 +3,25 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\Category;
-use App\Entity\ProductCategory;
-use App\Form\ProductCategoryType;
 use App\Form\UpdateProductType;
 use App\Repository\CategoryRepository;
 use App\Form\ProductFormType;
-use App\Form\UserFormType;
 use App\Repository\ProductCategoryRepository;
-use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * @Route("admin/products")
+ * @Symfony\Component\Routing\Annotation\Route("admin/products")
  */
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_index")
-     * @return Response
+     * @Symfony\Component\Routing\Annotation\Route("/", name="product_index")
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
@@ -52,11 +43,11 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_new", methods={"GET","POST"})
+     * @Symfony\Component\Routing\Annotation\Route("/new", name="product_new", methods={"GET","POST"})
      * @param         Request $request
      * @param         EntityManagerInterface $entityManager
-     * @return        Response
      * @param         CategoryRepository $categoryRepository
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function createProduct(
         Request $request,
@@ -80,8 +71,7 @@ class ProductController extends AbstractController
                 );
             } catch (FileException $e) {
                 echo $e;
-            }
-            $product->setImage($fileName);
+            } $product->setImage($fileName);
             $spaceReplace = $product->getUrlCustom();
             $string = preg_replace('/\s+/', '-', $spaceReplace);
             $product->setUrlCustom($string . $product->getProductnumber());
@@ -102,12 +92,12 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/updateproduct/{id}", name="update_product")
+     * @Symfony\Component\Routing\Annotation\Route("/updateproduct/{id}", name="update_product")
      * @param                        EntityManagerInterface $entityManager
      * @param                        ProductCategoryRepository $productCategoryRepository
      * @param                        Request $request
      * @param                        Product $product
-     * @return                       Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function updateProduct(
         Product $product,
@@ -137,8 +127,7 @@ class ProductController extends AbstractController
                 );
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
-            }
-            $product = $form->getData();
+            } $product = $form->getData();
             $product->setImage($fileName);
 
             $productCategory = $productCategoryRepository->findBy(
@@ -149,16 +138,14 @@ class ProductController extends AbstractController
             foreach ($productCategory as $proCategory) {
                 $entityManager->remove($proCategory);
                 $entityManager->flush();
-            }
-            $spaceReplace = $product->getUrlCustom();
+            } $spaceReplace = $product->getUrlCustom();
             $string = preg_replace('/\s+/', '-', $spaceReplace);
             $product->setUrlCustom($string . $product->getProductnumber());
             $entityManager->merge($product);
             $entityManager->flush();
             $this->addFlash('success', 'Updated!');
             return $this->redirectToRoute('product_index');
-        }
-        return $this->render(
+        } return $this->render(
             'admin/updateproduct.html.twig',
             [
                 'form' => $form->createView()
@@ -168,15 +155,16 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/delete/{id}", name="product_delete")
+     * @Symfony\Component\Routing\Annotation\Route("/delete/{id}", name="product_delete")
+     * @param Product $product
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function delete(Request $request, Product $product): Response
+    public function delete(Product $product)
     {
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($product);
         $entityManager->flush();
-
 
         return $this->redirectToRoute('product_index');
     }
@@ -186,48 +174,5 @@ class ProductController extends AbstractController
         // md5() reduces the similarity of the file names generated by
         // uniqid(), which is based on timestamps
         return md5(uniqid());
-    }
-
-
-    /**
-     * @Route  ("/newCategory/{id}" , name = "product_new_category")
-     * @param  CategoryRepository $categoryRepository
-     * @return Response
-     */
-    public function newCategory(
-        $id,
-        Request $request,
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository,
-        EntityManagerInterface $entityManager
-    ) {
-
-        $product = $productRepository->find($id);
-        $form = $this->createForm(ProductUpdateForm::class);
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $productCategories = $form->getData();
-            $cat = $productCategories->getCategory();
-            foreach ($cat as $category) {
-                /**
-                 * @var ProductCategory $productCategory
-                 */
-                $productCategory = new ProductCategory();
-                $productCategory->setProduct($product);
-                $productCategory->setCategory($category);
-                $entityManager->persist($productCategory);
-                $entityManager->flush();
-            }
-        }
-
-
-        return $this->render(
-            "admin/newcategory.html.twig",
-            [
-                'form' => $form->createView(),
-            ]
-        );
     }
 }

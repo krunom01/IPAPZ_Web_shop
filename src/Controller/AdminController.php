@@ -263,7 +263,7 @@ class AdminController extends AbstractController
             $coupon->setDiscount($discount);
             $entityManager->persist($coupon);
             $entityManager->flush();
-            $this->addFlash('success', 'Successfully added new coupon!');
+            $this->addFlash('success', 'Successfully added new Coupon!');
             return $this->redirectToRoute('admin_coupons');
         } return $this->render(
             'admin/coupons.html.twig',

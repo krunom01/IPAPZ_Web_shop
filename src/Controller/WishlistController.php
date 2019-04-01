@@ -21,17 +21,17 @@ class WishlistController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, Product $product)
     {
 
-        $wishlist = new Wishlist();
-        $form = $this->createForm(WishListType::class, $wishlist);
+        $wishList = new Wishlist();
+        $form = $this->createForm(WishListType::class, $wishList);
         $form->handleRequest($request);
         $user = $this->getUser();
-        $wishlist->setUser($user);
-        $wishlist->setProduct($product);
-        $entityManager->persist($wishlist);
+        $wishList->setUser($user);
+        $wishList->setProduct($product);
+        $entityManager->persist($wishList);
         $entityManager->flush();
 
         $form->handleRequest($request);
-        $this->addFlash('success', 'Successfully added new item in your wishlist !');
+        $this->addFlash('success', 'Successfully added new item in your Wishlist !');
         return $this->redirectToRoute('home');
     }
 

@@ -189,18 +189,12 @@ class HomeController extends AbstractController
     /**
      * @Symfony\Component\Routing\Annotation\Route("/shopcart", name="shopCart")
      * @param CartRepository $cartRepository
-     * @param Request $request
-     * @param CouponRepository $couponRepository
-     * @param EntityManagerInterface $entityManager
      * @param CustomPageRepository $customPageRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userShopCart(
-        Request $request,
         CartRepository $cartRepository,
-        CouponRepository $couponRepository,
-        CustomPageRepository $customPageRepository,
-        EntityManagerInterface $entityManager
+        CustomPageRepository $customPageRepository
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
@@ -213,33 +207,11 @@ class HomeController extends AbstractController
             $shopCartTotal = $userCart->getSubTotal();
             $items = $userCart->getCartItems();
             $coupon = $userCart->getCoupon();
-        }
-
-        $form = $this->createForm(InsertCouponType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $coupon = $couponRepository->findOneBy(['code' => $form->get('code')->getData()]);
-            if (!$coupon) {
-                $this->addFlash('success', 'Wrong coupon code!');
-                return $this->redirectToRoute('shopCart');
-            } else {
-                $total = $userCart->getSubTotal();
-                $discount = 1 - ('0.' . $coupon->getDiscount());
-                $priceWithDiscount = $total * $discount;
-                $userCart->setSubTotal($priceWithDiscount);
-                $userCart->setCoupon(1);
-                $entityManager->persist($userCart);
-                $entityManager->flush();
-                $this->addFlash('success', '' . $coupon->getDiscount() . '% discount on total price');
-                return $this->redirectToRoute('shopCart');
-            }
         } return $this->render(
             'home/shopcart.html.twig',
             [
                 'items' => $items,
                 'total' => $shopCartTotal,
-                'form' => $form->createView(),
                 'coupon' => $coupon,
                 'customPages' => $customPageRepository->findAll(),
             ]

@@ -8,20 +8,19 @@ use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * * Class CategoryController
  *
  * @package                  App\Controller
- * @Route("/admin/category")
+ * @Symfony\Component\Routing\Annotation\Route("/admin/category")
  */
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="category_index", methods={"GET"})
+     * @Symfony\Component\Routing\Annotation\Route("/", name="category_index", methods={"GET"})
      * @param      CategoryRepository $categoryRepository
-     * @return     Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(CategoryRepository $categoryRepository)
     {
@@ -38,9 +37,11 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="category_new", methods={"GET","POST"})
+     * @Symfony\Component\Routing\Annotation\Route("/new", name="category_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request)
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -64,9 +65,11 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_show", methods={"GET"})
+     * @Symfony\Component\Routing\Annotation\Route("/{id}", name="category_show", methods={"GET"})
+     * @param Category $category
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function show(Category $category): Response
+    public function show(Category $category)
     {
         return $this->render(
             'category/show.html.twig',
@@ -77,9 +80,12 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="category_edit")
+     * @Symfony\Component\Routing\Annotation\Route("/edit/{id}", name="category_edit")
+     * @param Request $request
+     * @param Category $category
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Request $request, Category $category): Response
+    public function edit(Request $request, Category $category)
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -105,9 +111,12 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_delete", methods={"DELETE"})
+     * @Symfony\Component\Routing\Annotation\Route("/{id}", name="category_delete", methods={"DELETE"})
+     * @param Category $category
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function delete(Request $request, Category $category): Response
+    public function delete(Request $request, Category $category)
     {
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
