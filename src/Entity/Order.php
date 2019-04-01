@@ -176,7 +176,7 @@ class Order
 
     public function getDate()
     {
-        $newDate = $this->date->format('d-m-Y,H:m');
+        $newDate = $this->date->format('d-m-Y,H:i');
         return $newDate;
     }
 

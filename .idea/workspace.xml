@@ -5,155 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac597815-00a9-4600-811f-55f009843a5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/clothing.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/pictureOne.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/pictureTwo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/styles/shop-homepage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/8299ca747ebe133eac4e9403dfcf5f5d.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/998f4f6a224ca7f7a8b7fcde0f554405.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/db37a99cf8ffb7c16a2d76e97c35671e.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/e431f3193511bf1b42a139bb92ba509b.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/home/newBootstrap.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2bc31f35-8af4-4cdf-b096-efb2d0b04744.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2bc31f35-8af4-4cdf-b096-efb2d0b04744.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/adv_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/adv_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/adv_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/banner_2_background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/banner_2_product.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/banner_background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/banner_product.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/best_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/best_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/best_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/best_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/best_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/best_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog_single_background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brands_8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/cart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/char_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/char_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/char_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/char_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/contact_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/contact_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/contact_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/deals.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/featured_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/heart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logos_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logos_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logos_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logos_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/mail.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/mail_white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/marker.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/new_single.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/phone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/phone_white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/popular_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/popular_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/popular_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/popular_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/popular_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/quote.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/review_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/review_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/review_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/search.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/send.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shop_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shop_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shop_background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shopping_cart.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/single_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/single_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/single_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/single_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/trends_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/trends_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/trends_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/trends_background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/user.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/user.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/view_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/view_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/view_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/view_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/view_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/view_6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CustomPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CustomPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CartFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CartFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserChangePasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserChangePasswordType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserEditType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserEditType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/editCustomPage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/editCustomPage.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/edituser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/edituser.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/categorydetails.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/categorydetails.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/customPage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/customPage.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/footer.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/header.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/home.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/newOrder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/newOrder.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/paypal.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/popularcategory.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/popularcategory.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/productdetails.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/productdetails.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/profile.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/shopcart.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/shopcart.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/test.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/userOrder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/userOrder.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/userOrders.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/userOrders.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/userWishList.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/userWishList.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/userChangePassword.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/userChangePassword.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/useredit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/useredit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Order.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -234,11 +87,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="413" selection-start-line="413" selection-end-line="413" />
+              <folding>
+                <element signature="e#34#54#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/order">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/CustomPage.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -290,7 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Entity/Cart.php" />
         <option value="$PROJECT_DIR$/templates/admin/orderDetails.html.twig" />
         <option value="$PROJECT_DIR$/templates/home/paypal.html.twig" />
         <option value="$PROJECT_DIR$/templates/category/index.html.twig" />
@@ -341,6 +223,7 @@
         <option value="$PROJECT_DIR$/templates/home/categorydetails.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/src/Entity/CustomPage.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Order.php" />
       </list>
     </option>
   </component>
@@ -652,12 +535,12 @@
       <workItem from="1553792586968" duration="16291000" />
       <workItem from="1553840865153" duration="20444000" />
       <workItem from="1553973101994" duration="59000" />
-      <workItem from="1554095773324" duration="22025000" />
+      <workItem from="1554095773324" duration="22865000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="551481000" />
+    <option name="totallyTimeSpent" value="552321000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -672,26 +555,26 @@
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.24546425" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.24546425" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info id="Favorites" order="2" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286026" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32969433" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.41835645" weight="0.31113538" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.41835645" visible="true" weight="0.31113538" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286026" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286026" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" weight="0.28056768" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5816435" side_tool="true" weight="0.31113538" />
       <window_info anchor="bottom" id="Database Console" order="12" sideWeight="0.4994664" weight="0.32751092" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2497332" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.13713981" />
+      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.13713981" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19743863" />
@@ -766,11 +649,6 @@
           <url>file://$PROJECT_DIR$/vendor/symfony/form/NativeRequestHandler.php</url>
           <line>50</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Controller/HomeController.php</url>
-          <line>413</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1043,23 +921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/order">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-406">
-          <caret line="424" selection-start-line="424" selection-end-line="424" />
-          <folding>
-            <element signature="e#34#54#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -1067,13 +928,6 @@
           <folding>
             <element signature="e#34#54#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1089,8 +943,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/CustomPage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="413" selection-start-line="413" selection-end-line="413" />
+          <folding>
+            <element signature="e#34#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/order">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
         </state>
       </provider>
     </entry>
