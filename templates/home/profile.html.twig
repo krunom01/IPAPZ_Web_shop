@@ -1,3 +1,6 @@
+{% extends 'home/newBootstrap.html.twig' %}
+{% block content %}
+
 {% for message in app.flashes('success') %}
     <div class="row mt-3">
         <div class="col">
@@ -7,22 +10,48 @@
         </div>
     </div>
 {% endfor %}
-Account details:
-firstname:
-{{ user.firstName }}
-lastname:
-{{ user.lastName }}
-email:
-{{ user.email }}
-<a href="{{ path('profile_edit')}}">
-    <button class="btn-primary" type="submit">Edit your details</button>
-</a>
-<a href="{{ path('changePassword')}}">
-    <button class="btn-primary" type="submit">Change password</button>
-</a>
-<a href="{{ path('wishList')}}">
-    <button class="btn-primary" type="submit">My wish list</button>
-</a>
-<a href="{{ path('orders')}}">
-    <button class="btn-primary" type="submit">My orders</button>
-</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{{ path('profile_edit')}}">
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('changePassword')}}">
+                        <button class="btn btn-primary" type="submit">Change Password</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('wishList')}}">
+                        <button class="btn btn-primary" type="submit">Wishlist</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('orders')}}">
+                        <button class="btn btn-primary" type="submit">Orders</button>
+                    </a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -1,10 +1,10 @@
-{% extends 'home/base.html.twig' %}
+{% extends 'home/newBootstrap.html.twig' %}
 
-{% block title %}Register{% endblock %}
+
 
 {% block content %}
-    <h1>Register</h1>
-
+    <h3 class="text-center text-black pt-5">Register</h3>
+    <div id="login-row" class="row justify-content-center align-items-center">
     {{ form_start(registrationForm) }}
     {{ form_row(registrationForm.firstName) }}
     {{ form_row(registrationForm.lastName) }}
@@ -13,4 +13,5 @@
     {{ form_row(registrationForm.plainPassword.second) }}
     <button class="btn" formnovalidate>Register</button>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}

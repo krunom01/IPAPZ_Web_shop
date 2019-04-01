@@ -1,8 +1,39 @@
-{% extends 'home/base.html.twig' %}
-
+{% extends 'home/newBootstrap.html.twig' %}
 {% block content %}
+{% for message in app.flashes('success') %}
+    <div class="row mt-3">
+        <div class="col">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+{% endfor %}
 
-{{ page.content|raw|nl2br }}
+<div class="row">
+
+    <div class="col-lg-3">
+
+        <a class="nav-link" href="{{ path('home') }}"><h2 class="my-4">Categories</h2></a>
+        <div class="list-group">
+            {% for category in categories %}
+                <a class="list-group-item" href="{{ path('category_details', {id: category.id}) }}">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+
+    </div>
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-9">
+        {{ page.content|raw|nl2br }}
+        <!-- /.row -->
+    </div>
+    <!-- /.col-lg-9 -->
+</div>
+<!-- /.row -->
+
 
 {% endblock %}
+
+
 

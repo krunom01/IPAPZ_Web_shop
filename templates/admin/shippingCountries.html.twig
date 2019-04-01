@@ -26,9 +26,9 @@
             <tr>
                 <td>{{ country.country }}</td>
                 <td>{{ country.countryCode }}</td>
-                <td>{{ country.shippingPrice }}</td>
+                <td>{{ country.shippingPrice }} €</td>
                 <td><a href="{{ path('admin_deleteCountry', {id: country.id }) }}" class="btn btn-danger">Delete</a></td>
-                <td><a href="{{ path('admin_editCountry', {id: country.id }) }}" class="btn btn-primary">Edit</a></t
+                <td><a href="{{ path('admin_editCountry', {id: country.id }) }}" class="btn btn-primary">Edit</a></td>
             </tr>
         {% else %}
             <tr>

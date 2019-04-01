@@ -1,18 +1,23 @@
+
+{% extends 'home/newBootstrap.html.twig' %}
+{% block content %}
+    {% for message in app.flashes('success') %}
+        <div class="row mt-3">
+            <div class="col">
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div style="margin-top: 10px"></div>
+
 {% if coupon != 1 %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Add coupon code') }}</button>
     {{ form_end(form) }}
 {% endif %}
-{% for message in app.flashes('success') %}
-    <div class="row mt-3">
-        <div class="col">
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        </div>
-    </div>
-{% endfor %}
 
 <table class="table">
     <thead>
@@ -40,13 +45,13 @@
     </tbody>
 </table>
 
-Total price without shipping : {{ total }} kn, <br>
-Shipping Price: {{ shippingPrice }}, <br>
-Total price with shipping : {{ totalWithShipping }} kn <br>
+Total price without shipping : {{ total }} €, <br>
+Shipping Price: {{ shippingPrice }} €, <br>
+Total price with shipping : {{ totalWithShipping }} € <br>
 
 {% for payment in payments %}
     {% if payment.type == 'invoice' %}
-            <a href="{{ path('invoiceOrder') }}"><button class="btn-primary">{{ payment.type }}</button></a>
+            <a href="{{ path('invoiceOrder') }}"><button  style="margin-top: 10px"  class="btn btn-primary">{{ payment.type }}</button></a>
     {% elseif payment.type == 'paypal' %}
         <form method="post" id="payment-form" action="{{ path('paypal_payment') }}">
             <section>
@@ -57,11 +62,11 @@ Total price with shipping : {{ totalWithShipping }} kn <br>
             <input id="nonce" name="payment_method_nonce" type="hidden" />
             <button class="btn btn-primary" type="submit" onclick="submitOnce(this, form)"><span>Complete Transaction</span></button>
         </form>
-        {% else %}
-            <a href="#"><button class="btn-primary">{{ payment.type }}</button></a>
+
     {% endif %}
 {% endfor %}
-
+{% endblock %}
+    {% block javascripts %}
 <script src="https://js.braintreegateway.com/web/dropin/1.16.0/js/dropin.min.js"></script>
 <script>
     var form = document.querySelector('#payment-form');
@@ -90,6 +95,7 @@ Total price with shipping : {{ totalWithShipping }} kn <br>
             });
         });
     });
+
 </script>
 <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
 
@@ -98,3 +104,6 @@ Total price with shipping : {{ totalWithShipping }} kn <br>
 
 <!-- Load the PayPal Checkout component. -->
 <script src="https://js.braintreegateway.com/web/3.43.0/js/paypal-checkout.min.js"></script>
+{% endblock %}
+{% block footer %}
+{% endblock %}

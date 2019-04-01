@@ -5,10 +5,155 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac597815-00a9-4600-811f-55f009843a5e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/clothing.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pictureOne.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pictureTwo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/styles/shop-homepage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/image/8299ca747ebe133eac4e9403dfcf5f5d.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/image/998f4f6a224ca7f7a8b7fcde0f554405.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/image/db37a99cf8ffb7c16a2d76e97c35671e.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/upload/image/e431f3193511bf1b42a139bb92ba509b.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/home/newBootstrap.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2bc31f35-8af4-4cdf-b096-efb2d0b04744.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2bc31f35-8af4-4cdf-b096-efb2d0b04744.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/adv_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/adv_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/adv_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/banner_2_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/banner_2_product.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/banner_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/banner_product.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/best_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/best_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/best_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/best_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/best_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/best_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/blog_single_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/brands_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/cart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/char_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/char_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/char_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/char_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/contact_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/contact_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/contact_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/deals.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/featured_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/heart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/logos_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/logos_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/logos_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/logos_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/mail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/mail_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/marker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/new_single.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/phone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/phone_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/popular_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/popular_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/popular_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/popular_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/popular_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/quote.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/review_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/review_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/review_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/send.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/shop_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/shop_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/shop_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/shopping_cart.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/single_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/single_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/single_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/single_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/trends_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/trends_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/trends_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/trends_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/user.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/view_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/view_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/view_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/view_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/view_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/view_6.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/allOrders.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/allOrders.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/users.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/users.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/CustomPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CustomPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/CartFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CartFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserChangePasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserChangePasswordType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserEditType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserEditType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/editCustomPage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/editCustomPage.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/edituser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/edituser.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/base.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/categorydetails.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/categorydetails.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/customPage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/customPage.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/footer.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/header.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/home.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/newOrder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/newOrder.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/paypal.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/popularcategory.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/popularcategory.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/productdetails.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/productdetails.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/profile.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/shopcart.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/shopcart.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/test.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/userOrder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/userOrder.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/userOrders.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/userOrders.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/userWishList.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/userWishList.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/userChangePassword.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/userChangePassword.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/useredit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/useredit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +210,7 @@
         <item name="test@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="test: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="order: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="custom_page: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -89,55 +234,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="50" column="10" selection-start-line="46" selection-start-column="8" selection-end-line="50" selection-end-column="10" />
-              <folding>
-                <element signature="e#34#54#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/home/home.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="201" column="19" selection-start-line="201" selection-start-column="19" selection-end-line="203" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/users.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
+        <entry file="file://$PROJECT_DIR$/src/Entity/CustomPage.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="358" column="14" selection-start-line="358" selection-start-column="14" selection-end-line="358" selection-end-column="14" />
-              <folding>
-                <element signature="e#34#65#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/allOrders.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="77" column="39" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="39" />
+            <state relative-caret-position="360">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="47" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Coupon.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -155,6 +272,13 @@
       <find>admin_users</find>
       <find>customPage</find>
       <find>categor</find>
+      <find>pick you</find>
+      <find>custompage</find>
+      <find>edit</find>
+      <find>add pro</find>
+      <find>newOr</find>
+      <find>confirm</find>
+      <find>confim</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -166,57 +290,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/config/bundles.php" />
-        <option value="$PROJECT_DIR$/templates/admin/newCSV.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/PaymentType.php" />
-        <option value="$PROJECT_DIR$/templates/admin/newCountry.html.twig" />
-        <option value="$PROJECT_DIR$/templates/admin/base.html.twig" />
-        <option value="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" />
-        <option value="$PROJECT_DIR$/templates/admin/editCountry.html.twig" />
-        <option value="$PROJECT_DIR$/src/Form/ImportShippingCSVType.php" />
-        <option value="$PROJECT_DIR$/src/Form/ShippingCountryType.php" />
-        <option value="$PROJECT_DIR$/templates/admin/search.html.twig" />
-        <option value="$PROJECT_DIR$/src/Repository/CountryShippingRepository.php" />
-        <option value="$PROJECT_DIR$/templates/home/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/Order.php" />
-        <option value="$PROJECT_DIR$/src/Form/OrderFormType.php" />
-        <option value="$PROJECT_DIR$/src/Entity/CountryShipping.php" />
-        <option value="$PROJECT_DIR$/templates/home/confimOrder.html.twig" />
-        <option value="$PROJECT_DIR$/templates/home/newOrder.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Cart.php" />
-        <option value="$PROJECT_DIR$/templates/home/shopcart.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/orderDetails.html.twig" />
         <option value="$PROJECT_DIR$/templates/home/paypal.html.twig" />
         <option value="$PROJECT_DIR$/templates/category/index.html.twig" />
         <option value="$PROJECT_DIR$/templates/category/new.html.twig" />
         <option value="$PROJECT_DIR$/templates/category/edit.html.twig" />
-        <option value="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/orderPDF.html.twig" />
         <option value="$PROJECT_DIR$/templates/home/header.html.twig" />
-        <option value="$PROJECT_DIR$/templates/home/home.html.twig" />
-        <option value="$PROJECT_DIR$/templates/security/useredit.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Security/UserChangePasswordType.php" />
-        <option value="$PROJECT_DIR$/templates/security/userChangePassword.html.twig" />
-        <option value="$PROJECT_DIR$/templates/home/userWishList.html.twig" />
-        <option value="$PROJECT_DIR$/templates/home/profile.html.twig" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2bc31f35-8af4-4cdf-b096-efb2d0b04744/console.sql" />
         <option value="$PROJECT_DIR$/src/Repository/OrderRepository.php" />
-        <option value="$PROJECT_DIR$/templates/home/userOrders.html.twig" />
-        <option value="$PROJECT_DIR$/templates/home/userOrder.html.twig" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/Form/UserEditType.php" />
-        <option value="$PROJECT_DIR$/src/Form/UserChangePasswordType.php" />
-        <option value="$PROJECT_DIR$/src/Form/CartFormType.php" />
         <option value="$PROJECT_DIR$/src/Entity/Wishlist.php" />
         <option value="$PROJECT_DIR$/src/Controller/WishlistController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
-        <option value="$PROJECT_DIR$/config/packages/security.yaml" />
-        <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/templates/admin/users.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/allOrders.html.twig" />
+        <option value="$PROJECT_DIR$/.env.local" />
+        <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/CartFormType.php" />
+        <option value="$PROJECT_DIR$/src/Form/RegistrationFormType.php" />
+        <option value="$PROJECT_DIR$/templates/security/register.html.twig" />
+        <option value="$PROJECT_DIR$/config/packages/security.yaml" />
+        <option value="$PROJECT_DIR$/templates/home/productdetails.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/newOrder.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/papal.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/profile.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/userOrders.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/shopcart.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/userOrder.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/edituser.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" />
+        <option value="$PROJECT_DIR$/templates/product/new.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/customPage.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/templates/admin/editCustomPage.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/popularcategory.html.twig" />
+        <option value="$PROJECT_DIR$/templates/security/useredit.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/UserEditType.php" />
+        <option value="$PROJECT_DIR$/templates/security/userChangePassword.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/UserChangePasswordType.php" />
+        <option value="$PROJECT_DIR$/templates/home/userWishList.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/home.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
+        <option value="$PROJECT_DIR$/templates/home/newBootstrap.html.twig" />
+        <option value="$PROJECT_DIR$/templates/home/categorydetails.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/CustomPage.php" />
       </list>
     </option>
   </component>
@@ -358,13 +482,19 @@
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="webshop" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="webshop" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webshop" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="upload" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
@@ -392,31 +522,13 @@
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="webshop" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webshop" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webshop" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="webshop" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webshop" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
@@ -538,12 +650,14 @@
       <workItem from="1553753436333" duration="15401000" />
       <workItem from="1553774557991" duration="6751000" />
       <workItem from="1553792586968" duration="16291000" />
-      <workItem from="1553840865153" duration="17892000" />
+      <workItem from="1553840865153" duration="20444000" />
+      <workItem from="1553973101994" duration="59000" />
+      <workItem from="1554095773324" duration="22025000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="526845000" />
+    <option name="totallyTimeSpent" value="551481000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -558,7 +672,7 @@
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.24012807" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.24546425" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info id="Favorites" order="2" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -577,7 +691,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2497332" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.15314835" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.13713981" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19743863" />
@@ -653,58 +767,62 @@
           <line>50</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/HomeController.php</url>
+          <line>413</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/order">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/profile.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" selection-start-line="25" selection-end-line="27" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/shopcart.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="22" column="86" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/userOrders.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/userOrder.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/search.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/admin/newPaymentType.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/shippingCountries.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="118" selection-start-line="30" selection-start-column="118" selection-end-line="30" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/WishlistController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home/customPage.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="43" selection-start-column="43" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/allOrders.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="68" selection-start-line="68" selection-end-line="73" selection-end-column="12" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="60" column="91" selection-start-line="60" selection-start-column="91" selection-end-line="60" selection-end-column="91" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/category.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/categoryProducts.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/coupons.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/customPages.html.twig">
@@ -714,78 +832,98 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/editCustomPage.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/editPaymentType.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/newcategory.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/admin/editProductCategory.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/newCountry.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/newCustomPage.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/newPaymentType.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/orderDetails.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ordered_items/_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ordered_items/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ordered_items/new.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/home/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1098" />
+        <state relative-caret-position="-1563" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/orderPDF.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/home/footer.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="97" column="22" lean-forward="true" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home/header.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/product/_delete_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/home/popularcategory.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="41" column="63" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/product/_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/home/test.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1260" />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/product/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/home/shopcart.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="119" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="119" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/product/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/home/profile.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/product/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/home/userOrder.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" selection-start-line="33" selection-end-line="35" selection-end-column="14" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/wishlist/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/admin/edituser.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/security/useredit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="29" selection-start-column="29" selection-end-column="29" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/Form/RegistrationFormType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="13" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="285">
-            <caret line="19" selection-start-line="19" selection-end-line="19" selection-end-column="9" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/templates/security/userChangePassword.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="29" selection-start-column="29" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/UserEditType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="315">
+          <caret line="21" column="48" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="48" />
           <folding>
             <element signature="e#28#48#0#PHP" expanded="true" />
           </folding>
@@ -795,69 +933,99 @@
     <entry file="file://$PROJECT_DIR$/src/Form/UserChangePasswordType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
-          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+          <caret line="42" column="69" selection-start-line="42" selection-start-column="69" selection-end-line="42" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/CartFormType.php">
+    <entry file="file://$PROJECT_DIR$/templates/home/userOrders.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="43" column="10" lean-forward="true" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+    <entry file="file://$PROJECT_DIR$/templates/home/userWishList.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="4" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="24" />
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Wishlist.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-261">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="-2285">
+          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/WishlistController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/templates/home/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
+    <entry file="file://$PROJECT_DIR$/templates/home/home.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-165">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding>
-            <element signature="e#34#54#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="40" column="20" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
+        <state relative-caret-position="-81" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home/newBootstrap.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="122" column="102" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
         </state>
       </provider>
     </entry>
-    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/cart_item">
+    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/cart">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/ordered_items">
+    <entry file="file://$PROJECT_DIR$/templates/home/categorydetails.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/coupon">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/AbstractHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/cache/Traits/FilesystemCommonTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/debug/ErrorHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="661" selection-start-line="661" selection-end-line="661" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -870,55 +1038,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="152" selection-start-line="152" selection-end-line="152" />
+        <state relative-caret-position="471">
+          <caret line="170" selection-start-line="170" selection-end-line="170" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/home.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="201" column="19" selection-start-line="201" selection-start-column="19" selection-end-line="203" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/users.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/allOrders.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="77" column="39" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="39" />
+    <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/order">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="50" column="10" selection-start-line="46" selection-start-column="8" selection-end-line="50" selection-end-column="10" />
+        <state relative-caret-position="-406">
+          <caret line="424" selection-start-line="424" selection-end-line="424" />
           <folding>
             <element signature="e#34#54#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="358" column="14" selection-start-line="358" selection-start-column="14" selection-end-line="358" selection-end-column="14" />
+        <state relative-caret-position="99">
+          <caret line="275" selection-start-line="275" selection-end-line="275" />
           <folding>
-            <element signature="e#34#65#0#PHP" expanded="true" />
+            <element signature="e#34#54#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Coupon.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/CustomPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
         </state>
       </provider>
     </entry>

@@ -1,4 +1,4 @@
-{% extends 'home/base.html.twig' %}
+{% extends 'home/newBootstrap.html.twig' %}
 
 
 
@@ -20,7 +20,7 @@
                 <td><img width="80" height="80" src="../../../../../upload/image/{{ item.product.image }}" alt=""></td>
 
                 <td>
-                    <a href="{{ path('shopCartDeleteIdem', {'id': item.product.id}) }}">delete item from shop cart</a>
+                    <a href="{{ path('shopCartDeleteIdem', {'id': item.product.id}) }}" class="btn btn-danger">delete item from Shopcart</a>
                 </td>
             </tr>
         {% else %}
@@ -31,10 +31,10 @@
         </tbody>
     </table>
     {% if total != 0 %}
-    Total price : {{ total }}
-
+    Total price : {{ total }} €
+    <br>
     <a href="{{ path('newOrder')}}">
-        <button class="btn" type="submit">Order</button>
+        <button class="btn btn-primary" type="submit">Checkout</button>
     </a>
     {% endif %}
 {% endblock %}

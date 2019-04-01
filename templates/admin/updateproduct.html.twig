@@ -1,3 +1,5 @@
+{% extends 'admin/base.html.twig' %}
+{% block content %}
 {{ form_start(form) }}
             {{ form_row(form.name) }}
             {{ form_row(form.price) }}
@@ -7,3 +9,4 @@
 
 <button type="submit" class="btn btn-primary" formnovalidate>Update</button>
 {{ form_end(form) }}
+{% endblock %}

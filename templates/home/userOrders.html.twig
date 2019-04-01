@@ -1,16 +1,45 @@
+{% extends 'home/newBootstrap.html.twig' %}
 
+{% block content %}
 {% set count = 0 %}
-{% for userOrder in userOrders %}
-    {% set count = count + 1 %}
-    {{ count }}
-    {{ userOrder.userName }}
-    {{ userOrder.userMail }}
-    {{ userOrder.country }}
-    {{ userOrder.address }}
-    {{ userOrder.status }}
-    {{ userOrder.date }}
-    {{ userOrder.totalPrice }} €
-    <a href="{{ path('user_order_details', {'id': userOrder.id}) }}">
-        <button class="btn-primary" type="submit">Details</button>
-    </a>
-{% endfor %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>User</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Total price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for userOrder in userOrders %}
+        {% set count = count + 1 %}
+        <tr>
+            <td>{{ count }}</td>
+            <td>{{ userOrder.userName }}</td>
+            <td>{{ userOrder.userMail }}</td>
+            <td>{{ userOrder.country }}</td>
+            <td>{{ userOrder.address }}</td>
+            <td>{{ userOrder.status }}</td>
+            <td>{{ userOrder.date }}</td>
+            <td>{{ userOrder.totalPrice }} €</td>
+            <td>
+                <a href="{{ path('user_order_details', {'id': userOrder.id}) }}">
+                    <button class="btn btn-primary" type="submit">Details</button>
+                </a>
+            </td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block footer %}
+{% endblock %}

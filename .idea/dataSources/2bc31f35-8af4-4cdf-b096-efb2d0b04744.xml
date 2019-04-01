@@ -1195,7 +1195,7 @@
     </column>
     <column id="293" parent="250" name="content">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

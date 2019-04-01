@@ -1,20 +1,19 @@
-{% extends 'home/base.html.twig' %}
+{% extends 'home/newBootstrap.html.twig' %}
 {% block content %}
 
-{% for message in app.flashes('success') %}
-    <div class="row mt-3">
-        <div class="col">
-            <div class="alert alert-success">
-                {{ message }}
+    {% for message in app.flashes('success') %}
+        <div class="row mt-3">
+            <div class="col">
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
             </div>
         </div>
-    </div>
-{% endfor %}
-
+    {% endfor %}
 {{ form_start(formCart) }}
     {{ form_widget(formCart) }}
-<button href="{{ path('confirmOrder') }}" class="btn">{{ button_label|default('next') }}</button>
+<button href="{{ path('confirmOrder') }}" class="btn btn-primary">{{ button_label|default('next') }}</button>
 {{ form_end(formCart) }}
 
-    Total price : {{ total }} kn
+    Total price : {{ total }} €
 {% endblock %}

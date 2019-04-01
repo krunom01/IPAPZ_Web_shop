@@ -50,7 +50,7 @@ class HomeController extends AbstractController
             10/*limit per page*/
         );
         return $this->render(
-            'home/home.html.twig',
+            'home/newBootstrap.html.twig',
             [
                 'title' => 'Sport webshop',
                 'categories' => $categories,
@@ -59,7 +59,6 @@ class HomeController extends AbstractController
             ]
         );
     }
-
     /**
      * @Symfony\Component\Routing\Annotation\Route("/product_details/{id}/{urlCustom}", name="product_details")
      * @param                                      ProductRepository $productRepository
@@ -67,6 +66,7 @@ class HomeController extends AbstractController
      * @param                                      CartRepository $cartRepository
      * @param                                      CartItemRepository $cartItemRepository
      * @param                                      $id
+     * @param                                      CustomPageRepository $customPageRepository
      * @param                                      Request $request
      * @param                                      EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
@@ -78,6 +78,7 @@ class HomeController extends AbstractController
         CartRepository $cartRepository,
         Request $request,
         EntityManagerInterface $entityManager,
+        CustomPageRepository $customPageRepository,
         CartItemRepository $cartItemRepository
     ) {
 
@@ -140,6 +141,7 @@ class HomeController extends AbstractController
                 'title' => 'Product details',
                 'wishlistProduct' => $wishListProduct,
                 'form' => $form->createView(),
+                'customPages' => $customPageRepository->findAll(),
 
             ]
         );
@@ -147,51 +149,42 @@ class HomeController extends AbstractController
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/category/{id}", name="category_details", methods={"GET"})
-     * @param                   CategoryRepository $categoryRepository
+     * @param CategoryRepository $categoryRepository
      * @param $id
      * @param ProductCategoryRepository $productCategoryRepository
+     * @param CustomPageRepository $customPageRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function showCategory(
         CategoryRepository $categoryRepository,
         $id,
+        CustomPageRepository $customPageRepository,
+        PaginatorInterface $paginator,
+        Request $request,
         ProductCategoryRepository $productCategoryRepository
     ) {
 
         $categories = $categoryRepository->findAll();
         $categoryProducts = $productCategoryRepository->findBy(['category' => $id]);
+        $pagination = $paginator->paginate(
+            $categoryProducts, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
         return $this->render(
             'home/categorydetails.html.twig',
             [
                 'title' => 'category details',
                 'categories' => $categories,
-                'categoryProducts' => $categoryProducts
+                'pagination' => $pagination,
+                'customPages' => $customPageRepository->findAll(),
 
             ]
         );
     }
-
-    /**
-     * @Symfony\Component\Routing\Annotation\Route("/category/{id}", name="new_cart", methods={"GET"})
-     * @param $id
-     * @param ProductRepository $productRepository
-     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
-     */
-    public function newUserCart($id, ProductRepository $productRepository)
-    {
-
-        $product = $productRepository->findBy($id);
-
-        return $this->render(
-            'home/categorydetails.html.twig',
-            [
-
-
-            ]
-        );
-    }
-
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/shopcart", name="shopCart")
@@ -199,12 +192,14 @@ class HomeController extends AbstractController
      * @param Request $request
      * @param CouponRepository $couponRepository
      * @param EntityManagerInterface $entityManager
+     * @param CustomPageRepository $customPageRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userShopCart(
         Request $request,
         CartRepository $cartRepository,
         CouponRepository $couponRepository,
+        CustomPageRepository $customPageRepository,
         EntityManagerInterface $entityManager
     ) {
         $user = $this->getUser();
@@ -246,7 +241,7 @@ class HomeController extends AbstractController
                 'total' => $shopCartTotal,
                 'form' => $form->createView(),
                 'coupon' => $coupon,
-
+                'customPages' => $customPageRepository->findAll(),
             ]
         );
     }
@@ -288,24 +283,20 @@ class HomeController extends AbstractController
      * @Symfony\Component\Routing\Annotation\Route("/neworder", name="newOrder")
      * @param CartRepository $cartRepository
      * @param Request $request
-     * @param CouponRepository $couponRepository
-     * @param CartItemRepository $cartItemRepository
      * @param EntityManagerInterface $entityManager
-     * @param CountryShippingRepository $countryShippingRepository
+     * @param CustomPageRepository $customPageRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userNewOrder(
         Request $request,
         CartRepository $cartRepository,
-        CartItemRepository $cartItemRepository,
-        CouponRepository $couponRepository,
         EntityManagerInterface $entityManager,
-        CountryShippingRepository $countryShippingRepository
+        CustomPageRepository $customPageRepository
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
         if ($userCart == null) {
-            $this->addFlash('success', 'please add some products before order');
+            $this->addFlash('warning', 'please add some products before order');
             return $this->redirectToRoute('home');
         } $userCart->getSubTotal();
         $form = $this->createForm(InsertCouponType::class);
@@ -323,8 +314,10 @@ class HomeController extends AbstractController
 
                 $entityManager->persist($userCart);
                 $entityManager->flush();
-                $this->addFlash('success', 'Pick your payment method');
                 return $this->redirectToRoute('confirmOrder');
+            } else {
+                $this->addFlash('success', 'Invalid address');
+                return $this->redirectToRoute('newOrder');
             }
         } return $this->render(
             'home/newOrder.html.twig',
@@ -334,6 +327,7 @@ class HomeController extends AbstractController
                 'form' => $form->createView(),
                 'coupon' => $userCart->getCoupon(),
                 'formCart' => $formCart->createView(),
+                'customPages' => $customPageRepository->findAll(),
             ]
         );
     }
@@ -345,6 +339,7 @@ class HomeController extends AbstractController
      * @param PaymentTypeRepository $paymentType
      * @param EntityManagerInterface $entityManager
      * @param CountryShippingRepository $countryShippingRepository
+     * @param CustomPageRepository $customPageRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function userOrderConfirm(
@@ -353,15 +348,16 @@ class HomeController extends AbstractController
         CouponRepository $couponRepository,
         EntityManagerInterface $entityManager,
         CountryShippingRepository $countryShippingRepository,
+        CustomPageRepository $customPageRepository,
         PaymentTypeRepository $paymentType
     ) {
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);
         if ($userCart == null) {
-            $this->addFlash('success', 'Add products in shopcart and set your address');
+            $this->addFlash('warning', 'Add products in shopcart and set your address');
             return $this->redirectToRoute('home');
         } if (empty($userCart->getSubTotal()) or empty($userCart->getAddress())) {
-            $this->addFlash('success', 'Add products in shopcart and set your address');
+            $this->addFlash('warning', 'Add products in shopcart and set your address');
             return $this->redirectToRoute('home');
         } $form = $this->createForm(InsertCouponType::class);
         $form->handleRequest($request);
@@ -395,7 +391,8 @@ class HomeController extends AbstractController
                 'coupon' => $userCart->getCoupon(),
                 'payments' => $paymentType->findBy(['visibility' => '1']),
                 'gateway' => $gateway,
-                'usercart' => $userCart
+                'usercart' => $userCart,
+                'customPages' => $customPageRepository->findAll(),
             ]
         );
     }
@@ -445,11 +442,13 @@ class HomeController extends AbstractController
      * @Symfony\Component\Routing\Annotation\Route("/cms/{customPage}/", name="customPage", methods={"GET"})
      * @param CustomPageRepository $customPageRepository
      * @param $customPage
+     * @param CategoryRepository $categoryRepository
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function showCustomPage(
         CustomPageRepository $customPageRepository,
-        $customPage
+        $customPage,
+        CategoryRepository $categoryRepository
     ) {
 
         $page = $customPageRepository->findOneBy(['customUrl' => $customPage]);
@@ -457,7 +456,9 @@ class HomeController extends AbstractController
         return $this->render(
             'home/customPage.html.twig',
             [
-                'page' => $page
+                'page' => $page,
+                'customPages' => $customPageRepository->findAll(),
+                'categories' => $categoryRepository->findAll(),
             ]
         );
     }
@@ -470,14 +471,13 @@ class HomeController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function payment(
+    public function paypal(
         EntityManagerInterface $entityManager,
         CartRepository $cartRepository,
         CartItemRepository $cartItemRepository,
         Request $request
 
     ) {
-
 
         $user = $this->getUser();
         $userCart = $cartRepository->findOneBy(['user' => $user->getId()]);

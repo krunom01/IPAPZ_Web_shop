@@ -21,7 +21,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CouponRepository;
 use App\Repository\CustomPageRepository;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\UserFormType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,40 +71,7 @@ class AdminController extends AbstractController
         );
     }
 
-    /**
-     * @Symfony\Component\Routing\Annotation\Route("/admin/userEdit/{id}", name ="admin_user_edit")
-     * @param  Request $request
-     * @param User $user
-     * @param  EntityManagerInterface $entityManager
-     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\Response
-     */
 
-
-    public function editUser(
-        Request $request,
-        EntityManagerInterface $entityManager,
-        User $user
-    ) {
-
-        $form = $this->createForm(UserFormType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            $this->addFlash('success', 'Successfully edited!');
-            return $this->redirectToRoute('admin_users');
-        }
-
-        return $this->render(
-            'admin/edituser.html.twig',
-            [
-                'title' => 'Edit list',
-                'user' => $user,
-                'form' => $form->createView(),
-            ]
-        );
-    }
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/admin/userOrder/{id}", name ="admin_user_order")
@@ -709,5 +675,4 @@ class AdminController extends AbstractController
             ]
         );
     }
-
 }

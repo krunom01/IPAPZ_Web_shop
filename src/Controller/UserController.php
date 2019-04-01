@@ -6,12 +6,13 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserChangePasswordType;
 use App\Form\UserEditType;
+use App\Form\UserFormType;
+use App\Repository\CustomPageRepository;
 use App\Repository\OrderRepository;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -31,15 +32,24 @@ class UserController extends AbstractController
      * @Symfony\Component\Routing\Annotation\Route("/login/", name="app_login")
      * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("not   is_granted('ROLE_USER')")
      * @param           AuthenticationUtils $authenticationUtils
-     * @return          Response
+     * @param      CustomPageRepository $customPageRepository,
+     * @return           \Symfony\Component\HttpFoundation\Response
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+    public function login(
+        AuthenticationUtils $authenticationUtils,
+        CustomPageRepository $customPageRepository
+    ) {
+        if ($this->isGranted('ROLE_USER') or $this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('home');
+        } $error = $authenticationUtils->getLastAuthenticationError();
+
         $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render(
+            'security/login.html.twig',
+            ['last_username' => $lastUsername,
+                'error' => $error, 'customPages' => $customPageRepository->findAll()
+            ]
+        );
     }
 
     /**
@@ -48,15 +58,17 @@ class UserController extends AbstractController
      * @param              UserPasswordEncoderInterface $passwordEncoder
      * @param              GuardAuthenticatorHandler $guardHandler
      * @param              LoginFormAuthenticator $authenticator
+     * @param      CustomPageRepository $customPageRepository
      * @param              EntityManagerInterface $entityManager
-     * @return             null|Response
+     * @return           \Symfony\Component\HttpFoundation\Response            null|Response
      */
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
         LoginFormAuthenticator $authenticator,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CustomPageRepository $customPageRepository
     ) {
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('home');
@@ -84,6 +96,7 @@ class UserController extends AbstractController
             'security/register.html.twig',
             [
                 'registrationForm' => $form->createView(),
+                'customPages' => $customPageRepository->findAll()
 
             ]
         );
@@ -112,16 +125,19 @@ class UserController extends AbstractController
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/profile", name="profile")
-     * @return            null|Response
+     * @param CustomPageRepository $customPageRepository
+     * @return           \Symfony\Component\HttpFoundation\Response           null|Response
      */
-    public function profile()
-    {
+    public function profile(
+        CustomPageRepository $customPageRepository
+    ) {
         $user = $this->getUser();
 
         return $this->render(
             'home/profile.html.twig',
             [
                 'user' => $user,
+                'customPages' => $customPageRepository->findAll(),
             ]
         );
     }
@@ -130,11 +146,13 @@ class UserController extends AbstractController
      * @Symfony\Component\Routing\Annotation\Route("/profile/edit", name="profile_edit")
      * @param             EntityManagerInterface $entityManager
      * @param             Request $request
-     * @return            null|Response
+     * @param CustomPageRepository $customPageRepository
+     * @return           \Symfony\Component\HttpFoundation\Response            null|Response
      */
     public function editProfile(
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CustomPageRepository $customPageRepository
     ) {
 
         $user = $this->getUser();
@@ -148,20 +166,22 @@ class UserController extends AbstractController
             return $this->redirectToRoute('profile');
         } return $this->render(
             'security/useredit.html.twig',
-            ['userEdit' => $form->createView(),]
+            ['userEdit' => $form->createView(), 'customPages' => $customPageRepository->findAll()]
         );
     }
     /**
      * @Symfony\Component\Routing\Annotation\Route("/profile/changePassword", name="changePassword")
      * @param             EntityManagerInterface $entityManager
      * @param             UserPasswordEncoderInterface $passwordEncoder
+     * @param CustomPageRepository $customPageRepository
      * @param             Request $request
-     * @return            null|Response
+     * @return           \Symfony\Component\HttpFoundation\Response           null|Response
      */
     public function changePassword(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CustomPageRepository $customPageRepository
     ) {
         $user = $this->getUser();
         $form = $this->createForm(UserChangePasswordType::class, $user);
@@ -181,46 +201,54 @@ class UserController extends AbstractController
             return $this->redirectToRoute('profile');
         } return $this->render(
             'security/userChangePassword.html.twig',
-            ['userEdit' => $form->createView(),]
+            ['userEdit' => $form->createView(),'customPages' => $customPageRepository->findAll()]
         );
     }
 
     /**
      * @Symfony\Component\Routing\Annotation\Route("/profile/wishlist", name="wishList")
-     * @return            null|Response
+     * @param CustomPageRepository $customPageRepository
+     * @return           \Symfony\Component\HttpFoundation\Response            null|Response
      */
-    public function userWishlist()
-    {
+    public function userWishList(
+        CustomPageRepository $customPageRepository
+    ) {
         $user = $this->getUser();
 
         return $this->render(
             'home/userWishList.html.twig',
-            ['wishlist' => $user->getWish(),]
+            ['wishlist' => $user->getWish(),'customPages' => $customPageRepository->findAll()]
         );
     }
     /**
      * @Symfony\Component\Routing\Annotation\Route("/profile/orders", name="orders")
      * @param OrderRepository $orderRepository
-     * @return            null|Response
+     * @param CustomPageRepository $customPageRepository
+     * @return           \Symfony\Component\HttpFoundation\Response            null|Response
      */
     public function userOrders(
-        OrderRepository $orderRepository
+        OrderRepository $orderRepository,
+        CustomPageRepository $customPageRepository
     ) {
         $user = $this->getUser();
 
         return $this->render(
             'home/userOrders.html.twig',
-            ['userOrders' => $orderRepository->findUserOrders($user),]
+            ['userOrders' => $orderRepository->findUserOrders($user),
+                'customPages' => $customPageRepository->findAll()
+            ]
         );
     }
     /**
      * @Symfony\Component\Routing\Annotation\Route("/profile/order/{id}", name="user_order_details")
      * @param OrderRepository $orderRepository
      * @param $id
-     * @return            null|Response
+     * @param CustomPageRepository $customPageRepository
+     * @return           \Symfony\Component\HttpFoundation\Response           null|Response
      */
     public function userOrderDetails(
         OrderRepository $orderRepository,
+        CustomPageRepository $customPageRepository,
         $id
     ) {
         $user = $this->getUser();
@@ -233,7 +261,43 @@ class UserController extends AbstractController
 
         return $this->render(
             'home/userOrder.html.twig',
-            ['userItems' => $userItems->getOrderedItems(),]
+            ['userItems' => $userItems->getOrderedItems(),
+                'customPages' => $customPageRepository->findAll()
+            ]
+        );
+    }
+    /**
+     * @Symfony\Component\Routing\Annotation\Route("/admin/userEdit/{id}", name ="admin_user_edit")
+     * @param  Request $request
+     * @param User $user
+     * @param  EntityManagerInterface $entityManager
+     * @return           \Symfony\Component\HttpFoundation\Response
+     */
+
+
+    public function editUser(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        User $user
+    ) {
+
+        $form = $this->createForm(UserFormType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Successfully edited!');
+            return $this->redirectToRoute('users');
+        }
+
+        return $this->render(
+            'admin/edituser.html.twig',
+            [
+                'title' => 'Edit list',
+                'user' => $user,
+                'form' => $form->createView(),
+            ]
         );
     }
 }

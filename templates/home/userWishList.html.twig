@@ -1,7 +1,32 @@
+{% extends 'home/newBootstrap.html.twig' %}
 
+{% block content %}
 {% for wish in wishlist %}
+    {% set count = 0 %}
+ {% set count = count + 1 %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Product name</th>
 
-    {{ wish.product.name }}
-    <img src="../../../../../upload/image/{{ wish.product.image }}" alt="{{ wish.product.name }}">
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ count }}</td>
+                <td>{{ wish.product.name }}</td>
+                <td> <img src="../../../../../upload/image/{{ wish.product.image }}" alt="{{ wish.product.name }}"></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{% endfor %}
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
