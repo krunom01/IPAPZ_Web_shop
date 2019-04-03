@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\ProductCategory;
 use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Class Product
