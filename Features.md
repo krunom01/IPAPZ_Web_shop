@@ -12,7 +12,7 @@ changePassword() - User can change his password.
 
 userWishList() - In Products details, User can add Product in Wishlist.
 
-userOrders() - User Orders.
+userOrders() - User's Orders.
 
 userOrderDetails() - User can see his order with all information (list of products, product quantity, total price).
 
@@ -47,7 +47,7 @@ deleteCoupon() - admin deletes Coupon.
 
 adminOrders() -  list of all Orders. Orders can be filtrated by user name, email or date.
 
-createPdf() - admin can creat PDF file (invoice Order).
+createPdf() - admin can create PDF file (invoice Order).
 
 downloadPdf() - download Order in PDF.
 
@@ -77,7 +77,7 @@ HomeController:
 
 showProduct() - Product details with custom URL.
 
-userShopCart - User ShopCart with Items. 
+userShopCart - User's ShopCart with Items. 
 
 deleteItemFromShopCart() - User can delete Items from Cart.
 

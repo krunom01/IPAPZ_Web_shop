@@ -24,6 +24,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
+
 class HomeController extends AbstractController
 {
     /**
@@ -42,6 +43,7 @@ class HomeController extends AbstractController
         CustomPageRepository $customPageRepository,
         ProductRepository $productRepository
     ) {
+
         $categories = $categoryRepository->findAll();
         $products = $productRepository->findAll();
         $pagination = $paginator->paginate(
@@ -504,10 +506,10 @@ class HomeController extends AbstractController
     {
         return $gateway = new \Braintree_Gateway(
             [
-                'environment' => 'sandbox',
-                'merchantId' => '3z58zqv68q7ktm5q',
-                'publicKey' => 'ttrdtktqbbqvn3wg',
-                'privateKey' => '595fa94c954f64725283892411cd9ddf'
+                'environment' => getenv('APP_PayPalEnv'),
+                'merchantId' => getenv('APP_PayPalMerchantId'),
+                'publicKey' => getenv('APP_PayPalPublicKey'),
+                'privateKey' => getenv('APP_PayPalPrivateKey')
             ]
         );
     }
