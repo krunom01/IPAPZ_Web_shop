@@ -84,7 +84,7 @@
             </tbody>
         </table>
         {% if userOrder.pdf != 1  %}
-        <td><a href="{{ path('admin_orders_pdf', {id: userOrder.id}) }}" class="btn btn-primary">Make Bill</a></td>
+        <td><a href="{{ path('admin_orders_pdf', {id: userOrder.id}) }}" class="btn btn-primary">Invoice</a></td>
         {% endif %}
     {% endif %}
 {% endblock %}
