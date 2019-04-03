@@ -34,7 +34,7 @@ class Order
 
 
     /**
-     * @Doctrine\ORM\Mapping\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="decimal", scale=2)
      */
     private $totalPrice;
 

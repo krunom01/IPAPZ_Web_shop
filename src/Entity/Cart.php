@@ -26,12 +26,12 @@ class Cart
     private $user;
 
     /**
-     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="decimal", scale=2, nullable=true)
      */
     private $subTotal;
 
     /**
-     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="decimal", scale=2, nullable=true)
      */
     private $total;
 

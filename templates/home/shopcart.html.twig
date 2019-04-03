@@ -10,6 +10,7 @@
         <tr>
             <th>Product name</th>
             <th>Product image</th>
+            <th>Quantity</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -18,7 +19,7 @@
             <tr>
                 <td>{{ item.product.name }}</td>
                 <td><img width="80" height="80" src="../../../../../upload/image/{{ item.product.image }}" alt=""></td>
-
+                <td>{{ item.productQuantity }}</td>
                 <td>
                     <a href="{{ path('shopCartDeleteIdem', {'id': item.product.id}) }}" class="btn btn-danger">delete item from Shopcart</a>
                 </td>

@@ -3,44 +3,42 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CartItemRepository")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="App\Repository\CartItemRepository")
  */
 class CartItem
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id()
+     * @Doctrine\ORM\Mapping\GeneratedValue()
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Product", inversedBy="products")
      */
     private $product;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="decimal", scale=2)
      */
     private $productPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Cart", inversedBy="cartItems")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="App\Entity\Cart", inversedBy="cartItems")
      */
     private $cart;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="insert product quantity")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
+     * @Symfony\Component\Validator\Constraints\NotBlank(message="insert product quantity")
      */
     private $productQuantity;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     private $userId;
 

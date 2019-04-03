@@ -39,8 +39,7 @@ class Product
     private $productnumber;
 
     /**
-     * @Doctrine\ORM\Mapping\Column(type="integer")
-     * @Doctrine\ORM\Mapping\Column(type="decimal",      scale=2)
+     * @Doctrine\ORM\Mapping\Column(type="decimal", scale=2)
      * @Symfony\Component\Validator\Constraints\NotBlank(message="insert product price")
      */
     private $price;
@@ -181,7 +180,7 @@ class Product
     {
         foreach ($productCategory as $category) {
             /**
-             * @var \App\Entity\ProductCategory $newProductCategory
+             * @var ProductCategory $newProductCategory
              */
             $newProductCategory = new ProductCategory();
             $newProductCategory->setProduct($this);
