@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -53,7 +54,7 @@ class UpdateProductType extends AbstractType
             )
             ->add(
                 'price',
-                IntegerType::class,
+                MoneyType::class,
                 [
                     'label' => 'price',
                     'required' => false,

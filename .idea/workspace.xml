@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac597815-00a9-4600-811f-55f009843a5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/upload/image/000662af4f811ff5a8cb8ecaed5fa9a6.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/0da866c093295e37b1cb518786c4f158.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/2a7e8506a80f33902bde73de834f09fd.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/698adc3df6cbd702c7d05849136a77dc.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/image/b124becf1054babb802d881cd32d6f61.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2bc31f35-8af4-4cdf-b096-efb2d0b04744.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2bc31f35-8af4-4cdf-b096-efb2d0b04744.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CartItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CartItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProductFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/allOrders.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/allOrders.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/orderDetails.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/orderDetails.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/products.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/shopcart.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/shopcart.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UpdateProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UpdateProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,57 +88,40 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/allOrders.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/Form/ProductFormType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+            <state relative-caret-position="195">
+              <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/orderDetails.html.twig">
+        <entry file="file://$PROJECT_DIR$/templates/admin/editPaymentType.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="79" column="48" selection-start-line="79" selection-start-column="48" selection-end-line="79" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/CartItem.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-660">
-              <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+            <state relative-caret-position="75">
+              <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Product.php">
+        <entry file="file://$PROJECT_DIR$/templates/admin/updateproduct.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+            <state relative-caret-position="45">
+              <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/product_category">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/templates/admin/newCountry.html.twig">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="28" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/templates/admin/editProductCategory.html.twig">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -188,7 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Entity/Wishlist.php" />
         <option value="$PROJECT_DIR$/templates/admin/users.html.twig" />
         <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/CartFormType.php" />
@@ -200,7 +168,6 @@
         <option value="$PROJECT_DIR$/templates/home/confirmOrder.html.twig" />
         <option value="$PROJECT_DIR$/templates/home/profile.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/edituser.html.twig" />
-        <option value="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" />
         <option value="$PROJECT_DIR$/templates/product/new.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/shippingCountries.html.twig" />
         <option value="$PROJECT_DIR$/templates/home/customPage.html.twig" />
@@ -239,6 +206,8 @@
         <option value="$PROJECT_DIR$/templates/admin/orderDetails.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/CartItem.php" />
         <option value="$PROJECT_DIR$/src/Entity/Product.php" />
+        <option value="$PROJECT_DIR$/src/Form/UpdateProductType.php" />
+        <option value="$PROJECT_DIR$/templates/admin/updateproduct.html.twig" />
       </list>
     </option>
   </component>
@@ -385,12 +354,6 @@
             <path>
               <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="webshop" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webshop" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -515,12 +478,12 @@
       <workItem from="1554203264202" duration="3429000" />
       <workItem from="1554232576650" duration="762000" />
       <workItem from="1554236695903" duration="764000" />
-      <workItem from="1554268664083" duration="10320000" />
+      <workItem from="1554268664083" duration="10925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="574942000" />
+    <option name="totallyTimeSpent" value="575547000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -535,7 +498,7 @@
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.2588047" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.2588047" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info id="Favorites" order="2" sideWeight="0.5016234" side_tool="true" weight="0.19743863" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -548,7 +511,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286026" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" visible="true" weight="0.28056768" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5816435" side_tool="true" weight="0.31113538" />
       <window_info anchor="bottom" id="Database Console" order="12" sideWeight="0.4994664" weight="0.32751092" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -639,21 +602,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Form/PaymentTypeFormType.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/OrderFormType.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/OrderedItemsType.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/NewProductCategoryType.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/InsertCouponType.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/ImportShippingCSVType.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -822,16 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/ProductFormType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
-          <folding>
-            <element signature="e#28#51#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Cart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -933,6 +871,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-570">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://2bc31f35-8af4-4cdf-b096-efb2d0b04744/schema/test/table/product_category">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -940,10 +885,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Product.php">
+    <entry file="file://$PROJECT_DIR$/src/Form/UpdateProductType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        <state relative-caret-position="450">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="e#28#51#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/editProductCategory.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/newCountry.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/ProductFormType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/editPaymentType.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/updateproduct.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
         </state>
       </provider>
     </entry>
