@@ -351,7 +351,7 @@ class HomeController extends AbstractController
                 $userCart->setCoupon(1);
                 $entityManager->persist($userCart);
                 $entityManager->flush();
-                $this->addFlash('success', 'You get ' . $coupon->getDiscount() . '% discount on total price');
+                $this->addFlash('success', 'You have ' . $coupon->getDiscount() . '% discount on regular price');
                 return $this->redirectToRoute('confirmOrder');
             }
         }  return $this->render(
