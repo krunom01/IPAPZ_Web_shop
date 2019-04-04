@@ -49,7 +49,7 @@ class HomeController extends AbstractController
         $pagination = $paginator->paginate(
             $products, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            10/*limit per page*/
+            5/*limit per page*/
         );
         return $this->render(
             'home/newBootstrap.html.twig',
