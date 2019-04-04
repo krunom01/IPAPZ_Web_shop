@@ -1,9 +1,6 @@
 {% extends 'home/newBootstrap.html.twig' %}
 
 {% block content %}
-{% for wish in wishlist %}
-    {% set count = 0 %}
- {% set count = count + 1 %}
     <table class="table">
         <thead>
         <tr>
@@ -13,10 +10,13 @@
         </tr>
         </thead>
         <tbody>
+        {% for wish in wishlist %}
+            {% set count = 0 %}
+            {% set count = count + 1 %}
             <tr>
                 <td>{{ count }}</td>
                 <td>{{ wish.product.name }}</td>
-                <td> <img src="../../../../../upload/image/{{ wish.product.image }}" alt="{{ wish.product.name }}"></td>
+                <td> <img  height="100" width="100" src="../../../../../upload/image/{{ wish.product.image }}" alt="{{ wish.product.name }}"></td>
             </tr>
         {% else %}
             <tr>

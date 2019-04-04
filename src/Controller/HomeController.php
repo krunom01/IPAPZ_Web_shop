@@ -403,7 +403,7 @@ class HomeController extends AbstractController
                 $itemsOrder->setUserId($user->getId());
                 $itemsOrder->setProductPrice($userCartItems->getProductPrice());
                 $itemsOrder->setProductQuantity($userCartItems->getProductQuantity());
-                $itemsOrder->setProduct($userCartItems->getProduct());
+                $itemsOrder->setProduct($cartItem->getProduct());
                 $itemsOrder->setOrder($order);
                 $entityManager->persist($itemsOrder);
                 $entityManager->flush();

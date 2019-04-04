@@ -258,6 +258,7 @@ class UserController extends AbstractController
              'id' => $id
             ]
         );
+        $nesto = $userItems->getOrderedItems();
 
         return $this->render(
             'home/userOrder.html.twig',

@@ -76,14 +76,12 @@ class Product
 
     /**
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\CartItem",
-     * mappedBy="product", cascade={"persist", "remove"})
-     */
-    private $products;
-    /**
+     * mappedBy="product", cascade={"persist", "remove"}),
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="App\Entity\OrderedItems",
      * mappedBy="product", cascade={"persist", "remove"})
      */
-    private $orderProducts;
+    private $products;
+
 
 
     /**
@@ -94,7 +92,6 @@ class Product
         $this->productCategory = new ArrayCollection();
         $this->wishList = new ArrayCollection();
         $this->products = new ArrayCollection();
-        $this->orderProducts = new ArrayCollection();
     }
 
     /**
